@@ -2,16 +2,32 @@
   "Items": [
     {
       "Analyzer": "LongMethodAnalyzer",
-      "OccurrenceCount": 2,
+      "OccurrenceCount": 5,
       "Exceptions": null,
       "SentToServer": true,
       "InstallationName": "COREDESK"
     },
     {
       "Analyzer": "UseStringCollectionIntersectsAnalyzer",
-      "OccurrenceCount": 3,
+      "OccurrenceCount": 4,
       "Exceptions": null,
       "SentToServer": true,
+      "InstallationName": "COREDESK"
+    },
+    {
+      "Analyzer": "BooleanParameterAnalyzer",
+      "OccurrenceCount": 1,
+      "Exceptions": null,
+      "SentToServer": true,
+      "InstallationName": "COREDESK"
+    },
+    {
+      "Analyzer": "IEnumerableMultipleEvaluationsAnalyzer",
+      "OccurrenceCount": 1,
+      "Exceptions": {
+        "ArgumentException": "Syntax node is not within syntax tree\r\n\r\nSource:\r\npublic static string Left(this string value, int length)\r\n{\r\n    return value != null && value.Length > length ? value.Substring(0, length) : value;\r\n}"
+      },
+      "SentToServer": false,
       "InstallationName": "COREDESK"
     }
   ]
