@@ -2,14 +2,14 @@
   "Items": [
     {
       "Analyzer": "LongMethodAnalyzer",
-      "OccurrenceCount": 5,
+      "OccurrenceCount": 24,
       "Exceptions": null,
       "SentToServer": true,
       "InstallationName": "COREDESK"
     },
     {
       "Analyzer": "UseStringCollectionIntersectsAnalyzer",
-      "OccurrenceCount": 4,
+      "OccurrenceCount": 5,
       "Exceptions": null,
       "SentToServer": true,
       "InstallationName": "COREDESK"
@@ -24,10 +24,92 @@
     {
       "Analyzer": "IEnumerableMultipleEvaluationsAnalyzer",
       "OccurrenceCount": 1,
-      "Exceptions": {
-        "ArgumentException": "Syntax node is not within syntax tree\r\n\r\nSource:\r\npublic static string Left(this string value, int length)\r\n{\r\n    return value != null && value.Length > length ? value.Substring(0, length) : value;\r\n}"
-      },
-      "SentToServer": false,
+      "Exceptions": null,
+      "SentToServer": true,
+      "InstallationName": "COREDESK"
+    },
+    {
+      "Analyzer": "UseDirectIdPropertyAnalyzer",
+      "OccurrenceCount": 1,
+      "Exceptions": null,
+      "SentToServer": true,
+      "InstallationName": "COREDESK"
+    },
+    {
+      "Analyzer": "UseCalculateForMethodNameAnalyzer",
+      "OccurrenceCount": 2,
+      "Exceptions": null,
+      "SentToServer": true,
+      "InstallationName": "COREDESK"
+    },
+    {
+      "Analyzer": "VariableOnlyForReturnAnalyzer",
+      "OccurrenceCount": 6,
+      "Exceptions": null,
+      "SentToServer": true,
+      "InstallationName": "COREDESK"
+    },
+    {
+      "Analyzer": "OrderByWhereLinqAnalyzer",
+      "OccurrenceCount": 1,
+      "Exceptions": null,
+      "SentToServer": true,
+      "InstallationName": "COREDESK"
+    },
+    {
+      "Analyzer": "PathAnalyzer",
+      "OccurrenceCount": 1,
+      "Exceptions": null,
+      "SentToServer": true,
+      "InstallationName": "COREDESK"
+    },
+    {
+      "Analyzer": "ImmutableMethodsAnalyzer",
+      "OccurrenceCount": 1,
+      "Exceptions": null,
+      "SentToServer": true,
+      "InstallationName": "COREDESK"
+    },
+    {
+      "Analyzer": "DefineAttributeAnalyzer",
+      "OccurrenceCount": 1,
+      "Exceptions": null,
+      "SentToServer": true,
+      "InstallationName": "COREDESK"
+    },
+    {
+      "Analyzer": "EmptyCatchClauseAnalyzer",
+      "OccurrenceCount": 1,
+      "Exceptions": null,
+      "SentToServer": true,
+      "InstallationName": "COREDESK"
+    },
+    {
+      "Analyzer": "UnusedMethodsAnalyzer",
+      "OccurrenceCount": 8,
+      "Exceptions": null,
+      "SentToServer": true,
+      "InstallationName": "COREDESK"
+    },
+    {
+      "Analyzer": "UnusedParametersAnalyzer",
+      "OccurrenceCount": 1,
+      "Exceptions": null,
+      "SentToServer": true,
+      "InstallationName": "COREDESK"
+    },
+    {
+      "Analyzer": "RedundantCastAnalyzer",
+      "OccurrenceCount": 1,
+      "Exceptions": null,
+      "SentToServer": true,
+      "InstallationName": "COREDESK"
+    },
+    {
+      "Analyzer": "ConstantVariableAnalyzer",
+      "OccurrenceCount": 11,
+      "Exceptions": null,
+      "SentToServer": true,
       "InstallationName": "COREDESK"
     }
   ]
