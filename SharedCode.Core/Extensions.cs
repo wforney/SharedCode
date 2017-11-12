@@ -15,6 +15,8 @@ namespace SharedCode.Core
     using Newtonsoft.Json;
     using System.Runtime.Serialization.Json;
     using System.Runtime.Serialization;
+    using JetBrains.Annotations;
+    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// The extensions class.
@@ -24,6 +26,7 @@ namespace SharedCode.Core
         /// <summary>
         /// The XML serializers
         /// </summary>
+        [NotNull]
         private static readonly Dictionary<RuntimeTypeHandle, XmlSerializer> XmlSerializers = new Dictionary<RuntimeTypeHandle, XmlSerializer>();
 
         /// <summary>
@@ -34,7 +37,7 @@ namespace SharedCode.Core
         /// <param name="from">The lower bound value.</param>
         /// <param name="to">The upper bound value.</param>
         /// <returns><c>true</c> if the specified <paramref name="value"/> is between the <paramref name="from"/> and <paramref name="to"/> values, <c>false</c> otherwise.</returns>
-        public static bool Between<T>(this T value, T from, T to) where T : IComparable<T> => value.CompareTo(from) >= 0 && value.CompareTo(to) <= 0;
+        public static bool Between<T>([NotNull] this T value, [NotNull] T from, [NotNull] T to) where T : IComparable<T> => value.CompareTo(from) >= 0 && value.CompareTo(to) <= 0;
 
         /// <summary>
         /// Makes a copy from the object.
@@ -43,7 +46,8 @@ namespace SharedCode.Core
         /// <typeparam name="T">Type of the return object.</typeparam>
         /// <param name="item">Object to be copied.</param>
         /// <returns>Returns the copied object.</returns>
-        public static T Clone<T>(this object item)
+        [CanBeNull]
+        public static T Clone<T>([CanBeNull] this object item)
         {
             if (item == null)
             {
@@ -64,7 +68,8 @@ namespace SharedCode.Core
         /// <typeparam name="T">The type to convert to.</typeparam>
         /// <param name="value">The input value.</param>
         /// <returns>The output value.</returns>
-        public static T ConvertTo<T>(this IConvertible value)
+        [NotNull]
+        public static T ConvertTo<T>([NotNull] this IConvertible value)
             => (T)Convert.ChangeType(value, typeof(T));
 
         /// <summary>
@@ -73,7 +78,8 @@ namespace SharedCode.Core
         /// <typeparam name="T">The type to convert to.</typeparam>
         /// <param name="value">The input value.</param>
         /// <returns>The output value.</returns>
-        public static T ConvertTo<T>(this object value)
+        [NotNull]
+        public static T ConvertTo<T>([NotNull] this object value)
             => (T)Convert.ChangeType(value, typeof(T));
 
         /// <summary>
@@ -82,8 +88,12 @@ namespace SharedCode.Core
         /// <typeparam name="T">The type of the input object.</typeparam>
         /// <param name="input">The input object.</param>
         /// <returns>The output.</returns>
-        public static T DeepClone<T>(this T input) where T : ISerializable
+        [NotNull]
+        public static T DeepClone<T>([NotNull] this T input) where T : ISerializable
         {
+            Contract.Ensures(!EqualityComparer<T>.Default.Equals(Contract.Result<T>(), default));
+            Contract.Requires<ArgumentNullException>(!EqualityComparer<T>.Default.Equals(input, default));
+
             using (var stream = new MemoryStream())
             {
                 var formatter = new BinaryFormatter();
@@ -99,7 +109,8 @@ namespace SharedCode.Core
         /// <typeparam name="T">The type of the object represented in the JSON string.</typeparam>
         /// <param name="jsonString">The JSON string.</param>
         /// <returns>The output.</returns>
-        public static T FromJson<T>(this object jsonString) => JsonConvert.DeserializeObject<T>(jsonString as string);
+        [CanBeNull]
+        public static T FromJson<T>([CanBeNull] this object jsonString) => JsonConvert.DeserializeObject<T>(jsonString as string);
 
         /// <summary>
         /// If the object this method is called on is not null, runs the given function and returns the value.
@@ -110,7 +121,8 @@ namespace SharedCode.Core
         /// <param name="target">The target object.</param>
         /// <param name="getValue">The get value function.</param>
         /// <returns>The result.</returns>
-        public static TResult IfNotNull<T, TResult>(this T target, Func<T, TResult> getValue)
+        [CanBeNull]
+        public static TResult IfNotNull<T, TResult>([CanBeNull] this T target, [CanBeNull] Func<T, TResult> getValue)
         {
             var handler = getValue;
             return handler == null || EqualityComparer<T>.Default.Equals(target, default) ? default : handler(target);
@@ -124,7 +136,7 @@ namespace SharedCode.Core
         /// <param name="low">The low value.</param>
         /// <param name="high">The high value.</param>
         /// <returns><c>true</c> if the specified value is between the low and high values; otherwise, <c>false</c>.</returns>
-        public static bool IsBetween<T>(this T value, T low, T high)
+        public static bool IsBetween<T>([NotNull] this T value, [NotNull] T low, [NotNull] T high)
                 where T : IComparable<T>
                 => value.CompareTo(low) >= 0 && value.CompareTo(high) <= 0;
 
@@ -133,28 +145,30 @@ namespace SharedCode.Core
         /// </summary>
         /// <param name="source">The source object.</param>
         /// <returns><c>true</c> if the specified source object is not null; otherwise, <c>false</c>.</returns>
-        public static bool IsNotNull(this object source) => source != null;
+        public static bool IsNotNull([CanBeNull] this object source) => source != null;
 
         /// <summary>
         /// Determines whether the specified source object is null.
         /// </summary>
         /// <param name="source">The source object.</param>
         /// <returns><c>true</c> if the specified source object is null; otherwise, <c>false</c>.</returns>
-        public static bool IsNull(this object source) => source == null;
+        public static bool IsNull([CanBeNull] this object source) => source == null;
 
         /// <summary>
         /// Turns any object into an exception.
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns>The exception.</returns>
-        public static Exception ToException(this object obj) => new Exception(obj.ToString());
+        [NotNull]
+        public static Exception ToException([NotNull] this object obj) => new Exception(obj.ToString());
 
         /// <summary>
         /// Convert an object to JSON.
         /// </summary>
         /// <param name="input">The input object.</param>
         /// <returns>The JSON representation of the object.</returns>
-        public static string ToJson(this object input) => JsonConvert.SerializeObject(input);
+        [NotNull]
+        public static string ToJson([NotNull] this object input) => JsonConvert.SerializeObject(input);
 
         /// <summary>
         /// Converts this item to a JSON string.
@@ -164,8 +178,12 @@ namespace SharedCode.Core
         /// <param name="encoding">The string encoding.</param>
         /// <param name="serializer">The JSON serializer.</param>
         /// <returns>The JSON string.</returns>
-        public static string ToJson<T>(this T item, Encoding encoding = null, DataContractJsonSerializer serializer = null)
+        [NotNull]
+        public static string ToJson<T>([NotNull] this T item, [CanBeNull] Encoding encoding = null, [CanBeNull] DataContractJsonSerializer serializer = null)
         {
+            Contract.Requires(!EqualityComparer<T>.Default.Equals(item, default));
+            Contract.Ensures(Contract.Result<string>() != null);
+
             encoding = encoding ?? Encoding.Default;
             serializer = serializer ?? new DataContractJsonSerializer(typeof(T));
 
@@ -182,9 +200,13 @@ namespace SharedCode.Core
         /// <typeparam name="T">The type of the input value.</typeparam>
         /// <param name="value">The input value.</param>
         /// <returns>The XML representation of the input value.</returns>
-        public static string ToXml<T>(this T value)
+        [NotNull]
+        public static string ToXml<T>([NotNull] this T value)
             where T : new()
         {
+            Contract.Requires(!EqualityComparer<T>.Default.Equals(value, default));
+            Contract.Ensures(Contract.Result<string>() != null);
+
             var serializer = GetXmlSerializer(typeof(T));
             using (var stream = new MemoryStream())
             using (var writer = new XmlTextWriter(stream, new UTF8Encoding()))
@@ -200,9 +222,11 @@ namespace SharedCode.Core
         /// <typeparam name="T">The type of the input value.</typeparam>
         /// <param name="value">The input value.</param>
         /// <param name="stream">The output stream.</param>
-        public static void ToXml<T>(this T value, Stream stream)
+        public static void ToXml<T>([NotNull] this T value, [NotNull] Stream stream)
             where T : new()
         {
+            Contract.Requires(!EqualityComparer<T>.Default.Equals(value, default));
+            Contract.Requires(stream != null);
             var serializer = GetXmlSerializer(typeof(T));
             serializer.Serialize(stream, value);
         }
@@ -212,8 +236,12 @@ namespace SharedCode.Core
         /// </summary>
         /// <param name="input">The input object.</param>
         /// <returns>The XML string.</returns>
-        public static string ToXml(this object input)
+        [NotNull]
+        public static string ToXml([NotNull] this object input)
         {
+            Contract.Requires(input != null);
+            Contract.Ensures(Contract.Result<string>() != null);
+
             // Serialize an object into an xml string
             var xmlSerializer = new XmlSerializer(input.GetType());
 
@@ -231,8 +259,10 @@ namespace SharedCode.Core
         /// </summary>
         /// <param name="type">The type handled by the serializer.</param>
         /// <returns>The <see cref="XmlSerializer"/> for the <paramref name="type"/>.</returns>
-        private static XmlSerializer GetXmlSerializer(Type type)
+        [CanBeNull]
+        private static XmlSerializer GetXmlSerializer([NotNull] Type type)
         {
+            Contract.Requires<ArgumentNullException>(type != null);
             if (!XmlSerializers.TryGetValue(type.TypeHandle, out var serializer))
             {
                 lock (XmlSerializers)
@@ -244,6 +274,7 @@ namespace SharedCode.Core
                     }
                 }
             }
+
             return serializer;
         }
     }

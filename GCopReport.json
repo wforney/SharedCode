@@ -2,7 +2,7 @@
   "Items": [
     {
       "Analyzer": "LongMethodAnalyzer",
-      "OccurrenceCount": 31,
+      "OccurrenceCount": 37,
       "Exceptions": null,
       "SentToServer": true,
       "InstallationName": "COREDESK"
