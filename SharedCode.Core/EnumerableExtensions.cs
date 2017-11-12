@@ -304,6 +304,54 @@ namespace SharedCode.Core
 #pragma warning restore SG0005 // Weak random generator
 
         /// <summary>
+        /// Slices the source from specified start to the specified end.
+        /// </summary>
+        /// <typeparam name="T">The type of the items in the enumeration.</typeparam>
+        /// <param name="source">The source enumeration.</param>
+        /// <param name="start">The start index.</param>
+        /// <param name="end">The end index.</param>
+        /// <returns>The slice.</returns>
+        /// <exception cref="System.ArgumentNullException">source</exception>
+        public static IEnumerable<T> Slice<T>(this IEnumerable<T> source, int start, int end)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var index = 0;
+
+            // Optimise item count for ICollection interfaces.
+            var count = source is ICollection<T> ? ((ICollection<T>)source).Count : source is ICollection ? ((ICollection)source).Count : source.Count();
+
+            // Get start/end indexes, negative numbers start at the end of the collection.
+            if (start < 0)
+            {
+                start += count;
+            }
+
+            if (end < 0)
+            {
+                end += count;
+            }
+
+            foreach (var item in source)
+            {
+                if (index >= end)
+                {
+                    yield break;
+                }
+
+                if (index >= start)
+                {
+                    yield return item;
+                }
+
+                ++index;
+            }
+        }
+
+        /// <summary>
         /// Converts the source enumerable to a new collection.
         /// </summary>
         /// <typeparam name="T">The type of the items in the enumerable.</typeparam>
@@ -410,6 +458,23 @@ namespace SharedCode.Core
         /// <returns>A dictionary of groupings such that the key of the dictionary is TKey type and the value is List of TValue type.</returns>
         public static Dictionary<TKey, List<TValue>> ToDictionary<TKey, TValue>(this IEnumerable<IGrouping<TKey, TValue>> groupings)
             => groupings.ToDictionary(group => group.Key, group => group.ToList());
+
+        /// <summary>
+        /// Converts an IEnumerable to a HashSet
+        /// </summary>
+        /// <typeparam name="T">The IEnumerable type</typeparam>
+        /// <param name="enumerable">The IEnumerable</param>
+        /// <returns>A new HashSet</returns>
+        public static HashSet<T> ToHashSet<T>(this IEnumerable<T> enumerable)
+        {
+            var hs = new HashSet<T>();
+            foreach (var item in enumerable)
+            {
+                hs.Add(item);
+            }
+
+            return hs;
+        }
 
         /// <summary>
         /// Converts the enumerable to an observable collection.

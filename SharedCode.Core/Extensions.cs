@@ -13,6 +13,8 @@ namespace SharedCode.Core
     using System.Xml.Serialization;
 
     using Newtonsoft.Json;
+    using System.Runtime.Serialization.Json;
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// The extensions class.
@@ -75,6 +77,23 @@ namespace SharedCode.Core
             => (T)Convert.ChangeType(value, typeof(T));
 
         /// <summary>
+        /// Returns a deep copy of this object.
+        /// </summary>
+        /// <typeparam name="T">The type of the input object.</typeparam>
+        /// <param name="input">The input object.</param>
+        /// <returns>The output.</returns>
+        public static T DeepClone<T>(this T input) where T : ISerializable
+        {
+            using (var stream = new MemoryStream())
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(stream, input);
+                stream.Position = 0;
+                return (T)formatter.Deserialize(stream);
+            }
+        }
+
+        /// <summary>
         /// Converts a JSON string to the specified type.
         /// </summary>
         /// <typeparam name="T">The type of the object represented in the JSON string.</typeparam>
@@ -124,11 +143,38 @@ namespace SharedCode.Core
         public static bool IsNull(this object source) => source == null;
 
         /// <summary>
+        /// Turns any object into an exception.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns>The exception.</returns>
+        public static Exception ToException(this object obj) => new Exception(obj.ToString());
+
+        /// <summary>
         /// Convert an object to JSON.
         /// </summary>
         /// <param name="input">The input object.</param>
         /// <returns>The JSON representation of the object.</returns>
         public static string ToJson(this object input) => JsonConvert.SerializeObject(input);
+
+        /// <summary>
+        /// Converts this item to a JSON string.
+        /// </summary>
+        /// <typeparam name="T">The type of the item.</typeparam>
+        /// <param name="item">The item to be converted.</param>
+        /// <param name="encoding">The string encoding.</param>
+        /// <param name="serializer">The JSON serializer.</param>
+        /// <returns>The JSON string.</returns>
+        public static string ToJson<T>(this T item, Encoding encoding = null, DataContractJsonSerializer serializer = null)
+        {
+            encoding = encoding ?? Encoding.Default;
+            serializer = serializer ?? new DataContractJsonSerializer(typeof(T));
+
+            using (var stream = new MemoryStream())
+            {
+                serializer.WriteObject(stream, item);
+                return encoding.GetString(stream.ToArray());
+            }
+        }
 
         /// <summary>
         /// Serialize object to xml string by <see cref="XmlSerializer" />

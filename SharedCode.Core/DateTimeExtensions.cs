@@ -7,6 +7,8 @@ namespace SharedCode.Core
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Linq.Expressions;
+    using System.Threading;
 
     /// <summary>
     /// The date time extensions class
@@ -54,5 +56,22 @@ namespace SharedCode.Core
         /// <param name="value">The date value.</param>
         /// <returns><c>true</c> if the specified value is weekend; otherwise, <c>false</c>.</returns>
         public static bool IsWeekend(this DateTime value) => value.DayOfWeek == DayOfWeek.Sunday || value.DayOfWeek == DayOfWeek.Saturday;
+
+        /// <summary>
+        /// Converts the enumeration to the format string.
+        /// </summary>
+        /// <param name="source">The source date time.</param>
+        /// <param name="dateTimeFormat">The date time format.</param>
+        /// <returns>The date time format string.</returns>
+        public static string ToStringFormat(this DateTime source, Expression<Func<DateTimeFormat>> dateTimeFormat)
+        {
+            var dateTimeFormatCompiled = dateTimeFormat.Compile().Invoke();
+
+            var dateTimeStringFormat = Enum<string>.GetStringValue(dateTimeFormatCompiled);
+
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+
+            return source.ToString(dateTimeStringFormat, currentCulture);
+        }
     }
 }

@@ -55,6 +55,18 @@ namespace SharedCode.Core
         }
 
         /// <summary>
+        /// Returns this string or the specified default value if the string is empty.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <param name="considerWhiteSpaceIsEmpty">if set to <c>true</c> then consider white space as empty.</param>
+        /// <returns>The output string.</returns>
+        public static string DefaultIfEmpty(this string str, string defaultValue, bool considerWhiteSpaceIsEmpty = false)
+        {
+            return (considerWhiteSpaceIsEmpty ? string.IsNullOrWhiteSpace(str) : string.IsNullOrEmpty(str)) ? defaultValue : str;
+        }
+
+        /// <summary>
         /// Encryptes a string using the supplied key. Encoding is done using RSA encryption.
         /// </summary>
         /// <param name="stringToEncrypt">String that must be encrypted.</param>
