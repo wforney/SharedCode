@@ -13,6 +13,7 @@
     <RepositoryType>git</RepositoryType>
     <Description>A collection of useful extension methods, utility functions, classes, enumerations, etc.</Description>
     <PackageLicenseUrl>https://github.com/wforney/SharedCode/blob/master/LICENSE</PackageLicenseUrl>
+    <Version>1.0.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
