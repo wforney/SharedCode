@@ -7,10 +7,10 @@ namespace SharedCode.Office
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Drawing;
     using System.Linq;
     using System.Reflection;
     using Microsoft.Office.Interop.Excel;
-    using System.Drawing;
 
     /// <summary>
     /// The list extensions class.
@@ -175,7 +175,7 @@ namespace SharedCode.Office
         /// <param name="sheet">The worksheet.</param>
         /// <param name="objHeaders">The object headers.</param>
 #pragma warning disable GCop119 // Don’t use {0} parameters in method definition. To return several objects, define a class or struct for your method return type.
-        private static void CreateHeader<T>(out Range range, out Font font, object optionalValue, string strHeaderStart, _Worksheet sheet, out Dictionary<string, string> objHeaders)
+        private static void CreateHeader<T>(out Range range, out Microsoft.Office.Interop.Excel.Font font, object optionalValue, string strHeaderStart, _Worksheet sheet, out Dictionary<string, string> objHeaders)
 #pragma warning restore GCop119 // Don’t use {0} parameters in method definition. To return several objects, define a class or struct for your method return type.
         {
             objHeaders = new Dictionary<string, string>();
