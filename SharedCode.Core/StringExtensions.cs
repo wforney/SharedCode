@@ -6,6 +6,7 @@ namespace SharedCode.Core
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
     using System.Net.Mail;
@@ -15,11 +16,32 @@ namespace SharedCode.Core
     using System.Text;
     using System.Text.RegularExpressions;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// The string extensions class.
     /// </summary>
     public static class StringExtensions
     {
+        /// <summary>
+        /// Determines whether the specified string contains any of the specified characters.
+        /// </summary>
+        /// <param name="input">The input string.</param>
+        /// <param name="characters">The characters to check.</param>
+        /// <returns>A value indicating whether the specified string contains any of the specified characters.</returns>
+        public static bool ContainsAny([NotNull] this string input, [NotNull] char[] characters)
+        {
+            foreach (var character in characters)
+            {
+                if (input.Contains(character.ToString()))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// Decryptes a string using the supplied key. Decoding is done using RSA encryption.
         /// </summary>
@@ -27,8 +49,13 @@ namespace SharedCode.Core
         /// <param name="key">Decryptionkey.</param>
         /// <returns>The decrypted string or null if decryption failed.</returns>
         /// <exception cref="ArgumentException">Occurs when stringToDecrypt or key is null or empty.</exception>
-        public static string Decrypt(this string stringToDecrypt, string key)
+        [NotNull]
+        public static string Decrypt([NotNull] this string stringToDecrypt, [NotNull] string key)
         {
+            Contract.Requires(stringToDecrypt != null);
+            Contract.Requires(key != null);
+            Contract.Ensures(Contract.Result<string>() != null);
+
             string result = null;
 
             if (string.IsNullOrEmpty(stringToDecrypt))
@@ -44,7 +71,7 @@ namespace SharedCode.Core
             using (var rsa = new RSACryptoServiceProvider(new CspParameters { KeyContainerName = key }) { PersistKeyInCsp = true })
             {
                 var decryptArray = stringToDecrypt.Split(new string[] { "-" }, StringSplitOptions.None);
-                var decryptByteArray = Array.ConvertAll(decryptArray, s => Convert.ToByte(byte.Parse(s, System.Globalization.NumberStyles.HexNumber)));
+                var decryptByteArray = Array.ConvertAll(decryptArray, s => Convert.ToByte(byte.Parse(s, NumberStyles.HexNumber)));
 
                 var bytes = rsa.Decrypt(decryptByteArray, fOAEP: true);
 
@@ -55,13 +82,44 @@ namespace SharedCode.Core
         }
 
         /// <summary>
+        /// Converts the string representation of a Guid to its Guid equivalent. A return value indicates whether the operation succeeded.
+        /// </summary>
+        /// <param name="input">
+        /// A string containing a Guid to convert.
+        /// </param>
+        /// <returns>
+        /// When this method returns, contains the Guid value equivalent to the Guid contained in <paramref name="input"/>, if the conversion succeeded, or <see cref="Guid.Empty"/> if the conversion failed.
+        /// The conversion fails if the <paramref name="input"/> parameter is a <see langword="null" /> reference (<see langword="Nothing" /> in Visual Basic), or is not of the correct format.
+        /// <c>true</c> if <paramref name="input" /> was converted successfully; otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        ///        Thrown if <pararef name="s"/> is <see langword="null"/>.
+        /// </exception>
+        /// <remarks>
+        /// Original code at https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=94072&wa=wsignin1.0#tabs
+        /// </remarks>
+        public static bool IsGuid([NotNull] this string input)
+        {
+            Contract.Requires<ArgumentNullException>(input != null);
+
+            var format = new Regex(
+                "^[A-Fa-f0-9]{32}$|" +
+                "^({|\\()?[A-Fa-f0-9]{8}-([A-Fa-f0-9]{4}-){3}[A-Fa-f0-9]{12}(}|\\))?$|" +
+                "^({)?[0xA-Fa-f0-9]{3,10}(, {0,1}[0xA-Fa-f0-9]{3,6}){2}, {0,1}({)([0xA-Fa-f0-9]{3,4}, {0,1}){7}[0xA-Fa-f0-9]{3,4}(}})$");
+            var match = format.Match(input);
+
+            return match.Success;
+        }
+
+        /// <summary>
         /// Returns this string or the specified default value if the string is empty.
         /// </summary>
         /// <param name="str">The string.</param>
         /// <param name="defaultValue">The default value.</param>
         /// <param name="considerWhiteSpaceIsEmpty">if set to <c>true</c> then consider white space as empty.</param>
         /// <returns>The output string.</returns>
-        public static string DefaultIfEmpty(this string str, string defaultValue, bool considerWhiteSpaceIsEmpty = false)
+        [CanBeNull]
+        public static string DefaultIfEmpty([CanBeNull] this string str, [CanBeNull] string defaultValue, bool considerWhiteSpaceIsEmpty = false)
         {
             return (considerWhiteSpaceIsEmpty ? string.IsNullOrWhiteSpace(str) : string.IsNullOrEmpty(str)) ? defaultValue : str;
         }
@@ -73,7 +131,8 @@ namespace SharedCode.Core
         /// <param name="key">Encryptionkey.</param>
         /// <returns>A string representing a byte array separated by a minus sign.</returns>
         /// <exception cref="ArgumentException">Occurs when stringToEncrypt or key is null or empty.</exception>
-        public static string Encrypt(this string stringToEncrypt, string key)
+        [NotNull]
+        public static string Encrypt([NotNull] this string stringToEncrypt, [NotNull] string key)
         {
             if (string.IsNullOrEmpty(stringToEncrypt))
             {
@@ -99,7 +158,8 @@ namespace SharedCode.Core
         /// <param name="value">A composite format string</param>
         /// <param name="arg0">An System.Object to format</param>
         /// <returns>A copy of format in which the first format item has been replaced by the System.String equivalent of arg0</returns>
-        public static string Format(this string value, object arg0)
+        [CanBeNull]
+        public static string Format([CanBeNull] this string value, [CanBeNull] object arg0)
             => string.Format(value, arg0);
 
         /// <summary>
@@ -108,7 +168,8 @@ namespace SharedCode.Core
         /// <param name="value">A composite format string</param>
         /// <param name="args">An System.Object array containing zero or more objects to format.</param>
         /// <returns>A copy of format in which the format items have been replaced by the System.String equivalent of the corresponding instances of System.Object in args.</returns>
-        public static string Format(this string value, params object[] args)
+        [CanBeNull]
+        public static string Format([CanBeNull] this string value, [ItemCanBeNull][CanBeNull] params object[] args)
             => string.Format(value, args);
 
         /// <summary>
@@ -117,7 +178,8 @@ namespace SharedCode.Core
         /// <param name="input">The input string.</param>
         /// <param name="mask">The mask for formatting. Like "A##-##-T-###Z"</param>
         /// <returns>The formatted string</returns>
-        public static string FormatWithMask(this string input, string mask)
+        [CanBeNull]
+        public static string FormatWithMask([CanBeNull] this string input, [NotNull] string mask)
         {
             if (string.IsNullOrEmpty(input))
             {
@@ -155,8 +217,11 @@ namespace SharedCode.Core
         /// <typeparam name="T">The type of the enumeration.</typeparam>
         /// <param name="value">The enumeration value.</param>
         /// <returns>The enumeration value description.</returns>
-        public static string GetEnumDescription<T>(string value)
+        [NotNull]
+        public static string GetEnumDescription<T>([CanBeNull] string value)
         {
+            Contract.Ensures(Contract.Result<string>() != null);
+
             var type = typeof(T);
             var name = Enum.GetNames(type).Where(f => f.Equals(value, StringComparison.CurrentCultureIgnoreCase)).Select(d => d).FirstOrDefault();
 
@@ -176,7 +241,7 @@ namespace SharedCode.Core
         /// <param name="value">The input value.</param>
         /// <param name="stringValues">Array of string values to compare</param>
         /// <returns>Return true if any string value matches</returns>
-        public static bool In(this string value, params string[] stringValues)
+        public static bool In([CanBeNull] this string value, [ItemCanBeNull][CanBeNull] params string[] stringValues)
         {
             foreach (var otherValue in stringValues)
             {
@@ -194,21 +259,21 @@ namespace SharedCode.Core
         /// </summary>
         /// <param name="input">The input string.</param>
         /// <returns><c>true</c> if the specified input string is a date; otherwise, <c>false</c>.</returns>
-        public static bool IsDate(this string input) => !string.IsNullOrEmpty(input) && DateTime.TryParse(input, out var dt);
+        public static bool IsDate([CanBeNull] this string input) => !string.IsNullOrEmpty(input) && DateTime.TryParse(input, out var dt);
 
         /// <summary>
         /// Determines whether the specified string is numeric.
         /// </summary>
         /// <param name="input">The input string.</param>
         /// <returns><c>true</c> if the specified string is numeric; otherwise, <c>false</c>.</returns>
-        public static bool IsNumeric(this string input) => long.TryParse(input, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out _);
+        public static bool IsNumeric([CanBeNull] this string input) => long.TryParse(input, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out _);
 
         /// <summary>
         /// Determines whether the input string is a valid email address.
         /// </summary>
         /// <param name="input">The input string.</param>
         /// <returns><c>true</c> if the input string is a valid email address; otherwise, <c>false</c>.</returns>
-        public static bool IsValidEmailAddress(this string input)
+        public static bool IsValidEmailAddress([CanBeNull] this string input)
         {
             try
             {

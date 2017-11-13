@@ -2,6 +2,8 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
+using JetBrains.Annotations;
+
 namespace SharedCode.Core
 {
     using System;
@@ -9,6 +11,7 @@ namespace SharedCode.Core
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Data;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Reflection;
     using System.Text;
@@ -31,6 +34,35 @@ namespace SharedCode.Core
         /// <param name="source">The source enumerable.</param>
         /// <returns>The results.</returns>
         public static IEnumerable<T> Cache<T>(this IEnumerable<T> source) => CacheHelper(source.GetEnumerator());
+
+        /// <summary>
+        ///   Returns all combinations of a chosen amount of selected elements in the sequence.
+        /// </summary>
+        /// <typeparam name = "T">The type of the elements of the input sequence.</typeparam>
+        /// <param name = "source">The source for this extension method.</param>
+        /// <param name = "select">The amount of elements to select for every combination.</param>
+        /// <param name = "repetition">True when repetition of elements is allowed.</param>
+        /// <returns>All combinations of a chosen amount of selected elements in the sequence.</returns>
+        [ItemCanBeNull]
+        [NotNull]
+        public static IEnumerable<IEnumerable<T>> Combinations<T>([ItemCanBeNull][NotNull] this IEnumerable<T> source, int select, bool repetition = false)
+        {
+            Contract.Requires(source != null);
+            Contract.Requires(select >= 0);
+            Contract.Ensures(Contract.Result<IEnumerable<IEnumerable<T>>>() != null);
+
+            if (select == 0)
+            {
+                return new[] { new T[0] };
+            }
+
+            return source.SelectMany((element, index)
+                =>
+                    source
+                        .Skip(repetition ? index : index + 1)
+                        .Combinations(select - 1, repetition)
+                        .Select(c => new[] { element }.Concat(c)));
+        }
 
         /// <summary>
         /// Provides a Distinct method that takes a key selector lambda as parameter.
