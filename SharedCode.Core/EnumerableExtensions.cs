@@ -28,6 +28,29 @@ namespace SharedCode.Core
         private static readonly Random Random = new Random();
 
         /// <summary>
+        /// Aggregates the source.
+        /// </summary>
+        /// <typeparam name="T">The type of the items in the source.</typeparam>
+        /// <param name="source">The source enumerable.</param>
+        /// <param name="aggregateFunction">The aggregate function.</param>
+        /// <returns>The result.</returns>
+        [CanBeNull]
+        public static T Aggregate<T>([ItemCanBeNull][CanBeNull] this IEnumerable<T> source, [NotNull] Func<T, T, T> aggregateFunction)
+            => Aggregate(source, default, aggregateFunction);
+
+        /// <summary>
+        /// Aggregates the source.
+        /// </summary>
+        /// <typeparam name="T">The type of the items in the source.</typeparam>
+        /// <param name="source">The source enumerable.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <param name="aggregateFunction">The aggregate function.</param>
+        /// <returns>The result.</returns>
+        [CanBeNull]
+        public static T Aggregate<T>([ItemCanBeNull][CanBeNull] this IEnumerable<T> source, [CanBeNull] T defaultValue, [NotNull] Func<T, T, T> aggregateFunction)
+            => source.Any() ? source.Aggregate(aggregateFunction) : defaultValue;
+
+        /// <summary>
         /// Returns a lazy evaluated enumerable.
         /// </summary>
         /// <typeparam name="T">The type of the items in the enumerable.</typeparam>
