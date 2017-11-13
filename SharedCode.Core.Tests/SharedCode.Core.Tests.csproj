@@ -11,6 +11,8 @@
     <RepositoryUrl>https://github.com/wforney/SharedCode.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Description>A collection of useful extension methods, utility functions, classes, enumerations, etc.</Description>
+    <PackageLicenseUrl>https://github.com/wforney/SharedCode/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
