@@ -2,9 +2,11 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-namespace SharedCode.Core
+namespace SharedCode.Core.Attributes
 {
     using System;
+    using System.Diagnostics.Contracts;
+    using JetBrains.Annotations;
 
     /// <summary>
     /// The string value attribute class
@@ -17,8 +19,9 @@ namespace SharedCode.Core
         /// Initializes a new instance of the <see cref="StringValueAttribute"/> class.
         /// </summary>
         /// <param name="value">The string value.</param>
-        public StringValueAttribute(string value)
+        public StringValueAttribute([NotNull] string value)
         {
+            Contract.Requires(value != null);
             this.Value = value;
         }
 
@@ -26,6 +29,7 @@ namespace SharedCode.Core
         /// Gets the value.
         /// </summary>
         /// <value>The value.</value>
+        [NotNull]
         public string Value { get; }
     }
 }

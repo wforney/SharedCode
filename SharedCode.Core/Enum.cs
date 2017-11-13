@@ -9,6 +9,7 @@ namespace SharedCode.Core
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using SharedCode.Core.Attributes;
 
     /// <summary>
     /// The enumeration class.

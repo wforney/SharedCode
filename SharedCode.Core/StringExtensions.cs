@@ -82,36 +82,6 @@ namespace SharedCode.Core
         }
 
         /// <summary>
-        /// Converts the string representation of a Guid to its Guid equivalent. A return value indicates whether the operation succeeded.
-        /// </summary>
-        /// <param name="input">
-        /// A string containing a Guid to convert.
-        /// </param>
-        /// <returns>
-        /// When this method returns, contains the Guid value equivalent to the Guid contained in <paramref name="input"/>, if the conversion succeeded, or <see cref="Guid.Empty"/> if the conversion failed.
-        /// The conversion fails if the <paramref name="input"/> parameter is a <see langword="null" /> reference (<see langword="Nothing" /> in Visual Basic), or is not of the correct format.
-        /// <c>true</c> if <paramref name="input" /> was converted successfully; otherwise, <c>false</c>.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        ///        Thrown if <pararef name="s"/> is <see langword="null"/>.
-        /// </exception>
-        /// <remarks>
-        /// Original code at <seealso cref="https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=94072&wa=wsignin1.0#tabs"/>
-        /// </remarks>
-        public static bool IsGuid([NotNull] this string input)
-        {
-            Contract.Requires<ArgumentNullException>(input != null);
-
-            var format = new Regex(
-                "^[A-Fa-f0-9]{32}$|" +
-                "^({|\\()?[A-Fa-f0-9]{8}-([A-Fa-f0-9]{4}-){3}[A-Fa-f0-9]{12}(}|\\))?$|" +
-                "^({)?[0xA-Fa-f0-9]{3,10}(, {0,1}[0xA-Fa-f0-9]{3,6}){2}, {0,1}({)([0xA-Fa-f0-9]{3,4}, {0,1}){7}[0xA-Fa-f0-9]{3,4}(}})$");
-            var match = format.Match(input);
-
-            return match.Success;
-        }
-
-        /// <summary>
         /// Returns this string or the specified default value if the string is empty.
         /// </summary>
         /// <param name="str">The string.</param>
@@ -260,6 +230,36 @@ namespace SharedCode.Core
         /// <param name="input">The input string.</param>
         /// <returns><c>true</c> if the specified input string is a date; otherwise, <c>false</c>.</returns>
         public static bool IsDate([CanBeNull] this string input) => !string.IsNullOrEmpty(input) && DateTime.TryParse(input, out var dt);
+
+        /// <summary>
+        /// Converts the string representation of a Guid to its Guid equivalent. A return value indicates whether the operation succeeded.
+        /// </summary>
+        /// <param name="input">
+        /// A string containing a Guid to convert.
+        /// </param>
+        /// <returns>
+        /// When this method returns, contains the Guid value equivalent to the Guid contained in <paramref name="input"/>, if the conversion succeeded, or <see cref="Guid.Empty"/> if the conversion failed.
+        /// The conversion fails if the <paramref name="input"/> parameter is a <see langword="null" /> reference (<see langword="Nothing" /> in Visual Basic), or is not of the correct format.
+        /// <c>true</c> if <paramref name="input" /> was converted successfully; otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        ///        Thrown if <pararef name="s"/> is <see langword="null"/>.
+        /// </exception>
+        /// <remarks>
+        /// Original code at <seealso cref="https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=94072&wa=wsignin1.0#tabs"/>
+        /// </remarks>
+        public static bool IsGuid([NotNull] this string input)
+        {
+            Contract.Requires<ArgumentNullException>(input != null);
+
+            var format = new Regex(
+                "^[A-Fa-f0-9]{32}$|" +
+                "^({|\\()?[A-Fa-f0-9]{8}-([A-Fa-f0-9]{4}-){3}[A-Fa-f0-9]{12}(}|\\))?$|" +
+                "^({)?[0xA-Fa-f0-9]{3,10}(, {0,1}[0xA-Fa-f0-9]{3,6}){2}, {0,1}({)([0xA-Fa-f0-9]{3,4}, {0,1}){7}[0xA-Fa-f0-9]{3,4}(}})$");
+            var match = format.Match(input);
+
+            return match.Success;
+        }
 
         /// <summary>
         /// Determines whether the specified string is numeric.

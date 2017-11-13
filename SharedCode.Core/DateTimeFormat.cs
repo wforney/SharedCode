@@ -2,9 +2,10 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-
 namespace SharedCode.Core
 {
+    using SharedCode.Core.Attributes;
+
     /// <summary>
     /// Enum DateTimeFormat
     /// </summary>
