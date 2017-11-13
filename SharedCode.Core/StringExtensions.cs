@@ -96,7 +96,7 @@ namespace SharedCode.Core
         ///        Thrown if <pararef name="s"/> is <see langword="null"/>.
         /// </exception>
         /// <remarks>
-        /// Original code at https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=94072&wa=wsignin1.0#tabs
+        /// Original code at <seealso cref="https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=94072&wa=wsignin1.0#tabs"/>
         /// </remarks>
         public static bool IsGuid([NotNull] this string input)
         {
