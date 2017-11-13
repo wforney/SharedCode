@@ -2,30 +2,30 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>William Forney</Authors>
-    <Company>improvGroup, LLC</Company>
-    <Product>Shared Code</Product>
-    <Copyright>Copyright © improvGroup, LLC. All Rights Reserved.</Copyright>
-    <PackageProjectUrl>https://github.com/wforney/SharedCode</PackageProjectUrl>
-    <NeutralLanguage>en-US</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Copyright>Copyright © improvGroup, LLC. All Rights Reserved.</Copyright>
+    <Product>Shared Code</Product>
+    <Company>improvGroup, LLC</Company>
+    <Authors>William Forney</Authors>
+    <PackageProjectUrl>https://github.com/wforney/SharedCode</PackageProjectUrl>
+    <NeutralLanguage>English (United States)</NeutralLanguage>
     <RepositoryUrl>https://github.com/wforney/SharedCode.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netstandard2.0\SharedCode.Core.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netstandard2.0\SharedCode.Data.xml</DocumentationFile>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard2.0\SharedCode.Core.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\netstandard2.0\SharedCode.Data.xml</DocumentationFile>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Microsoft.Data.Services.Client" Version="5.8.3" />
   </ItemGroup>
 
   <ItemGroup>

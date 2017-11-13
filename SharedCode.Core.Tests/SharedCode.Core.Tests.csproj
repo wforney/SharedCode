@@ -6,8 +6,11 @@
     <Company>improvGroup, LLC</Company>
     <Product>Shared Code</Product>
     <Copyright>Copyright © improvGroup, LLC. All Rights Reserved.</Copyright>
-    <PackageProjectUrl>https://www.improvgroup.com/</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/wforney/SharedCode</PackageProjectUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <RepositoryUrl>https://github.com/wforney/SharedCode.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
