@@ -1,14 +1,15 @@
-﻿using System.Diagnostics.Contracts;
+﻿
 
 // <copyright file="Utilities.cs" company="improvGroup, LLC">
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
-
 namespace SharedCode.Core
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Reflection;
+
     using JetBrains.Annotations;
 
     /// <summary>
@@ -35,7 +36,8 @@ namespace SharedCode.Core
             // Gets all public and static fields
             // This tells it to get the fields from all base types as well
             // Go through the list and only pick out the constants
-            foreach (var fi in type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy))
+            foreach (var fi in type.GetFields(
+                BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy))
             {
                 // remove deprecated / obsolete fields/properties
                 if (fi.GetCustomAttributes<ObsoleteAttribute>(inherit: true).Any())
@@ -44,11 +46,11 @@ namespace SharedCode.Core
                 }
 
                 // IsLiteral determines if its value is written at
-                //   compile time and not changeable
+                // compile time and not changeable
                 // IsInitOnly determine if the field can be set
-                //   in the body of the constructor
+                // in the body of the constructor
                 // for C# a field which is readonly keyword would have both true
-                //   but a const field would have only IsLiteral equal to true
+                // but a const field would have only IsLiteral equal to true
                 if (fi.IsLiteral && !fi.IsInitOnly)
                 {
                     var value = fi.GetRawConstantValue();

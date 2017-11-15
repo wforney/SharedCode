@@ -2,8 +2,9 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-using JetBrains.Annotations;
 using System.Diagnostics.Contracts;
+
+using JetBrains.Annotations;
 
 namespace SharedCode.Core
 {

@@ -82,10 +82,13 @@ namespace SharedCode.Core
                 throw new ArgumentException("Cannot decrypt using an empty key. Please supply a decryption key.");
             }
 
-            using (var rsa = new RSACryptoServiceProvider(new CspParameters { KeyContainerName = key }) { PersistKeyInCsp = true })
+            using (var rsa =
+                new RSACryptoServiceProvider(new CspParameters { KeyContainerName = key }) { PersistKeyInCsp = true })
             {
-                var decryptArray = stringToDecrypt.Split(new string[] { "-" }, StringSplitOptions.None);
-                var decryptByteArray = Array.ConvertAll(decryptArray, s => Convert.ToByte(byte.Parse(s, NumberStyles.HexNumber)));
+                var decryptArray = stringToDecrypt.Split(new[] { "-" }, StringSplitOptions.None);
+                var decryptByteArray = Array.ConvertAll(
+                    decryptArray,
+                    s => Convert.ToByte(byte.Parse(s, NumberStyles.HexNumber)));
 
                 var bytes = rsa.Decrypt(decryptByteArray, fOAEP: true);
 
@@ -111,9 +114,14 @@ namespace SharedCode.Core
         ///     The output string.
         /// </returns>
         [CanBeNull]
-        public static string DefaultIfEmpty([CanBeNull] this string str, [CanBeNull] string defaultValue, bool considerWhiteSpaceIsEmpty = false)
+        public static string DefaultIfEmpty(
+            [CanBeNull] this string str,
+            [CanBeNull] string defaultValue,
+            bool considerWhiteSpaceIsEmpty = false)
         {
-            return (considerWhiteSpaceIsEmpty ? string.IsNullOrWhiteSpace(str) : string.IsNullOrEmpty(str)) ? defaultValue : str;
+            return (considerWhiteSpaceIsEmpty ? string.IsNullOrWhiteSpace(str) : string.IsNullOrEmpty(str))
+                       ? defaultValue
+                       : str;
         }
 
         /// <summary>
@@ -144,7 +152,8 @@ namespace SharedCode.Core
                 throw new ArgumentException("Cannot encrypt using an empty key. Please supply an encryption key.");
             }
 
-            using (var rsa = new RSACryptoServiceProvider(new CspParameters { KeyContainerName = key }) { PersistKeyInCsp = true })
+            using (var rsa =
+                new RSACryptoServiceProvider(new CspParameters { KeyContainerName = key }) { PersistKeyInCsp = true })
             {
                 var bytes = rsa.Encrypt(Encoding.UTF8.GetBytes(stringToEncrypt), fOAEP: true);
 
@@ -166,8 +175,8 @@ namespace SharedCode.Core
         ///     A copy of format in which the first format item has been replaced by the System.String equivalent of arg0
         /// </returns>
         [CanBeNull]
-        public static string Format([CanBeNull] this string value, [CanBeNull] object arg0)
-            => string.Format(value, arg0);
+        public static string Format([CanBeNull] this string value, [CanBeNull] object arg0) =>
+            string.Format(value, arg0);
 
         /// <summary>
         ///     Replaces the format item in a specified System.String with the text equivalent of the value of a
@@ -184,8 +193,8 @@ namespace SharedCode.Core
         ///     corresponding instances of System.Object in args.
         /// </returns>
         [CanBeNull]
-        public static string Format([CanBeNull] this string value, [ItemCanBeNull][CanBeNull] params object[] args)
-            => string.Format(value, args);
+        public static string Format([CanBeNull] this string value, [ItemCanBeNull] [CanBeNull] params object[] args) =>
+            string.Format(value, args);
 
         /// <summary>
         ///     Formats the string according to the specified mask
@@ -250,7 +259,8 @@ namespace SharedCode.Core
             Contract.Ensures(Contract.Result<string>() != null);
 
             var type = typeof(T);
-            var name = Enum.GetNames(type).Where(f => f.Equals(value, StringComparison.CurrentCultureIgnoreCase)).Select(d => d).FirstOrDefault();
+            var name = Enum.GetNames(type).Where(f => f.Equals(value, StringComparison.CurrentCultureIgnoreCase))
+                .Select(d => d).FirstOrDefault();
 
             if (name == null)
             {
@@ -274,7 +284,7 @@ namespace SharedCode.Core
         /// <returns>
         ///     Return true if any string value matches
         /// </returns>
-        public static bool In([CanBeNull] this string value, [ItemCanBeNull][CanBeNull] params string[] stringValues)
+        public static bool In([CanBeNull] this string value, [ItemCanBeNull] [CanBeNull] params string[] stringValues)
         {
             foreach (var otherValue in stringValues)
             {
@@ -296,7 +306,8 @@ namespace SharedCode.Core
         /// <returns>
         ///     Returns <c>true</c> if the specified input string is a date; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsDate([CanBeNull] this string input) => !string.IsNullOrEmpty(input) && DateTime.TryParse(input, out var dt);
+        public static bool IsDate([CanBeNull] this string input) =>
+            !string.IsNullOrEmpty(input) && DateTime.TryParse(input, out var dt);
 
         /// <summary>
         /// Converts the string representation of a Guid to its Guid equivalent. A return value indicates
@@ -321,9 +332,8 @@ namespace SharedCode.Core
             Contract.Requires<ArgumentNullException>(input != null);
 
             var format = new Regex(
-                "^[A-Fa-f0-9]{32}$|" +
-                "^({|\\()?[A-Fa-f0-9]{8}-([A-Fa-f0-9]{4}-){3}[A-Fa-f0-9]{12}(}|\\))?$|" +
-                "^({)?[0xA-Fa-f0-9]{3,10}(, {0,1}[0xA-Fa-f0-9]{3,6}){2}, {0,1}({)([0xA-Fa-f0-9]{3,4}, {0,1}){7}[0xA-Fa-f0-9]{3,4}(}})$");
+                "^[A-Fa-f0-9]{32}$|" + "^({|\\()?[A-Fa-f0-9]{8}-([A-Fa-f0-9]{4}-){3}[A-Fa-f0-9]{12}(}|\\))?$|"
+                + "^({)?[0xA-Fa-f0-9]{3,10}(, {0,1}[0xA-Fa-f0-9]{3,6}){2}, {0,1}({)([0xA-Fa-f0-9]{3,4}, {0,1}){7}[0xA-Fa-f0-9]{3,4}(}})$");
             var match = format.Match(input);
 
             return match.Success;
@@ -338,7 +348,11 @@ namespace SharedCode.Core
         /// <returns>
         ///     Returns <c>true</c> if the specified string is numeric; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsNumeric([CanBeNull] this string input) => long.TryParse(input, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out _);
+        public static bool IsNumeric([CanBeNull] this string input) => long.TryParse(
+            input,
+            NumberStyles.Integer,
+            NumberFormatInfo.InvariantInfo,
+            out _);
 
         /// <summary>
         ///     Determines whether the input string is a valid email address.
@@ -379,7 +393,9 @@ namespace SharedCode.Core
         [CanBeNull]
         public static string Left([CanBeNull] this string value, int length)
         {
-            return value != null && value.Length > Math.Max(length, 0) ? value.Substring(0, Math.Max(length, 0)) : value;
+            return value != null && value.Length > Math.Max(length, 0)
+                       ? value.Substring(0, Math.Max(length, 0))
+                       : value;
         }
 
         /// <summary>
@@ -392,7 +408,8 @@ namespace SharedCode.Core
         ///     The result.
         /// </returns>
         [CanBeNull]
-        public static string NullIfEmpty([CanBeNull] this string value) => string.IsNullOrEmpty(value) ? default : value;
+        public static string NullIfEmpty([CanBeNull] this string value) =>
+            string.IsNullOrEmpty(value) ? default : value;
 
         /// <summary>
         ///     Returns the string with the specified value or null if the value is white space.
@@ -404,7 +421,8 @@ namespace SharedCode.Core
         ///     The result.
         /// </returns>
         [CanBeNull]
-        public static string NullIfWhiteSpace([CanBeNull] this string value) => string.IsNullOrWhiteSpace(value) ? default : value;
+        public static string NullIfWhiteSpace([CanBeNull] this string value) =>
+            string.IsNullOrWhiteSpace(value) ? default : value;
 
         /// <summary>
         ///     Parses the specified value.
@@ -447,8 +465,8 @@ namespace SharedCode.Core
         ///     Returns string from right
         /// </returns>
         [CanBeNull]
-        public static string Right([CanBeNull] this string value, int length)
-            => value != null && value.Length > length ? value.Substring(value.Length - length) : value;
+        public static string Right([CanBeNull] this string value, int length) =>
+            value != null && value.Length > length ? value.Substring(value.Length - length) : value;
 
         /// <summary>
         ///     Strips the HTML from the input string.
@@ -485,8 +503,7 @@ namespace SharedCode.Core
         ///     Returns enum object
         /// </returns>
         public static T ToEnum<T>([NotNull] this string value)
-            where T : struct
-            => (T)Enum.Parse(typeof(T), value, ignoreCase: true);
+            where T : struct => (T)Enum.Parse(typeof(T), value, ignoreCase: true);
 
         /// <summary>
         ///     Converts a string into a "SecureString"
@@ -604,6 +621,7 @@ namespace SharedCode.Core
         ///     The result.
         /// </returns>
         [NotNull]
-        public static string ValueOrEmpty([CanBeNull] this string value) => string.IsNullOrEmpty(value) ? string.Empty : value;
+        public static string ValueOrEmpty([CanBeNull] this string value) =>
+            string.IsNullOrEmpty(value) ? string.Empty : value;
     }
 }

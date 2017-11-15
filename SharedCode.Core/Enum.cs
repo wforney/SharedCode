@@ -73,14 +73,18 @@ namespace SharedCode.Core
 
             var underlyingType = Enum.GetUnderlyingType(typeof(T));
             var values = new ArrayList();
-            //Look for our string value associated with fields in this enum
+
+            // Look for our string value associated with fields in this enum
             foreach (var fi in typeof(T).GetFields())
             {
-                //Check for our custom attribute
+                // Check for our custom attribute
                 var attrs = fi.GetCustomAttributes<StringValueAttribute>(inherit: false);
                 if (attrs.Any())
                 {
-                    values.Add(new DictionaryEntry(Convert.ChangeType(Enum.Parse(typeof(T), fi.Name), underlyingType), attrs.First().Value));
+                    values.Add(
+                        new DictionaryEntry(
+                            Convert.ChangeType(Enum.Parse(typeof(T), fi.Name), underlyingType),
+                            attrs.First().Value));
                 }
             }
 
@@ -132,7 +136,7 @@ namespace SharedCode.Core
             }
             catch (Exception)
             {
-                //Swallow!
+                // Swallow!
 #pragma warning restore GCop138 // When you catch an exception you should throw exception or at least log error
 #pragma warning restore RCS1075 // Avoid empty catch clause that catches System.Exception.
 #pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
@@ -154,10 +158,10 @@ namespace SharedCode.Core
 
             var values = new ArrayList();
 
-            //Look for our string value associated with fields in this enum
+            // Look for our string value associated with fields in this enum
             foreach (var fi in typeof(T).GetFields())
             {
-                //Check for our custom attribute
+                // Check for our custom attribute
                 var attrs = fi.GetCustomAttributes<StringValueAttribute>(inherit: false);
                 if (attrs.Any())
                 {
@@ -181,15 +185,15 @@ namespace SharedCode.Core
             string output = null;
             var type = value.GetType();
 
-            //Check first in our cached results...
+            // Check first in our cached results...
             if (StringValues.ContainsKey(value))
             {
                 output = (StringValues[value] as StringValueAttribute)?.Value;
             }
             else
             {
-                //Look for our 'StringValueAttribute'
-                //in the field's custom attributes
+                // Look for our 'StringValueAttribute'
+                // in the field's custom attributes
                 var fi = type.GetField(value.ToString());
                 var attrs = fi.GetCustomAttributes<StringValueAttribute>(inherit: false) as StringValueAttribute[];
                 if (attrs.Length > 0)
@@ -232,17 +236,17 @@ namespace SharedCode.Core
                 throw new ArgumentException($"Supplied type must be an Enum.  Type was {type}");
             }
 
-            //Look for our string value associated with fields in this enum
+            // Look for our string value associated with fields in this enum
             foreach (var fi in type.GetFields())
             {
-                //Check for our custom attribute
+                // Check for our custom attribute
                 var attrs = fi.GetCustomAttributes<StringValueAttribute>(inherit: false);
                 if (attrs.Any())
                 {
                     enumStringValue = attrs.First().Value;
                 }
 
-                //Check for equality then select actual enum value.
+                // Check for equality then select actual enum value.
                 if (string.Compare(enumStringValue, stringValue, ignoreCase) == 0)
                 {
                     output = Enum.Parse(type, fi.Name);

@@ -2,12 +2,12 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-using JetBrains.Annotations;
-using System.Diagnostics.Contracts;
-
 namespace SharedCode.Core
 {
+    using System.Diagnostics.Contracts;
     using System.IO;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// The directory information extensions class
@@ -24,7 +24,7 @@ namespace SharedCode.Core
 
             if (dirInfo.Parent != null)
             {
-                CreateDirectory(dirInfo.Parent);
+                DirectoryInfoExtensions.CreateDirectory(dirInfo.Parent);
             }
 
             if (!dirInfo.Exists)

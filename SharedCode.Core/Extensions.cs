@@ -6,17 +6,18 @@ namespace SharedCode.Core
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.IO;
+    using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Runtime.Serialization.Json;
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
 
-    using Newtonsoft.Json;
-    using System.Runtime.Serialization.Json;
-    using System.Runtime.Serialization;
     using JetBrains.Annotations;
-    using System.Diagnostics.Contracts;
+
+    using Newtonsoft.Json;
 
     /// <summary>
     /// The extensions class.

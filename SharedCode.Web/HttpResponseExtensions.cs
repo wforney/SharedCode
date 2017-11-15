@@ -22,7 +22,7 @@ namespace SharedCode.Web
             response.Clear();
             response.AddHeader("content-disposition", "attachment; filename=" + outputFileName);
             response.WriteFile(fullPathToFile);
-            response.ContentType = "";
+            response.ContentType = string.Empty;
             response.End();
         }
     }

@@ -2,13 +2,13 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-using JetBrains.Annotations;
-using System.Diagnostics.Contracts;
-
 namespace SharedCode.Core
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Reflection;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// The assembly extensions class

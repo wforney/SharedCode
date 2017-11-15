@@ -247,23 +247,30 @@ namespace SharedCode.Core
         /// Sorts the specified enumerable by the key selector function in the direction specified.
         /// </summary>
         /// <typeparam name="TSource">The type of the source enumerable.</typeparam>
-        /// <param name="enumerable">The source enumerable.</param>
+        /// <param name="source">The source enumerable.</param>
         /// <param name="keySelector1">The key first selector.</param>
         /// <param name="keySelector2">The key second selector.</param>
         /// <param name="keySelectors">The remaining key selectors.</param>
         /// <returns>The sorted enumerable.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source">source</paramref> or <paramref name="keySelectors">keySelector</paramref> is null.</exception>
+        /// <exception cref="OverflowException">The array is multidimensional and contains more than <see cref="F:System.Int32.MaxValue"></see> elements.</exception>
+        [ItemCanBeNull]
+        [CanBeNull]
         public static IOrderedEnumerable<TSource> OrderBy<TSource>(
-            this IEnumerable<TSource> enumerable,
-            Func<TSource, IComparable> keySelector1,
-            Func<TSource, IComparable> keySelector2,
-            params Func<TSource, IComparable>[] keySelectors)
+            [CanBeNull][ItemCanBeNull] this IEnumerable<TSource> source,
+            [NotNull] Func<TSource, IComparable> keySelector1,
+            [NotNull] Func<TSource, IComparable> keySelector2,
+            [CanBeNull][ItemNotNull] params Func<TSource, IComparable>[] keySelectors)
         {
-            if (enumerable == null)
+            Contract.Requires(keySelector1 != null);
+            Contract.Requires(keySelector2 != null);
+
+            if (source == null)
             {
                 return Enumerable.Empty<TSource>().OrderBy(i => i);
             }
 
-            var current = enumerable;
+            var current = source;
 
             if (keySelectors != null)
             {
@@ -287,12 +294,19 @@ namespace SharedCode.Core
         /// <param name="descending">if set to <c>true</c> the sort direction is descending.</param>
         /// <param name="keySelectors">The remaining key selectors.</param>
         /// <returns>The sorted enumerable.</returns>
+        /// <exception cref="OverflowException">The array is multidimensional and contains more than <see cref="F:System.Int32.MaxValue"></see> elements.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="source">source</paramref> or <paramref name="keySelector">keySelector</paramref> is null.</exception>
+        [NotNull]
+        [ItemCanBeNull]
         public static IOrderedEnumerable<TSource> OrderBy<TSource>(
-            this IEnumerable<TSource> enumerable,
-            Func<TSource, IComparable> keySelector,
+            [CanBeNull][ItemCanBeNull] this IEnumerable<TSource> enumerable,
+            [NotNull] Func<TSource, IComparable> keySelector,
             bool descending,
-            params Func<TSource, IComparable>[] keySelectors)
+            [CanBeNull][ItemNotNull] params Func<TSource, IComparable>[] keySelectors)
         {
+            Contract.Requires(keySelector != null);
+            Contract.Ensures(Contract.Result<IOrderedEnumerable<TSource>>() != null);
+
             if (enumerable == null)
             {
                 return Enumerable.Empty<TSource>().OrderBy(i => i);
@@ -323,6 +337,7 @@ namespace SharedCode.Core
         /// <param name="secondKeySelector">The second key selector.</param>
         /// <param name="aggregate">The aggregate function.</param>
         /// <returns>Dictionary&lt;TFirstKey, Dictionary&lt;TSecondKey, TValue&gt;&gt;.</returns>
+        /// <exception cref="Exception">A delegate callback throws an exception.</exception>
         public static Dictionary<TFirstKey, Dictionary<TSecondKey, TValue>> Pivot<TSource, TFirstKey, TSecondKey, TValue>(
             this IEnumerable<TSource> source,
             Func<TSource, TFirstKey> firstKeySelector,
@@ -348,14 +363,19 @@ namespace SharedCode.Core
             return retVal;
         }
 
+#pragma warning disable SG0005 // Weak random generator
+
         /// <summary>
         /// Randomizes order of the items in the specified enumerable.
         /// </summary>
-        /// <typeparam name="t">The type of the items in the enumerable.</typeparam>
-        /// <param name="target">The enumerable.</param>
+        /// <typeparam name="T">The type of the items in the enumerable.</typeparam>
+        /// <param name="source">The enumerable.</param>
         /// <returns>The enumerable with random order applied.</returns>
-#pragma warning disable SG0005 // Weak random generator
-        public static IOrderedEnumerable<t> Randomize<t>(this IEnumerable<t> target) => target.OrderBy(x => Random.Next());
+        /// <exception cref="ArgumentNullException"><paramref name="source">source</paramref> is null.</exception>
+        [CanBeNull]
+        [ItemCanBeNull]
+        public static IOrderedEnumerable<T> Randomize<T>([CanBeNull][ItemCanBeNull] this IEnumerable<T> source) => source?.OrderBy(x => EnumerableExtensions.Random.Next());
+
 #pragma warning restore SG0005 // Weak random generator
 
         /// <summary>
@@ -366,9 +386,13 @@ namespace SharedCode.Core
         /// <param name="start">The start index.</param>
         /// <param name="end">The end index.</param>
         /// <returns>The slice.</returns>
-        /// <exception cref="System.ArgumentNullException">source</exception>
-        public static IEnumerable<T> Slice<T>(this IEnumerable<T> source, int start, int end)
+        /// <exception cref="ArgumentNullException">source</exception>
+        [CanBeNull]
+        [ItemCanBeNull]
+        public static IEnumerable<T> Slice<T>([NotNull][ItemCanBeNull] this IEnumerable<T> source, int start, int end)
         {
+            Contract.Requires(source != null);
+
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -377,7 +401,7 @@ namespace SharedCode.Core
             var index = 0;
 
             // Optimise item count for ICollection interfaces.
-            var count = source is ICollection<T> ? ((ICollection<T>)source).Count : source is ICollection ? ((ICollection)source).Count : source.Count();
+            var count = source is ICollection<T> collection ? collection.Count : (source as ICollection)?.Count ?? source.Count();
 
             // Get start/end indexes, negative numbers start at the end of the collection.
             if (start < 0)

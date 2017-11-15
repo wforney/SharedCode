@@ -26,12 +26,12 @@ namespace SharedCode.Core
             /// <summary>
             /// The HMAC MD5 //DevSkim: ignore DS126858
             /// </summary>
-            HMACMD5, //DevSkim: ignore DS126858
+            HMACMD5, // DevSkim: ignore DS126858
 
             /// <summary>
             /// The HMAC SHA1 //DevSkim: ignore DS126858
             /// </summary>
-            HMACSHA1, //DevSkim: ignore DS126858
+            HMACSHA1, // DevSkim: ignore DS126858
 
             /// <summary>
             /// The HMAC SHA256
@@ -56,17 +56,17 @@ namespace SharedCode.Core
             /// <summary>
             /// The MD5 //DevSkim: ignore DS126858
             /// </summary>
-            MD5, //DevSkim: ignore DS126858
+            MD5, // DevSkim: ignore DS126858
 
             /// <summary>
             /// The RIPEMD160 //DevSkim: ignore DS126858
             /// </summary>
-            RIPEMD160, //DevSkim: ignore DS126858
+            RIPEMD160, // DevSkim: ignore DS126858
 
             /// <summary>
             /// The SHA1 //DevSkim: ignore DS126858
             /// </summary>
-            SHA1, //DevSkim: ignore DS126858
+            SHA1, // DevSkim: ignore DS126858
 
             /// <summary>
             /// The SHA256
@@ -100,11 +100,11 @@ namespace SharedCode.Core
                     return HMAC.Create().ComputeHash(inputBytes);
 
 #pragma warning disable RECS0030 // Suggests using the class declaring a static function when calling it
-                case EHashType.HMACMD5: //DevSkim: ignore DS126858
-                    return HMACMD5.Create().ComputeHash(inputBytes); //DevSkim: ignore DS126858
+                case EHashType.HMACMD5: // DevSkim: ignore DS126858
+                    return HMACMD5.Create().ComputeHash(inputBytes); // DevSkim: ignore DS126858
 
-                case EHashType.HMACSHA1: //DevSkim: ignore DS126858
-                    return HMACSHA1.Create().ComputeHash(inputBytes); //DevSkim: ignore DS126858
+                case EHashType.HMACSHA1: // DevSkim: ignore DS126858
+                    return HMACSHA1.Create().ComputeHash(inputBytes); // DevSkim: ignore DS126858
 
                 case EHashType.HMACSHA256:
                     return HMACSHA256.Create().ComputeHash(inputBytes);
@@ -116,14 +116,14 @@ namespace SharedCode.Core
                     return HMACSHA512.Create().ComputeHash(inputBytes);
 #pragma warning restore RECS0030 // Suggests using the class declaring a static function when calling it
 
-                case EHashType.MD5: //DevSkim: ignore DS126858
+                case EHashType.MD5: // DevSkim: ignore DS126858
 #pragma warning disable SG0006 // Weak hashing function
-                    return MD5.Create().ComputeHash(inputBytes); //DevSkim: ignore DS126858
+                    return MD5.Create().ComputeHash(inputBytes); // DevSkim: ignore DS126858
 #pragma warning restore SG0006 // Weak hashing function
 
-                case EHashType.SHA1: //DevSkim: ignore DS126858
+                case EHashType.SHA1: // DevSkim: ignore DS126858
 #pragma warning disable SG0006 // Weak hashing function
-                    return SHA1.Create().ComputeHash(inputBytes); //DevSkim: ignore DS126858
+                    return SHA1.Create().ComputeHash(inputBytes); // DevSkim: ignore DS126858
 #pragma warning restore SG0006 // Weak hashing function
 
                 case EHashType.SHA256:

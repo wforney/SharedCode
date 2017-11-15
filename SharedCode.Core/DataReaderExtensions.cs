@@ -2,15 +2,15 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-using JetBrains.Annotations;
-using System.Diagnostics.Contracts;
-
 namespace SharedCode.Core
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Diagnostics.Contracts;
     using System.Text;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// Class DataReaderExtensions.
@@ -26,7 +26,10 @@ namespace SharedCode.Core
         /// <returns>A list of delimited lines.</returns>
         [NotNull]
         [ItemNotNull]
-        public static List<string> ToDelimited([NotNull] this IDataReader dataReader, [CanBeNull] string separator, bool includeHeaderAsFirstRow)
+        public static List<string> ToDelimited(
+            [NotNull] this IDataReader dataReader,
+            [CanBeNull] string separator,
+            bool includeHeaderAsFirstRow)
         {
             Contract.Requires(dataReader != null);
             Contract.Ensures(Contract.Result<List<string>>() != null);
@@ -63,13 +66,13 @@ namespace SharedCode.Core
                         var value = dataReader.GetValue(index).ToString();
                         if (dataReader.GetFieldType(index) == typeof(string))
                         {
-                            //If double quotes are used in value, ensure each are replaced but 2.
+                            // If double quotes are used in value, ensure each are replaced but 2.
                             if (value.IndexOf("\"", StringComparison.Ordinal) >= 0)
                             {
                                 value = value.Replace("\"", "\"\"");
                             }
 
-                            //If separtor are is in value, ensure it is put in double quotes.
+                            // If separtor are is in value, ensure it is put in double quotes.
                             if (value.IndexOf(separator, StringComparison.Ordinal) >= 0)
                             {
                                 value = $"\"{value}\"";

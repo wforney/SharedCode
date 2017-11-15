@@ -36,6 +36,7 @@ namespace SharedCode.Windows
             var y = rectangle.Y;
             var width = rectangle.Width;
             var height = rectangle.Height;
+
             // adapt horizontal and vertical diameter if the rectangle is too little
             if (width < horizontalDiameter)
             {
@@ -68,7 +69,10 @@ namespace SharedCode.Windows
             var pointP = tl ? new Point(x + horizontalDiameter / 2, y) : new Point(x, y);
             var pointQ = tr ? new Point(x + width - horizontalDiameter / 2 - 1, y) : new Point(x + width - 1, y);
             var pointR = tr ? new Point(x + width - 1, y + verticalDiameter / 2) : pointQ;
-            var pointS = br ? new Point(x + width - 1, y + height - verticalDiameter / 2 - 1) : new Point(x + width - 1, y + height - 1);
+            var pointS =
+                br
+                    ? new Point(x + width - 1, y + height - verticalDiameter / 2 - 1)
+                    : new Point(x + width - 1, y + height - 1);
             var pointT = br ? new Point(x + width - horizontalDiameter / 2 - 1) : pointS;
             var pointU = bl ? new Point(x + horizontalDiameter / 2, y + height - 1) : new Point(x, y + height - 1);
             var pointV = bl ? new Point(x, y + height - verticalDiameter / 2 - 1) : pointU;
@@ -91,7 +95,13 @@ namespace SharedCode.Windows
                 // d
                 if (br)
                 {
-                    gp.AddArc(x + width - horizontalDiameter - 1, y + height - verticalDiameter - 1, horizontalDiameter, verticalDiameter, 0, 90);
+                    gp.AddArc(
+                        x + width - horizontalDiameter - 1,
+                        y + height - verticalDiameter - 1,
+                        horizontalDiameter,
+                        verticalDiameter,
+                        0,
+                        90);
                 }
 
                 // e

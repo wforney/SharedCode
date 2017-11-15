@@ -12,6 +12,8 @@ namespace SharedCode.Office
     using System.Reflection;
     using Microsoft.Office.Interop.Excel;
 
+    using Font = Microsoft.Office.Interop.Excel.Font;
+
     /// <summary>
     /// The list extensions class.
     /// </summary>
@@ -33,7 +35,7 @@ namespace SharedCode.Office
                 throw new Exception("Invalid file path.");
             }
 
-            if (pathToSave.IndexOf("", StringComparison.OrdinalIgnoreCase) < 0)
+            if (pathToSave.IndexOf(string.Empty, StringComparison.OrdinalIgnoreCase) < 0)
             {
                 throw new Exception("Invalid file path.");
             }
@@ -54,7 +56,7 @@ namespace SharedCode.Office
             var books = excelApp.Workbooks;
             var book = books.Add(optionalValue);
             var sheets = book.Worksheets;
-            var sheet = (_Worksheet)(sheets.get_Item(1));
+            var sheet = (_Worksheet)sheets.get_Item(1);
 
             // Create header
             CreateHeader<T>(out var range, out var font, optionalValue, strHeaderStart, sheet, out var objHeaders);
@@ -148,7 +150,7 @@ namespace SharedCode.Office
                 foreach (var entry in objHeaders)
                 {
                     var row = typeof(T).InvokeMember(entry.Key, BindingFlags.GetProperty, null, item, null);
-                    objData[j, col++] = (row == null) ? "" : row.ToString();
+                    objData[j, col++] = (row == null) ? string.Empty : row.ToString();
                 }
             }
 
@@ -175,7 +177,8 @@ namespace SharedCode.Office
         /// <param name="sheet">The worksheet.</param>
         /// <param name="objHeaders">The object headers.</param>
 #pragma warning disable GCop119 // Don’t use {0} parameters in method definition. To return several objects, define a class or struct for your method return type.
-        private static void CreateHeader<T>(out Range range, out Microsoft.Office.Interop.Excel.Font font, object optionalValue, string strHeaderStart, _Worksheet sheet, out Dictionary<string, string> objHeaders)
+
+        private static void CreateHeader<T>(out Range range, out Font font, object optionalValue, string strHeaderStart, _Worksheet sheet, out Dictionary<string, string> objHeaders)
 #pragma warning restore GCop119 // Don’t use {0} parameters in method definition. To return several objects, define a class or struct for your method return type.
         {
             objHeaders = new Dictionary<string, string>();
