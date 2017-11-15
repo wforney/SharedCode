@@ -2,6 +2,9 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
+using System.Diagnostics.Contracts;
+using JetBrains.Annotations;
+
 namespace SharedCode.Core
 {
     using System;
@@ -33,8 +36,11 @@ namespace SharedCode.Core
         /// <param name="fromDate">The from date.</param>
         /// <param name="toDate">The to date.</param>
         /// <returns>The date range <paramref name="fromDate"/> to <paramref name="toDate"/>.</returns>
+        [NotNull]
         public static IEnumerable<DateTimeOffset> GetDateRangeTo(this DateTimeOffset fromDate, DateTimeOffset toDate)
         {
+            Contract.Ensures(Contract.Result<IEnumerable<DateTimeOffset>>() != null);
+
             return Enumerable.Range(0, new TimeSpan(toDate.Ticks - fromDate.Ticks).Days)
                 .Select(p => new DateTimeOffset(fromDate.Date.AddDays(p)));
         }
@@ -63,8 +69,12 @@ namespace SharedCode.Core
         /// <param name="source">The source date time.</param>
         /// <param name="dateTimeFormat">The date time format.</param>
         /// <returns>The date time format string.</returns>
-        public static string ToStringFormat(this DateTimeOffset source, Expression<Func<DateTimeFormat>> dateTimeFormat)
+        [NotNull]
+        public static string ToStringFormat(this DateTimeOffset source, [NotNull] Expression<Func<DateTimeFormat>> dateTimeFormat)
         {
+            Contract.Requires(dateTimeFormat != null);
+            Contract.Ensures(Contract.Result<string>() != null);
+
             var dateTimeFormatCompiled = dateTimeFormat.Compile().Invoke();
 
             var dateTimeStringFormat = Enum<string>.GetStringValue(dateTimeFormatCompiled);

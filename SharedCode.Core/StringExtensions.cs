@@ -19,16 +19,22 @@ namespace SharedCode.Core
     using JetBrains.Annotations;
 
     /// <summary>
-    /// The string extensions class.
+    ///     The string extensions class.
     /// </summary>
     public static class StringExtensions
     {
         /// <summary>
-        /// Determines whether the specified string contains any of the specified characters.
+        ///     Determines whether the specified string contains any of the specified characters.
         /// </summary>
-        /// <param name="input">The input string.</param>
-        /// <param name="characters">The characters to check.</param>
-        /// <returns>A value indicating whether the specified string contains any of the specified characters.</returns>
+        /// <param name="input">
+        ///     The input string.
+        /// </param>
+        /// <param name="characters">
+        ///     The characters to check.
+        /// </param>
+        /// <returns>
+        ///     A value indicating whether the specified string contains any of the specified characters.
+        /// </returns>
         public static bool ContainsAny([NotNull] this string input, [NotNull] char[] characters)
         {
             foreach (var character in characters)
@@ -43,12 +49,20 @@ namespace SharedCode.Core
         }
 
         /// <summary>
-        /// Decryptes a string using the supplied key. Decoding is done using RSA encryption.
+        ///     Decryptes a string using the supplied key. Decoding is done using RSA encryption.
         /// </summary>
-        /// <param name="stringToDecrypt">String that must be decrypted.</param>
-        /// <param name="key">Decryptionkey.</param>
-        /// <returns>The decrypted string or null if decryption failed.</returns>
-        /// <exception cref="ArgumentException">Occurs when stringToDecrypt or key is null or empty.</exception>
+        /// <param name="stringToDecrypt">
+        ///     String that must be decrypted.
+        /// </param>
+        /// <param name="key">
+        ///     Decryptionkey.
+        /// </param>
+        /// <returns>
+        ///     The decrypted string or null if decryption failed.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        ///     Occurs when stringToDecrypt or key is null or empty.
+        /// </exception>
         [NotNull]
         public static string Decrypt([NotNull] this string stringToDecrypt, [NotNull] string key)
         {
@@ -82,12 +96,20 @@ namespace SharedCode.Core
         }
 
         /// <summary>
-        /// Returns this string or the specified default value if the string is empty.
+        ///     Returns this string or the specified default value if the string is empty.
         /// </summary>
-        /// <param name="str">The string.</param>
-        /// <param name="defaultValue">The default value.</param>
-        /// <param name="considerWhiteSpaceIsEmpty">if set to <c>true</c> then consider white space as empty.</param>
-        /// <returns>The output string.</returns>
+        /// <param name="str">
+        ///     The string.
+        /// </param>
+        /// <param name="defaultValue">
+        ///     The default value.
+        /// </param>
+        /// <param name="considerWhiteSpaceIsEmpty">
+        ///     if set to <c>true</c> then consider white space as empty.
+        /// </param>
+        /// <returns>
+        ///     The output string.
+        /// </returns>
         [CanBeNull]
         public static string DefaultIfEmpty([CanBeNull] this string str, [CanBeNull] string defaultValue, bool considerWhiteSpaceIsEmpty = false)
         {
@@ -95,12 +117,20 @@ namespace SharedCode.Core
         }
 
         /// <summary>
-        /// Encryptes a string using the supplied key. Encoding is done using RSA encryption.
+        ///     Encryptes a string using the supplied key. Encoding is done using RSA encryption.
         /// </summary>
-        /// <param name="stringToEncrypt">String that must be encrypted.</param>
-        /// <param name="key">Encryptionkey.</param>
-        /// <returns>A string representing a byte array separated by a minus sign.</returns>
-        /// <exception cref="ArgumentException">Occurs when stringToEncrypt or key is null or empty.</exception>
+        /// <param name="stringToEncrypt">
+        ///     String that must be encrypted.
+        /// </param>
+        /// <param name="key">
+        ///     Encryptionkey.
+        /// </param>
+        /// <returns>
+        ///     A string representing a byte array separated by a minus sign.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        ///     Occurs when stringToEncrypt or key is null or empty.
+        /// </exception>
         [NotNull]
         public static string Encrypt([NotNull] this string stringToEncrypt, [NotNull] string key)
         {
@@ -123,31 +153,52 @@ namespace SharedCode.Core
         }
 
         /// <summary>
-        ///  Replaces the format item in a specified System.String with the text equivalent of the value of a specified System.Object instance.
+        ///     Replaces the format item in a specified System.String with the text equivalent of the value of a
+        ///     specified System.Object instance.
         /// </summary>
-        /// <param name="value">A composite format string</param>
-        /// <param name="arg0">An System.Object to format</param>
-        /// <returns>A copy of format in which the first format item has been replaced by the System.String equivalent of arg0</returns>
+        /// <param name="value">
+        ///     A composite format string
+        /// </param>
+        /// <param name="arg0">
+        ///     An System.Object to format
+        /// </param>
+        /// <returns>
+        ///     A copy of format in which the first format item has been replaced by the System.String equivalent of arg0
+        /// </returns>
         [CanBeNull]
         public static string Format([CanBeNull] this string value, [CanBeNull] object arg0)
             => string.Format(value, arg0);
 
         /// <summary>
-        ///  Replaces the format item in a specified System.String with the text equivalent of the value of a specified System.Object instance.
+        ///     Replaces the format item in a specified System.String with the text equivalent of the value of a
+        ///     specified System.Object instance.
         /// </summary>
-        /// <param name="value">A composite format string</param>
-        /// <param name="args">An System.Object array containing zero or more objects to format.</param>
-        /// <returns>A copy of format in which the format items have been replaced by the System.String equivalent of the corresponding instances of System.Object in args.</returns>
+        /// <param name="value">
+        ///     A composite format string
+        /// </param>
+        /// <param name="args">
+        ///     An System.Object array containing zero or more objects to format.
+        /// </param>
+        /// <returns>
+        ///     A copy of format in which the format items have been replaced by the System.String equivalent of the
+        ///     corresponding instances of System.Object in args.
+        /// </returns>
         [CanBeNull]
         public static string Format([CanBeNull] this string value, [ItemCanBeNull][CanBeNull] params object[] args)
             => string.Format(value, args);
 
         /// <summary>
-        /// Formats the string according to the specified mask
+        ///     Formats the string according to the specified mask
         /// </summary>
-        /// <param name="input">The input string.</param>
-        /// <param name="mask">The mask for formatting. Like "A##-##-T-###Z"</param>
-        /// <returns>The formatted string</returns>
+        /// <param name="input">
+        ///     The input string.
+        /// </param>
+        /// <param name="mask">
+        ///     The mask for formatting. Like "A##-##-T-###Z"
+        /// </param>
+        /// <returns>
+        ///     The formatted string
+        /// </returns>
         [CanBeNull]
         public static string FormatWithMask([CanBeNull] this string input, [NotNull] string mask)
         {
@@ -182,11 +233,17 @@ namespace SharedCode.Core
         }
 
         /// <summary>
-        /// Gets the enumeration value description.
+        ///     Gets the enumeration value description.
         /// </summary>
-        /// <typeparam name="T">The type of the enumeration.</typeparam>
-        /// <param name="value">The enumeration value.</param>
-        /// <returns>The enumeration value description.</returns>
+        /// <typeparam name="T">
+        ///     The type of the enumeration.
+        /// </typeparam>
+        /// <param name="value">
+        ///     The enumeration value.
+        /// </param>
+        /// <returns>
+        ///     The enumeration value description.
+        /// </returns>
         [NotNull]
         public static string GetEnumDescription<T>([CanBeNull] string value)
         {
@@ -206,11 +263,17 @@ namespace SharedCode.Core
         }
 
         /// <summary>
-        /// Checks string object's value to array of string values
+        ///     Checks string object's value to array of string values
         /// </summary>
-        /// <param name="value">The input value.</param>
-        /// <param name="stringValues">Array of string values to compare</param>
-        /// <returns>Return true if any string value matches</returns>
+        /// <param name="value">
+        ///     The input value.
+        /// </param>
+        /// <param name="stringValues">
+        ///     Array of string values to compare
+        /// </param>
+        /// <returns>
+        ///     Return true if any string value matches
+        /// </returns>
         public static bool In([CanBeNull] this string value, [ItemCanBeNull][CanBeNull] params string[] stringValues)
         {
             foreach (var otherValue in stringValues)
@@ -225,31 +288,36 @@ namespace SharedCode.Core
         }
 
         /// <summary>
-        /// Determines whether the specified input string is a date.
+        ///     Determines whether the specified input string is a date.
         /// </summary>
-        /// <param name="input">The input string.</param>
-        /// <returns><c>true</c> if the specified input string is a date; otherwise, <c>false</c>.</returns>
+        /// <param name="input">
+        ///     The input string.
+        /// </param>
+        /// <returns>
+        ///     Returns <c>true</c> if the specified input string is a date; otherwise, <c>false</c>.
+        /// </returns>
         public static bool IsDate([CanBeNull] this string input) => !string.IsNullOrEmpty(input) && DateTime.TryParse(input, out var dt);
 
         /// <summary>
-        /// Converts the string representation of a Guid to its Guid equivalent. A return value indicates whether the operation succeeded.
+        /// Converts the string representation of a Guid to its Guid equivalent. A return value indicates
+        /// whether the operation succeeded.
         /// </summary>
-        /// <param name="input">
-        /// A string containing a Guid to convert.
-        /// </param>
-        /// <returns>
-        /// When this method returns, contains the Guid value equivalent to the Guid contained in <paramref name="input"/>, if the conversion succeeded, or <see cref="Guid.Empty"/> if the conversion failed.
-        /// The conversion fails if the <paramref name="input"/> parameter is a <see langword="null" /> reference (<see langword="Nothing" /> in Visual Basic), or is not of the correct format.
-        /// <c>true</c> if <paramref name="input" /> was converted successfully; otherwise, <c>false</c>.
+        /// <param name="input"> A string containing a Guid to convert.</param>
+        /// <returns> When this method returns, contains the Guid value equivalent to the Guid contained in
+        /// <paramref name="input"/>, if the conversion succeeded, or <see cref="Guid.Empty"/> if the conversion failed.
+        /// The conversion fails if the <paramref name="input"/> parameter is a <see langword="null" /> reference
+        /// (<see langword="Nothing" /> in Visual Basic), or is not of the correct format. <c>true</c> if
+        /// <paramref name="input" /> was converted successfully; otherwise, <c>false</c>.
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        ///        Thrown if <pararef name="s"/> is <see langword="null"/>.
+        /// Thrown if <pararef name="s"/> is <see langword="null"/>.
         /// </exception>
         /// <remarks>
-        /// Original code at <seealso cref="https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=94072&wa=wsignin1.0#tabs"/>
+        /// Original code at <seealso href="https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=94072&amp;wa=wsignin1.0#tabs"/>
         /// </remarks>
         public static bool IsGuid([NotNull] this string input)
         {
+            Contract.Requires(input != null);
             Contract.Requires<ArgumentNullException>(input != null);
 
             var format = new Regex(
@@ -262,17 +330,25 @@ namespace SharedCode.Core
         }
 
         /// <summary>
-        /// Determines whether the specified string is numeric.
+        ///     Determines whether the specified string is numeric.
         /// </summary>
-        /// <param name="input">The input string.</param>
-        /// <returns><c>true</c> if the specified string is numeric; otherwise, <c>false</c>.</returns>
+        /// <param name="input">
+        ///     The input string.
+        /// </param>
+        /// <returns>
+        ///     Returns <c>true</c> if the specified string is numeric; otherwise, <c>false</c>.
+        /// </returns>
         public static bool IsNumeric([CanBeNull] this string input) => long.TryParse(input, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out _);
 
         /// <summary>
-        /// Determines whether the input string is a valid email address.
+        ///     Determines whether the input string is a valid email address.
         /// </summary>
-        /// <param name="input">The input string.</param>
-        /// <returns><c>true</c> if the input string is a valid email address; otherwise, <c>false</c>.</returns>
+        /// <param name="input">
+        ///     The input string.
+        /// </param>
+        /// <returns>
+        ///     Returns <c>true</c> if the input string is a valid email address; otherwise, <c>false</c>.
+        /// </returns>
         public static bool IsValidEmailAddress([CanBeNull] this string input)
         {
             try
@@ -289,37 +365,61 @@ namespace SharedCode.Core
         }
 
         /// <summary>
-        /// Returns characters from left of specified length
+        ///     Returns characters from left of specified length
         /// </summary>
-        /// <param name="value">String value</param>
-        /// <param name="length">Max number of charaters to return</param>
-        /// <returns>Returns string from left</returns>
-        public static string Left(this string value, int length)
+        /// <param name="value">
+        ///     String value
+        /// </param>
+        /// <param name="length">
+        ///     Max number of charaters to return
+        /// </param>
+        /// <returns>
+        ///     Returns string from left
+        /// </returns>
+        [CanBeNull]
+        public static string Left([CanBeNull] this string value, int length)
         {
             return value != null && value.Length > Math.Max(length, 0) ? value.Substring(0, Math.Max(length, 0)) : value;
         }
 
         /// <summary>
-        /// Returns the string with the specified value or null if the value is empty.
+        ///     Returns the string with the specified value or null if the value is empty.
         /// </summary>
-        /// <param name="value">The string value.</param>
-        /// <returns>The result.</returns>
-        public static string NullIfEmpty(this string value) => string.IsNullOrEmpty(value) ? default : value;
+        /// <param name="value">
+        ///     The string value.
+        /// </param>
+        /// <returns>
+        ///     The result.
+        /// </returns>
+        [CanBeNull]
+        public static string NullIfEmpty([CanBeNull] this string value) => string.IsNullOrEmpty(value) ? default : value;
 
         /// <summary>
-        /// Returns the string with the specified value or null if the value is white space.
+        ///     Returns the string with the specified value or null if the value is white space.
         /// </summary>
-        /// <param name="value">The string value.</param>
-        /// <returns>The result.</returns>
-        public static string NullIfWhiteSpace(this string value) => string.IsNullOrWhiteSpace(value) ? default : value;
+        /// <param name="value">
+        ///     The string value.
+        /// </param>
+        /// <returns>
+        ///     The result.
+        /// </returns>
+        [CanBeNull]
+        public static string NullIfWhiteSpace([CanBeNull] this string value) => string.IsNullOrWhiteSpace(value) ? default : value;
 
         /// <summary>
-        /// Parses the specified value.
+        ///     Parses the specified value.
         /// </summary>
-        /// <typeparam name="T">The type to parse the string into.</typeparam>
-        /// <param name="value">The string value.</param>
-        /// <returns>The parsed output.</returns>
-        public static T Parse<T>(this string value)
+        /// <typeparam name="T">
+        ///     The type to parse the string into.
+        /// </typeparam>
+        /// <param name="value">
+        ///     The string value.
+        /// </param>
+        /// <returns>
+        ///     The parsed output.
+        /// </returns>
+        [CanBeNull]
+        public static T Parse<T>([CanBeNull] this string value)
         {
             // Get default value for type so if string is empty then we can return default value.
             var result = default(T);
@@ -328,67 +428,118 @@ namespace SharedCode.Core
                 return result;
             }
 
-            // We are not going to handle exceptions here. If you need SafeParse then you should create another method specially for that.
+            // We are not going to handle exceptions here. If you need SafeParse then you should create another method
+            // specially for that.
             var tc = TypeDescriptor.GetConverter(typeof(T));
             return (T)tc.ConvertFrom(value);
         }
 
         /// <summary>
-        /// Returns characters from right of specified length
+        ///     Returns characters from right of specified length
         /// </summary>
-        /// <param name="value">String value</param>
-        /// <param name="length">Max number of charaters to return</param>
-        /// <returns>Returns string from right</returns>
-        public static string Right(this string value, int length)
+        /// <param name="value">
+        ///     String value
+        /// </param>
+        /// <param name="length">
+        ///     Max number of charaters to return
+        /// </param>
+        /// <returns>
+        ///     Returns string from right
+        /// </returns>
+        [CanBeNull]
+        public static string Right([CanBeNull] this string value, int length)
             => value != null && value.Length > length ? value.Substring(value.Length - length) : value;
 
         /// <summary>
-        /// Strips the HTML from the input string.
+        ///     Strips the HTML from the input string.
         /// </summary>
-        /// <param name="input">The input string.</param>
-        /// <returns>The output string.</returns>
-        public static string StripHtml(this string input)
+        /// <param name="input">
+        ///     The input string.
+        /// </param>
+        /// <returns>
+        ///     The output string.
+        /// </returns>
+        [CanBeNull]
+        public static string StripHtml([CanBeNull] this string input)
         {
+            if (input == null)
+            {
+                return input;
+            }
+
             // Will this simple expression replace all tags???
             var tagsExpression = new Regex("</?.+?>");
             return tagsExpression.Replace(input, " ");
         }
 
         /// <summary>
-        /// Converts string to enum object
+        ///     Converts string to enum object
         /// </summary>
-        /// <typeparam name="T">Type of enum</typeparam>
-        /// <param name="value">String value to convert</param>
-        /// <returns>Returns enum object</returns>
-        public static T ToEnum<T>(this string value)
+        /// <typeparam name="T">
+        ///     Type of enum
+        /// </typeparam>
+        /// <param name="value">
+        ///     String value to convert
+        /// </param>
+        /// <returns>
+        ///     Returns enum object
+        /// </returns>
+        public static T ToEnum<T>([NotNull] this string value)
             where T : struct
             => (T)Enum.Parse(typeof(T), value, ignoreCase: true);
 
         /// <summary>
-        /// Converts a string into a "SecureString"
+        ///     Converts a string into a "SecureString"
         /// </summary>
-        /// <param name="input">The input string.</param>
-        /// <returns>The secure string.</returns>
-        public static SecureString ToSecureString(this string input)
+        /// <param name="input">
+        ///     The input string.
+        /// </param>
+        /// <returns>
+        ///     The secure string.
+        /// </returns>
+        [NotNull]
+        public static SecureString ToSecureString([CanBeNull] this string input)
         {
+            Contract.Ensures(Contract.Result<SecureString>() != null);
+
             var secureString = new SecureString();
-            foreach (var character in input)
+
+            if (input != null)
             {
-                secureString.AppendChar(character);
+                foreach (var character in input)
+                {
+                    secureString.AppendChar(character);
+                }
             }
 
             return secureString;
         }
 
         /// <summary>
-        /// Truncates the string to a specified length and replace the truncated to a ...
+        ///     Truncates the string to a specified length and replace the truncated to a ...
         /// </summary>
-        /// <param name="text">The string that will be truncated.</param>
-        /// <param name="maxLength">The total length of characters to maintain before the truncate happens.</param>
-        /// <param name="suffix">The suffix string.</param>
-        /// <returns>The truncated string.</returns>
-        public static string Truncate(this string text, int maxLength, string suffix = "...")
+        /// <param name="text">
+        ///     The string that will be truncated.
+        /// </param>
+        /// <param name="maxLength">
+        ///     The total length of characters to maintain before the truncate happens.
+        /// </param>
+        /// <param name="suffix">
+        ///     The suffix string.
+        /// </param>
+        /// <returns>
+        ///     The truncated string.
+        /// </returns>
+        [CanBeNull]
+        public static string Truncate([CanBeNull] this string text, int maxLength, [NotNull] string suffix = "...")
         {
+            Contract.Requires(suffix != null);
+
+            if (text == null)
+            {
+                return null;
+            }
+
             // replaces the truncated string to a ...
             var truncatedString = text;
 
@@ -417,12 +568,22 @@ namespace SharedCode.Core
         }
 
         /// <summary>
-        /// Upper case the first letter in the string.
+        ///     Upper case the first letter in the string.
         /// </summary>
-        /// <param name="value">The string value.</param>
-        /// <returns>The upper cased string.</returns>
-        public static string UppercaseFirstLetter(this string value)
+        /// <param name="value">
+        ///     The string value.
+        /// </param>
+        /// <returns>
+        ///     The upper cased string.
+        /// </returns>
+        [CanBeNull]
+        public static string UppercaseFirstLetter([CanBeNull] this string value)
         {
+            if (value == null)
+            {
+                return value;
+            }
+
             if (value.Length > 0)
             {
                 var array = value.ToCharArray();
@@ -434,10 +595,15 @@ namespace SharedCode.Core
         }
 
         /// <summary>
-        /// Returns the string with the specified value or an empty string if value is null.
+        ///     Returns the string with the specified value or an empty string if value is null.
         /// </summary>
-        /// <param name="value">The string value.</param>
-        /// <returns>The result.</returns>
-        public static string ValueOrEmpty(this string value) => string.IsNullOrEmpty(value) ? string.Empty : value;
+        /// <param name="value">
+        ///     The string value.
+        /// </param>
+        /// <returns>
+        ///     The result.
+        /// </returns>
+        [NotNull]
+        public static string ValueOrEmpty([CanBeNull] this string value) => string.IsNullOrEmpty(value) ? string.Empty : value;
     }
 }

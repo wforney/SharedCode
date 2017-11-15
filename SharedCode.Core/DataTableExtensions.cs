@@ -6,22 +6,30 @@ namespace SharedCode.Core
 {
     using System;
     using System.Data;
+    using System.Diagnostics.Contracts;
     using System.Text;
+    using JetBrains.Annotations;
 
     /// <summary>
-    /// The data table extensions class.
+    ///     The data table extensions class.
     /// </summary>
     public static class DataTableExtensions
     {
         /// <summary>
-        /// Converts a data table to a delimited string.
+        ///     Converts a data table to a delimited string.
         /// </summary>
-        /// <param name="table">The data table.</param>
-        /// <param name="delimiter">The column delimiter.</param>
+        /// <param name="table">        The data table.</param>
+        /// <param name="delimiter">    The column delimiter.</param>
         /// <param name="includeHeader">if set to <c>true</c> [include header].</param>
-        public static string ToDelimitedString(this DataTable table, string delimiter, bool includeHeader)
+        [NotNull]
+        public static string ToDelimitedString([NotNull] this DataTable table, [CanBeNull] string delimiter, bool includeHeader)
         {
+            Contract.Requires(table != null);
+            Contract.Ensures(Contract.Result<string>() != null);
+
             var result = new StringBuilder();
+
+            result.Append(string.Empty);
 
             if (includeHeader)
             {
@@ -45,10 +53,9 @@ namespace SharedCode.Core
                     }
                     else
                     {
-                        // Double up all embedded double quotes
-                        // To keep things simple, always delimit with double-quotes
-                        // so we don't have to determine in which cases they're necessary
-                        // and which cases they're not.
+                        // Double up all embedded double quotes To keep things simple, always delimit
+                        // with double-quotes so we don't have to determine in which cases they're
+                        // necessary and which cases they're not.
                         result.Append("\"").Append(item.ToString().Replace("\"", "\"\"")).Append("\"").Append(delimiter);
                     }
                 }

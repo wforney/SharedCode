@@ -2,6 +2,9 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
+using JetBrains.Annotations;
+using System.Diagnostics.Contracts;
+
 namespace SharedCode.Core
 {
     using System;
@@ -21,8 +24,13 @@ namespace SharedCode.Core
         /// <param name="separator">The value separator.</param>
         /// <param name="includeHeaderAsFirstRow">if set to <c>true</c> include header as first row.</param>
         /// <returns>A list of delimited lines.</returns>
-        public static List<string> ToDelimited(this IDataReader dataReader, string separator, bool includeHeaderAsFirstRow)
+        [NotNull]
+        [ItemNotNull]
+        public static List<string> ToDelimited([NotNull] this IDataReader dataReader, [CanBeNull] string separator, bool includeHeaderAsFirstRow)
         {
+            Contract.Requires(dataReader != null);
+            Contract.Ensures(Contract.Result<List<string>>() != null);
+
             var output = new List<string>();
             StringBuilder sb = null;
 

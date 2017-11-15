@@ -2,6 +2,9 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
+using System.Diagnostics.Contracts;
+using JetBrains.Annotations;
+
 namespace SharedCode.Core
 {
     using System;
@@ -17,18 +20,28 @@ namespace SharedCode.Core
     /// <typeparam name="T">The type of the enumeration.</typeparam>
     public static class Enum<T>
     {
+#pragma warning disable RECS0108 // Warns about static fields in generic types
+
         /// <summary>
         /// The string values
         /// </summary>
+        [NotNull]
+        [ItemNotNull]
         private static readonly Hashtable StringValues = new Hashtable();
+
+#pragma warning restore RECS0108 // Warns about static fields in generic types
 
         /// <summary>
         /// Converts an enumeration to a list.
         /// </summary>
         /// <returns>The list.</returns>
-        /// <exception cref="System.ArgumentException">T must be of type System.Enum</exception>
+        /// <exception cref="ArgumentException">T must be of type System.Enum</exception>
+        [NotNull]
+        [ItemNotNull]
         public static List<T> EnumToList()
         {
+            Contract.Ensures(Contract.Result<List<T>>() != null);
+
             var enumType = typeof(T);
 
             // Can't use type constraints on value types, so have to do check like this
@@ -52,8 +65,12 @@ namespace SharedCode.Core
         /// Gets the values as a 'bindable' list datasource.
         /// </summary>
         /// <returns>IList for data binding</returns>
+        [NotNull]
+        [ItemNotNull]
         public static IList GetListValues()
         {
+            Contract.Ensures(Contract.Result<IList>() != null);
+
             var underlyingType = Enum.GetUnderlyingType(typeof(T));
             var values = new ArrayList();
             //Look for our string value associated with fields in this enum
@@ -75,7 +92,7 @@ namespace SharedCode.Core
         /// </summary>
         /// <param name="stringValue">String value.</param>
         /// <returns>Existence of the string value</returns>
-        public static bool IsStringDefined(string stringValue) => Enum.Parse(typeof(T), stringValue) != null;
+        public static bool IsStringDefined([NotNull] string stringValue) => Enum.Parse(typeof(T), stringValue) != null;
 
         /// <summary>
         /// Return the existence of the given string value within the enum.
@@ -83,12 +100,13 @@ namespace SharedCode.Core
         /// <param name="stringValue">String value.</param>
         /// <param name="ignoreCase">Denotes whether to conduct a case-insensitive match on the supplied string value</param>
         /// <returns>Existence of the string value</returns>
-        public static bool IsStringDefined(string stringValue, bool ignoreCase) => Enum.Parse(typeof(T), stringValue, ignoreCase) != null;
+        public static bool IsStringDefined([NotNull] string stringValue, bool ignoreCase) => Enum.Parse(typeof(T), stringValue, ignoreCase) != null;
 
         /// <summary>
         /// Gets the underlying enum type for this instance.
         /// </summary>
         /// <value>The type of the enum.</value>
+        [NotNull]
         public static Type EnumType => typeof(T);
 
         /// <summary>
@@ -96,8 +114,11 @@ namespace SharedCode.Core
         /// </summary>
         /// <param name="valueName">Name of the enum value.</param>
         /// <returns>String Value</returns>
-        public static string GetStringValue(string valueName)
+        [CanBeNull]
+        public static string GetStringValue([NotNull] string valueName)
         {
+            Contract.Requires(valueName != null);
+
             Enum enumType;
             string stringValue = null;
             try
@@ -125,8 +146,12 @@ namespace SharedCode.Core
         /// Gets the string values associated with the enum.
         /// </summary>
         /// <returns>String value array</returns>
+        [NotNull]
+        [ItemCanBeNull]
         public static Array GetStringValues()
         {
+            Contract.Ensures(Contract.Result<Array>() != null);
+
             var values = new ArrayList();
 
             //Look for our string value associated with fields in this enum
@@ -148,8 +173,11 @@ namespace SharedCode.Core
         /// </summary>
         /// <param name="value">The enumeration value.</param>
         /// <returns>The string value.</returns>
-        public static string GetStringValue(Enum value)
+        [CanBeNull]
+        public static string GetStringValue([NotNull] Enum value)
         {
+            Contract.Requires(value != null);
+
             string output = null;
             var type = value.GetType();
 
@@ -180,7 +208,8 @@ namespace SharedCode.Core
         /// <param name="type">Type.</param>
         /// <param name="stringValue">String value.</param>
         /// <returns>Enum value associated with the string value, or null if not found.</returns>
-        public static object Parse(Type type, string stringValue) => Parse(type, stringValue, ignoreCase: false);
+        [CanBeNull]
+        public static object Parse([NotNull] Type type, [NotNull] string stringValue) => Parse(type, stringValue, ignoreCase: false);
 
         /// <summary>
         /// Parses the supplied enum and string value to find an associated enum value.
@@ -189,8 +218,12 @@ namespace SharedCode.Core
         /// <param name="stringValue">String value.</param>
         /// <param name="ignoreCase">Denotes whether to conduct a case-insensitive match on the supplied string value</param>
         /// <returns>Enum value associated with the string value, or null if not found.</returns>
-        public static object Parse(Type type, string stringValue, bool ignoreCase)
+        [CanBeNull]
+        public static object Parse([NotNull] Type type, [NotNull] string stringValue, bool ignoreCase)
         {
+            Contract.Requires(type != null);
+            Contract.Requires(stringValue != null);
+
             object output = null;
             string enumStringValue = null;
 
@@ -226,7 +259,7 @@ namespace SharedCode.Core
         /// <param name="stringValue">String value.</param>
         /// <param name="enumType">Type of enum</param>
         /// <returns>Existence of the string value</returns>
-        public static bool IsStringDefined(Type enumType, string stringValue) => Parse(enumType, stringValue) != null;
+        public static bool IsStringDefined([NotNull] Type enumType, [NotNull] string stringValue) => Parse(enumType, stringValue) != null;
 
         /// <summary>
         /// Return the existence of the given string value within the enum.
@@ -235,7 +268,7 @@ namespace SharedCode.Core
         /// <param name="enumType">Type of enum</param>
         /// <param name="ignoreCase">Denotes whether to conduct a case-insensitive match on the supplied string value</param>
         /// <returns>Existence of the string value</returns>
-        public static bool IsStringDefined(Type enumType, string stringValue, bool ignoreCase) => Parse(enumType, stringValue, ignoreCase) != null;
+        public static bool IsStringDefined([NotNull] Type enumType, [NotNull] string stringValue, bool ignoreCase) => Parse(enumType, stringValue, ignoreCase) != null;
 
         /// <summary>
         /// Converts Enumeration type into a dictionary of names and values
@@ -243,8 +276,11 @@ namespace SharedCode.Core
         /// <returns>IDictionary&lt;System.String, System.Int32&gt;.</returns>
         /// <exception cref="ArgumentNullException">enumType</exception>
         /// <exception cref="InvalidCastException">object is not an Enumeration</exception>
+        [NotNull]
         public static IDictionary<string, int> ToDictionary()
         {
+            Contract.Ensures(Contract.Result<IDictionary<string, int>>() != null);
+
             if (typeof(T) == null)
             {
                 throw new ArgumentNullException(typeof(T).Name);

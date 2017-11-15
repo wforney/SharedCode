@@ -2,6 +2,9 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
+using JetBrains.Annotations;
+using System.Diagnostics.Contracts;
+
 namespace SharedCode.Core
 {
     using System;
@@ -18,9 +21,12 @@ namespace SharedCode.Core
         /// <typeparam name="T">The type of the custom attribute to find.</typeparam>
         /// <param name="callingAssembly">The calling assembly to search.</param>
         /// <returns>The custom attribute of type T, if found.</returns>
-        public static T GetAttribute<T>(this Assembly callingAssembly)
+        [CanBeNull]
+        public static T GetAttribute<T>([NotNull] this Assembly callingAssembly)
             where T : Attribute
         {
+            Contract.Requires(callingAssembly != null);
+
             T result = null;
 
             // Try to find the configuration attribute for the default logger if it exists

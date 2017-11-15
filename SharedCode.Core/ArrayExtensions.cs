@@ -6,6 +6,8 @@ namespace SharedCode.Core
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using JetBrains.Annotations;
 
     /// <summary>
     /// The array extensions class
@@ -21,8 +23,12 @@ namespace SharedCode.Core
         /// <param name="items">The array of items.</param>
         /// <param name="mapFunction">The map function.</param>
         /// <returns>The output list.</returns>
-        public static List<T> ToList<T>(this Array items, Func<object, T> mapFunction)
+        [ItemNotNull]
+        [NotNull]
+        public static List<T> ToList<T>([ItemCanBeNull][CanBeNull] this Array items, [CanBeNull] Func<object, T> mapFunction)
         {
+            Contract.Ensures(Contract.Result<List<T>>() != null);
+
             if (items == null || mapFunction == null)
             {
                 return new List<T>();

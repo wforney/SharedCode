@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.Contracts;
+
 // <copyright file="Utilities.cs" company="improvGroup, LLC">
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
@@ -16,29 +17,13 @@ namespace SharedCode.Core
     public static class Utilities
     {
         /// <summary>
-        /// Swaps the left reference with the right reference.
-        /// </summary>
-        /// <typeparam name="T">The type of the references.</typeparam>
-        /// <param name="left">The left reference.</param>
-        /// <param name="right">The right reference.</param>
-        public static void Swap<T>([NotNull] ref T left, [NotNull] ref T right)
-        {
-            Contract.Requires(!System.Collections.Generic.EqualityComparer<T>.Default.Equals(left, default));
-            Contract.Requires(!System.Collections.Generic.EqualityComparer<T>.Default.Equals(right, default));
-
-            var tmp = left;
-            left = right;
-            right = tmp;
-        }
-
-        /// <summary>
         /// Gets the constant name from value.
         /// </summary>
         /// <param name="type">The input type.</param>
         /// <param name="val">The input value.</param>
         /// <returns>The constant name.</returns>
         /// <remarks>
-        /// See also <seealso cref="http://stackoverflow.com/a/10261848/1449056" />
+        /// See also <seealso href="https://stackoverflow.com/a/10261848/1449056" />
         /// </remarks>
         [NotNull]
         public static string GetConstantNameFromValue([NotNull] Type type, [NotNull] object val)
@@ -75,6 +60,22 @@ namespace SharedCode.Core
             }
 
             return val.ToString();
+        }
+
+        /// <summary>
+        /// Swaps the left reference with the right reference.
+        /// </summary>
+        /// <typeparam name="T">The type of the references.</typeparam>
+        /// <param name="left">The left reference.</param>
+        /// <param name="right">The right reference.</param>
+        public static void Swap<T>([NotNull] ref T left, [NotNull] ref T right)
+        {
+            Contract.Requires(!System.Collections.Generic.EqualityComparer<T>.Default.Equals(left, default));
+            Contract.Requires(!System.Collections.Generic.EqualityComparer<T>.Default.Equals(right, default));
+
+            var tmp = left;
+            left = right;
+            right = tmp;
         }
     }
 }

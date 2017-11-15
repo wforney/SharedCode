@@ -2,6 +2,9 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
+using JetBrains.Annotations;
+using System.Diagnostics.Contracts;
+
 namespace SharedCode.Core
 {
     using System.IO;
@@ -15,8 +18,10 @@ namespace SharedCode.Core
         /// Recursively create directory
         /// </summary>
         /// <param name="dirInfo">Folder path to create.</param>
-        public static void CreateDirectory(this DirectoryInfo dirInfo)
+        public static void CreateDirectory([NotNull] this DirectoryInfo dirInfo)
         {
+            Contract.Requires(dirInfo != null);
+
             if (dirInfo.Parent != null)
             {
                 CreateDirectory(dirInfo.Parent);
