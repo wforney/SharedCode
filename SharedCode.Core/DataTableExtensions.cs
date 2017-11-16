@@ -8,6 +8,8 @@ namespace SharedCode.Core
     using System.Data;
     using System.Diagnostics.Contracts;
     using System.Text;
+    using System.Xml.Linq;
+
     using JetBrains.Annotations;
 
     /// <summary>
@@ -65,6 +67,40 @@ namespace SharedCode.Core
             }
 
             return result.ToString();
+        }
+
+        /// <summary>
+        /// Converts the data table to XML.
+        /// </summary>
+        /// <param name="dataTable">The data table.</param>
+        /// <param name="rootName">Name of the XML root node.</param>
+        /// <returns>An XML document.</returns>
+        [NotNull]
+        public static XDocument ToXml([NotNull] this DataTable dataTable, [NotNull] string rootName)
+        {
+            Contract.Requires(dataTable != null);
+            Contract.Requires(rootName != null);
+            Contract.Ensures(Contract.Result<XDocument>() != null);
+
+            var xdoc = new XDocument
+            {
+                Declaration = new XDeclaration("1.0", "utf-8", "")
+            };
+
+            xdoc.Add(new XElement(rootName));
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                var element = new XElement(dataTable.TableName);
+                foreach (DataColumn col in dataTable.Columns)
+                {
+                    element.Add(new XElement(col.ColumnName, row[col].ToString().Trim(' ')));
+                }
+
+                xdoc.Root?.Add(element);
+            }
+
+            return xdoc;
         }
     }
 }

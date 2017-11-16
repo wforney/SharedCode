@@ -5,6 +5,7 @@
 namespace SharedCode.Core
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics.Contracts;
     using System.Globalization;
@@ -24,6 +25,30 @@ namespace SharedCode.Core
     public static class StringExtensions
     {
         /// <summary>
+        /// Returns a value indicating whether the specified <see cref="string"/> object occurs within the <paramref name="input"/> string.
+        /// A parameter specifies the type of search to use for the specified string.
+        /// </summary>
+        /// <param name="input">The string to search in</param>
+        /// <param name="value">The string to seek</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies the rules for the search</param>
+        /// <exception cref="ArgumentNullException"><paramref name="input"/> or <paramref name="value"/> is <c>null</c></exception>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a valid <see cref="StringComparison"/> value</exception>
+        /// <returns>
+        /// Returns <c>true</c> if the <paramref name="value"/> parameter occurs within the <paramref name="input"/> parameter,
+        /// or if <paramref name="value"/> is the empty string (<c>""</c>);
+        /// otherwise, <c>false</c>.
+        /// </returns>
+        /// <remarks>
+        /// The <paramref name="comparisonType"/> parameter specifies to search for the value parameter using the current or invariant culture,
+        /// using a case-sensitive or case-insensitive search, and using word or ordinal comparison rules.
+        /// </remarks>
+        public static bool Contains(
+            [CanBeNull] this string input,
+            [CanBeNull] string value,
+            StringComparison comparisonType)
+            => input?.IndexOf(value, comparisonType) > -1;
+
+        /// <summary>
         ///     Determines whether the specified string contains any of the specified characters.
         /// </summary>
         /// <param name="input">
@@ -35,17 +60,11 @@ namespace SharedCode.Core
         /// <returns>
         ///     A value indicating whether the specified string contains any of the specified characters.
         /// </returns>
-        public static bool ContainsAny([NotNull] this string input, [NotNull] char[] characters)
+        public static bool ContainsAny([CanBeNull] this string input, [NotNull] IEnumerable<char> characters)
         {
-            foreach (var character in characters)
-            {
-                if (input.Contains(character.ToString()))
-                {
-                    return true;
-                }
-            }
+            Contract.Requires(characters != null);
 
-            return false;
+            return characters.Any(character => input?.Contains(character.ToString()) ?? false);
         }
 
         /// <summary>
@@ -70,8 +89,6 @@ namespace SharedCode.Core
             Contract.Requires(key != null);
             Contract.Ensures(Contract.Result<string>() != null);
 
-            string result = null;
-
             if (string.IsNullOrEmpty(stringToDecrypt))
             {
                 throw new ArgumentException("An empty string value cannot be encrypted.");
@@ -92,7 +109,7 @@ namespace SharedCode.Core
 
                 var bytes = rsa.Decrypt(decryptByteArray, fOAEP: true);
 
-                result = Encoding.UTF8.GetString(bytes);
+                var result = Encoding.UTF8.GetString(bytes);
 
                 return result;
             }
@@ -211,6 +228,7 @@ namespace SharedCode.Core
         [CanBeNull]
         public static string FormatWithMask([CanBeNull] this string input, [NotNull] string mask)
         {
+            Contract.Requires(mask != null);
             if (string.IsNullOrEmpty(input))
             {
                 return input;
@@ -224,7 +242,7 @@ namespace SharedCode.Core
             {
                 if (m == '#')
                 {
-                    if (index < input.Length)
+                    if (index < input?.Length)
                     {
                         builder.Append(input[index]);
                         index++;
@@ -285,17 +303,7 @@ namespace SharedCode.Core
         ///     Return true if any string value matches
         /// </returns>
         public static bool In([CanBeNull] this string value, [ItemCanBeNull] [CanBeNull] params string[] stringValues)
-        {
-            foreach (var otherValue in stringValues)
-            {
-                if (string.Compare(value, otherValue) == 0)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
+            => stringValues.Any(otherValue => string.CompareOrdinal(value, otherValue) == 0);
 
         /// <summary>
         ///     Determines whether the specified input string is a date.
@@ -306,8 +314,8 @@ namespace SharedCode.Core
         /// <returns>
         ///     Returns <c>true</c> if the specified input string is a date; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsDate([CanBeNull] this string input) =>
-            !string.IsNullOrEmpty(input) && DateTime.TryParse(input, out var dt);
+        public static bool IsDate([CanBeNull] this string input)
+            => !string.IsNullOrEmpty(input) && DateTime.TryParse(input, out var _);
 
         /// <summary>
         /// Converts the string representation of a Guid to its Guid equivalent. A return value indicates
@@ -338,6 +346,34 @@ namespace SharedCode.Core
 
             return match.Success;
         }
+
+        /// <summary>
+        /// Determines whether the specified input string is not null or empty.
+        /// </summary>
+        /// <param name="input">The input string.</param>
+        /// <returns><c>true</c> if the specified input string is not null or empty; otherwise, <c>false</c>.</returns>
+        public static bool IsNotNullOrEmpty([CanBeNull] this string input) => !string.IsNullOrEmpty(input);
+
+        /// <summary>
+        /// Determines whether the specified input string is null or empty.
+        /// </summary>
+        /// <param name="input">The input string.</param>
+        /// <returns><c>true</c> if the specified input string is null or empty; otherwise, <c>false</c>.</returns>
+        public static bool IsNullOrEmpty([CanBeNull] this string input) => string.IsNullOrEmpty(input);
+
+        /// <summary>
+        /// Determines whether the specified input string is not null or white space.
+        /// </summary>
+        /// <param name="input">The input string.</param>
+        /// <returns><c>true</c> if the specified input string is not null or white space; otherwise, <c>false</c>.</returns>
+        public static bool IsNotNullOrWhiteSpace([CanBeNull] this string input) => !string.IsNullOrWhiteSpace(input);
+
+        /// <summary>
+        /// Determines whether the specified input string is null or white space.
+        /// </summary>
+        /// <param name="input">The input string.</param>
+        /// <returns><c>true</c> if the specified input string is null or white space; otherwise, <c>false</c>.</returns>
+        public static bool IsNullOrWhiteSpace([CanBeNull] this string input) => string.IsNullOrWhiteSpace(input);
 
         /// <summary>
         ///     Determines whether the specified string is numeric.
@@ -377,6 +413,20 @@ namespace SharedCode.Core
                 return false;
             }
         }
+
+        /// <summary>
+        /// Determines whether the input text is a valid URI.
+        /// </summary>
+        /// <param name="input">The input text.</param>
+        /// <returns><c>true</c> if the input text is a valid URI; otherwise, <c>false</c>.</returns>
+        public static bool IsValidUri([CanBeNull] this string input) => Uri.TryCreate(input, UriKind.RelativeOrAbsolute, out var _);
+
+        /// <summary>
+        /// Determines whether the input text is a valid URL.
+        /// </summary>
+        /// <param name="input">The input text.</param>
+        /// <returns><c>true</c> if the input text is a valid URL; otherwise, <c>false</c>.</returns>
+        public static bool IsValidUrl([CanBeNull] this string input) => Regex.IsMatch(input, @"http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?", RegexOptions.Compiled);
 
         /// <summary>
         ///     Returns characters from left of specified length
@@ -504,6 +554,50 @@ namespace SharedCode.Core
         /// </returns>
         public static T ToEnum<T>([NotNull] this string value)
             where T : struct => (T)Enum.Parse(typeof(T), value, ignoreCase: true);
+
+        /// <summary>
+        /// متدی برای تبدیل اعداد انگلیسی به فارسی
+        /// </summary>
+        /// <param name="input">The input string.</param>
+        /// <returns>The equivalent persion number.</returns>
+        [CanBeNull]
+        public static string ToPersianNumber([CanBeNull] this string input)
+        {
+            if (input == null)
+            {
+                return null;
+            }
+
+            if (input.Trim()?.Length == 0)
+            {
+                return string.Empty;
+            }
+
+            //۰ ۱ ۲ ۳ ۴ ۵ ۶ ۷ ۸ ۹
+            input = input.Replace("0", "۰");
+            input = input.Replace("1", "۱");
+            input = input.Replace("2", "۲");
+            input = input.Replace("3", "۳");
+            input = input.Replace("4", "۴");
+            input = input.Replace("5", "۵");
+            input = input.Replace("6", "۶");
+            input = input.Replace("7", "۷");
+            input = input.Replace("8", "۸");
+            input = input.Replace("9", "۹");
+            return input;
+        }
+
+        /// <summary>
+        /// Changes the input string to proper case.
+        /// </summary>
+        /// <param name="text">The input string.</param>
+        /// <returns>The proper cased string.</returns>
+        public static string ToProperCase(this string text)
+        {
+            var cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+            var textInfo = cultureInfo.TextInfo;
+            return textInfo.ToTitleCase(text);
+        }
 
         /// <summary>
         ///     Converts a string into a "SecureString"

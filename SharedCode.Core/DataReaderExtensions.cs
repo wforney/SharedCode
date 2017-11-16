@@ -13,10 +13,19 @@ namespace SharedCode.Core
     using JetBrains.Annotations;
 
     /// <summary>
-    /// Class DataReaderExtensions.
+    /// The data reader extensions class
     /// </summary>
     public static class DataReaderExtensions
     {
+        /// <summary>
+        /// Determines whether The specified column value is null.
+        /// </summary>
+        /// <param name="dataReader">The data reader.</param>
+        /// <param name="columnName">Name of the column.</param>
+        /// <returns>A value indicating whether or not the specified column is null.</returns>
+        public static bool IsDBNull([CanBeNull] this IDataReader dataReader, [NotNull] string columnName)
+            => dataReader?.IsDBNull(dataReader.GetOrdinal(columnName)) ?? false;
+
         /// <summary>
         /// Returns a list of delimited lines from the data reader.
         /// </summary>
@@ -99,6 +108,37 @@ namespace SharedCode.Core
             dataReader.Close();
             sb = null;
             return output;
+        }
+
+        /// <summary>
+        /// Returns the value of the specified column.
+        /// </summary>
+        /// <typeparam name="T">The type of the value.</typeparam>
+        /// <param name="dataReader">The data reader.</param>
+        /// <param name="columnName">Name of the column.</param>
+        /// <returns>The value.</returns>
+        [CanBeNull]
+        public static T ValueOrDefault<T>([CanBeNull] this IDataReader dataReader, [NotNull] string columnName)
+        {
+            Contract.Requires(columnName != null);
+
+            var value = dataReader?[columnName];
+            return DBNull.Value == value ? default : (T)value;
+        }
+
+        /// <summary>
+        /// Returns the value of the specified column.
+        /// </summary>
+        /// <typeparam name="T">The type of the value.</typeparam>
+        /// <param name="dataReader">The data reader.</param>
+        /// <param name="columnIndex">Index of the column.</param>
+        /// <returns>The value.</returns>
+        [CanBeNull]
+        public static T ValueOrDefault<T>([CanBeNull] this IDataReader dataReader, int columnIndex)
+        {
+            return (dataReader?.IsDBNull(columnIndex) ?? true) || dataReader?.FieldCount <= columnIndex || columnIndex < 0
+                ? default
+                : (T)dataReader?[columnIndex];
         }
     }
 }

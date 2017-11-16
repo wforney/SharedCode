@@ -36,7 +36,7 @@ namespace SharedCode.Core
         /// <returns>The result.</returns>
         [CanBeNull]
         public static T Aggregate<T>([ItemCanBeNull][CanBeNull] this IEnumerable<T> source, [NotNull] Func<T, T, T> aggregateFunction)
-            => Aggregate(source, default, aggregateFunction);
+            => source.Aggregate(default, aggregateFunction);
 
         /// <summary>
         /// Aggregates the source.
@@ -48,7 +48,7 @@ namespace SharedCode.Core
         /// <returns>The result.</returns>
         [CanBeNull]
         public static T Aggregate<T>([ItemCanBeNull][CanBeNull] this IEnumerable<T> source, [CanBeNull] T defaultValue, [NotNull] Func<T, T, T> aggregateFunction)
-            => source.Any() ? source.Aggregate(aggregateFunction) : defaultValue;
+            => source?.Any() ?? false ? source.Aggregate(aggregateFunction) : defaultValue;
 
         /// <summary>
         /// Returns a lazy evaluated enumerable.
