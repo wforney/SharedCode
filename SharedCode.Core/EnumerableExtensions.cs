@@ -294,8 +294,6 @@ namespace SharedCode.Core
         /// <param name="descending">if set to <c>true</c> the sort direction is descending.</param>
         /// <param name="keySelectors">The remaining key selectors.</param>
         /// <returns>The sorted enumerable.</returns>
-        /// <exception cref="OverflowException">The array is multidimensional and contains more than <see cref="F:System.Int32.MaxValue"></see> elements.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="source">source</paramref> or <paramref name="keySelector">keySelector</paramref> is null.</exception>
         [NotNull]
         [ItemCanBeNull]
         public static IOrderedEnumerable<TSource> OrderBy<TSource>(
