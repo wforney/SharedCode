@@ -1,106 +1,180 @@
 <?xml version="1.0" encoding="utf-16"?>
-<DevTrackerData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SolutionTotalEditTime="PT7H46M16.1883923S" SolutionTotalViewTime="PT5H39M58.4896266S" SolutionTotalDebugTime="PT0S">
+<DevTrackerData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SolutionTotalEditTime="PT8H35M46.0266113S" SolutionTotalViewTime="PT6H15M18.2431064S" SolutionTotalDebugTime="PT0S">
   <FileVersion>
     <Major>1</Major>
     <Minor>0</Minor>
   </FileVersion>
   <SessionTimeList />
   <LastSessionTimeList>
-    <DevTrackerDataItem ViewActiveTime="PT30.9807881S" EditActiveTime="PT6.4001675S">
-      <ModifiedDate>2017-11-15T22:42:09.5244377-08:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT3M3.6744426S" EditActiveTime="PT13M28.8233296S">
+      <ModifiedDate>2017-11-16T00:28:05.0614783-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\DataReaderExtensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:20:20.8773476-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT27.359717S" EditActiveTime="PT2M13.2724478S">
+      <ModifiedDate>2017-11-16T00:06:50.3898768-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\DataTableExtensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
+      <CreatedDate>2017-11-16T00:04:15.3195785-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT39.8790942S" EditActiveTime="PT1M56.2023323S">
+      <ModifiedDate>2017-11-16T00:03:09.5255918-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
       <EditedCount>1</EditedCount>
       <ViewedCount>1</ViewedCount>
       <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\DateTimeExtensions.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
-      <CreatedDate>2017-11-15T22:31:48.8205148-08:00</CreatedDate>
+      <CreatedDate>2017-11-15T23:20:22.2949356-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT1.5625837S" EditActiveTime="PT0S">
-      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
-      <EditedCount>0</EditedCount>
-      <ViewedCount>1</ViewedCount>
-      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\DateTimeFormat.cs</Item>
-      <ItemType>ProjectItem</ItemType>
-      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
-      <CreatedDate>2017-11-15T22:31:47.2549004-08:00</CreatedDate>
-      <ViewedBy>WilliamForney</ViewedBy>
-    </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT6M32.2280193S" EditActiveTime="PT1M19.2129481S">
-      <ModifiedDate>2017-11-15T22:41:55.3041022-08:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT47.8573527S" EditActiveTime="PT2M10.9867972S">
+      <ModifiedDate>2017-11-16T00:03:40.9081243-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
       <EditedCount>1</EditedCount>
       <ViewedCount>1</ViewedCount>
       <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\DateTimeOffsetExtensions.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
-      <CreatedDate>2017-11-15T22:31:49.9780109-08:00</CreatedDate>
+      <CreatedDate>2017-11-15T23:20:24.8170026-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT9.0805551S" EditActiveTime="PT1M49.8537219S">
-      <ModifiedDate>2017-11-15T22:41:20.4011531-08:00</ModifiedDate>
-      <ModifiedBy>WilliamForney</ModifiedBy>
-      <EditedCount>1</EditedCount>
-      <ViewedCount>1</ViewedCount>
-      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\DayOfWeekExtensions.cs</Item>
-      <ItemType>ProjectItem</ItemType>
-      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
-      <CreatedDate>2017-11-15T22:39:28.5985143-08:00</CreatedDate>
-      <ViewedBy>WilliamForney</ViewedBy>
-    </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT7.4428591S" EditActiveTime="PT0S">
+    <DevTrackerDataItem ViewActiveTime="PT4M2.0515069S" EditActiveTime="PT0S">
       <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
       <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core.Tests\DateTimeStringFormatTests.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core.Tests\SharedCode.Core.Tests.csproj</ProjectName>
+      <CreatedDate>2017-11-16T00:40:15.3197685-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT8.4563554S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\Enum.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:07:21.8194373-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M17.7755398S" EditActiveTime="PT3.3657934S">
+      <ModifiedDate>2017-11-16T00:29:26.5160408-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
       <ViewedCount>1</ViewedCount>
       <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\EnumerableExtensions.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
-      <CreatedDate>2017-11-15T22:24:33.9572123-08:00</CreatedDate>
+      <CreatedDate>2017-11-16T00:29:11.0934705-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT16.0905621S" EditActiveTime="PT6M6.4577071S">
-      <ModifiedDate>2017-11-15T22:31:29.2606385-08:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT2M33.5303634S" EditActiveTime="PT5M43.4987155S">
+      <ModifiedDate>2017-11-15T23:15:02.8031684-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
       <EditedCount>1</EditedCount>
       <ViewedCount>1</ViewedCount>
       <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\Extensions.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
-      <CreatedDate>2017-11-15T22:25:03.0866865-08:00</CreatedDate>
+      <CreatedDate>2017-11-15T23:07:25.5276486-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT38.4997452S" EditActiveTime="PT2M57.0555126S">
-      <ModifiedDate>2017-11-15T22:24:12.0815858-08:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT20.6294474S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\AppData\Local\JetBrains\Shared\v09\DecompilerCache\decompiler\0279B6E2-D194-4600-B7FB-29D814B3491E\6f\f4c025f1\IDataRecord.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2017-11-16T00:23:51.4660904-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M19.5361978S" EditActiveTime="PT2M16.9209368S">
+      <ModifiedDate>2017-11-15T23:41:24.2505013-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
       <EditedCount>1</EditedCount>
       <ViewedCount>1</ViewedCount>
-      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\FileInfoExtensions.cs</Item>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\ListExtensions.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
-      <CreatedDate>2017-11-15T22:20:53.0598354-08:00</CreatedDate>
+      <CreatedDate>2017-11-15T23:38:22.7841961-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT2M57.3637256S" EditActiveTime="PT5M28.5497549S">
-      <ModifiedDate>2017-11-15T22:51:24.3384668-08:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT7M2.985568S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>SharedCode.Core.Tests\SharedCode.Core.Tests.csproj</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>SharedCode.Core.Tests\SharedCode.Core.Tests.csproj</ProjectName>
+      <CreatedDate>2017-11-16T00:37:18.3323853-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M10.5976581S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>SharedCode.Data\SharedCode.Data.csproj</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>SharedCode.Data\SharedCode.Data.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:25:40.7212978-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3M23.8111019S" EditActiveTime="PT8M38.2865373S">
+      <ModifiedDate>2017-11-16T00:00:55.9730721-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\StreamExtensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:43:05.6131551-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4M33.0082399S" EditActiveTime="PT10M54.2929219S">
+      <ModifiedDate>2017-11-16T00:10:54.5589565-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
       <EditedCount>1</EditedCount>
       <ViewedCount>1</ViewedCount>
       <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\StringExtensions.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
-      <CreatedDate>2017-11-15T22:42:30.1028607-08:00</CreatedDate>
+      <CreatedDate>2017-11-15T23:00:27.0776326-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT2M24.0707773S" EditActiveTime="PT17M0.1632002S">
-      <ModifiedDate>2017-11-15T22:19:03.6196315-08:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT2M59.3402159S" EditActiveTime="PT52.3967944S">
+      <ModifiedDate>2017-11-15T23:36:10.7686857-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Data\StringExtensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Data\SharedCode.Data.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:24:23.936723-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT29.2706032S" EditActiveTime="PT1M11.7911147S">
+      <ModifiedDate>2017-11-15T23:37:55.5538162-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
       <EditedCount>1</EditedCount>
       <ViewedCount>1</ViewedCount>
       <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\TypeExtensions.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
-      <CreatedDate>2017-11-15T22:00:54.550065-08:00</CreatedDate>
+      <CreatedDate>2017-11-15T23:36:37.8017981-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
   </LastSessionTimeList>
@@ -330,11 +404,11 @@
       <CreatedDate>2017-11-11T23:11:28.6356671-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT2M48.4235055S" EditActiveTime="PT5M56.6959042S">
-      <ModifiedDate>2017-11-08T00:03:27.7199542-08:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT5M52.0979481S" EditActiveTime="PT19M25.5192338S">
+      <ModifiedDate>2017-11-16T00:28:05.0614783-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
-      <EditedCount>1</EditedCount>
-      <ViewedCount>2</ViewedCount>
+      <EditedCount>2</EditedCount>
+      <ViewedCount>3</ViewedCount>
       <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\DataReaderExtensions.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
@@ -351,11 +425,11 @@
       <CreatedDate>2017-11-15T00:30:53.5668887-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT1M23.1787098S" EditActiveTime="PT8M54.0708534S">
-      <ModifiedDate>2017-11-11T16:15:27.0414768-08:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT1M50.5384268S" EditActiveTime="PT11M7.3433012S">
+      <ModifiedDate>2017-11-16T00:06:50.3898768-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
-      <EditedCount>1</EditedCount>
-      <ViewedCount>1</ViewedCount>
+      <EditedCount>2</EditedCount>
+      <ViewedCount>2</ViewedCount>
       <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\DataTableExtensions.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
@@ -383,11 +457,11 @@
       <CreatedDate>2017-11-11T19:20:39.5669673-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT3M54.4237985S" EditActiveTime="PT10M3.3702377S">
-      <ModifiedDate>2017-11-15T22:42:09.5244377-08:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT4M34.3028927S" EditActiveTime="PT11M59.57257S">
+      <ModifiedDate>2017-11-16T00:03:09.5255918-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
-      <EditedCount>3</EditedCount>
-      <ViewedCount>4</ViewedCount>
+      <EditedCount>4</EditedCount>
+      <ViewedCount>5</ViewedCount>
       <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\DateTimeExtensions.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
@@ -405,23 +479,23 @@
       <CreatedDate>2017-11-12T00:18:45.8595254-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT15M12.3074859S" EditActiveTime="PT14M12.2306802S">
-      <ModifiedDate>2017-11-15T22:41:55.3041022-08:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT16M0.1648386S" EditActiveTime="PT16M23.2174774S">
+      <ModifiedDate>2017-11-16T00:03:40.9081243-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
-      <EditedCount>3</EditedCount>
-      <ViewedCount>4</ViewedCount>
+      <EditedCount>4</EditedCount>
+      <ViewedCount>5</ViewedCount>
       <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\DateTimeOffsetExtensions.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
       <CreatedDate>2017-11-11T19:24:08.8881786-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT58.3929193S" EditActiveTime="PT1M53.7509223S">
+    <DevTrackerDataItem ViewActiveTime="PT5M0.4364611S" EditActiveTime="PT1M53.7509223S">
       <ModifiedDate>2017-11-12T00:27:24.6860969-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
       <EditedCount>1</EditedCount>
-      <ViewedCount>1</ViewedCount>
-      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core.Tests\DateTimeStringFormatTests.cs</Item>
+      <ViewedCount>2</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core.Tests\DateTimeExtensionsTests.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core.Tests\SharedCode.Core.Tests.csproj</ProjectName>
       <CreatedDate>2017-11-12T00:20:28.4079043-08:00</CreatedDate>
@@ -449,22 +523,22 @@
       <CreatedDate>2017-11-12T00:00:07.2813949-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT25M40.983386S" EditActiveTime="PT40M0.1639438S">
+    <DevTrackerDataItem ViewActiveTime="PT25M49.4397414S" EditActiveTime="PT40M0.1639438S">
       <ModifiedDate>2017-11-12T22:04:40.0461662-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
       <EditedCount>3</EditedCount>
-      <ViewedCount>4</ViewedCount>
+      <ViewedCount>5</ViewedCount>
       <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\Enum.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
       <CreatedDate>2017-11-11T15:41:10.6211708-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT1H22M39.5237625S" EditActiveTime="PT2H20M15.1607153S">
-      <ModifiedDate>2017-11-15T21:45:00.3593083-08:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT1H24M57.2993023S" EditActiveTime="PT2H20M18.5265087S">
+      <ModifiedDate>2017-11-16T00:29:26.5160408-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
-      <EditedCount>5</EditedCount>
-      <ViewedCount>6</ViewedCount>
+      <EditedCount>6</EditedCount>
+      <ViewedCount>7</ViewedCount>
       <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\EnumerableExtensions.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
@@ -493,11 +567,11 @@
       <CreatedDate>2017-11-11T23:55:12.8827308-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT20M28.3137564S" EditActiveTime="PT50M31.7035215S">
-      <ModifiedDate>2017-11-15T22:31:29.2606385-08:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT23M1.8441198S" EditActiveTime="PT56M15.202237S">
+      <ModifiedDate>2017-11-15T23:15:02.8031684-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
-      <EditedCount>5</EditedCount>
-      <ViewedCount>5</ViewedCount>
+      <EditedCount>6</EditedCount>
+      <ViewedCount>6</ViewedCount>
       <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\Extensions.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
@@ -581,6 +655,16 @@
       <CreatedDate>2017-11-11T21:26:02.0167614-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT20.6294474S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\AppData\Local\JetBrains\Shared\v09\DecompilerCache\decompiler\0279B6E2-D194-4600-B7FB-29D814B3491E\6f\f4c025f1\IDataRecord.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2017-11-16T00:23:51.4660904-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
     <DevTrackerDataItem ViewActiveTime="PT1M12.516162S" EditActiveTime="PT1M9.432327S">
       <ModifiedDate>2017-11-11T23:28:57.3853376-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
@@ -613,11 +697,11 @@
       <CreatedDate>2017-11-12T17:32:27.0402899-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT4M34.391441S" EditActiveTime="PT8M25.2574942S">
-      <ModifiedDate>2017-11-11T22:00:02.5536449-08:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT5M53.9276388S" EditActiveTime="PT10M42.178431S">
+      <ModifiedDate>2017-11-15T23:41:24.2505013-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
-      <EditedCount>2</EditedCount>
-      <ViewedCount>3</ViewedCount>
+      <EditedCount>3</EditedCount>
+      <ViewedCount>4</ViewedCount>
       <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\ListExtensions.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
@@ -827,6 +911,26 @@
       <CreatedDate>2017-11-11T18:11:38.9673616-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT7M2.985568S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>SharedCode.Core.Tests\SharedCode.Core.Tests.csproj</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>SharedCode.Core.Tests\SharedCode.Core.Tests.csproj</ProjectName>
+      <CreatedDate>2017-11-16T00:37:18.3323853-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M10.5976581S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>SharedCode.Data\SharedCode.Data.csproj</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>SharedCode.Data\SharedCode.Data.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:25:40.7212978-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
     <DevTrackerDataItem ViewActiveTime="PT3M30.9213063S" EditActiveTime="PT0S">
       <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
       <EditedCount>0</EditedCount>
@@ -858,11 +962,22 @@
       <CreatedDate>2017-11-11T18:38:59.481205-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT40M41.9392562S" EditActiveTime="PT36M57.7182997S">
-      <ModifiedDate>2017-11-15T22:51:24.3384668-08:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT3M23.8111019S" EditActiveTime="PT8M38.2865373S">
+      <ModifiedDate>2017-11-16T00:00:55.9730721-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
-      <EditedCount>4</EditedCount>
-      <ViewedCount>5</ViewedCount>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\StreamExtensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:43:05.6131551-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT45M14.9474961S" EditActiveTime="PT47M52.0112216S">
+      <ModifiedDate>2017-11-16T00:10:54.5589565-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>5</EditedCount>
+      <ViewedCount>6</ViewedCount>
       <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\StringExtensions.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
@@ -878,6 +993,17 @@
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Web\SharedCode.Web.csproj</ProjectName>
       <CreatedDate>2017-11-11T21:32:48.8249656-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M59.3402159S" EditActiveTime="PT52.3967944S">
+      <ModifiedDate>2017-11-15T23:36:10.7686857-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Data\StringExtensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Data\SharedCode.Data.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:24:23.936723-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
     <DevTrackerDataItem ViewActiveTime="PT43.7986904S" EditActiveTime="PT1M49.7381216S">
@@ -913,11 +1039,11 @@
       <CreatedDate>2017-11-11T20:26:37.7289563-08:00</CreatedDate>
       <ViewedBy>WilliamForney</ViewedBy>
     </DevTrackerDataItem>
-    <DevTrackerDataItem ViewActiveTime="PT2M24.0707773S" EditActiveTime="PT17M0.1632002S">
-      <ModifiedDate>2017-11-15T22:19:03.6196315-08:00</ModifiedDate>
+    <DevTrackerDataItem ViewActiveTime="PT2M53.3413805S" EditActiveTime="PT18M11.9543149S">
+      <ModifiedDate>2017-11-15T23:37:55.5538162-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
-      <EditedCount>1</EditedCount>
-      <ViewedCount>1</ViewedCount>
+      <EditedCount>2</EditedCount>
+      <ViewedCount>2</ViewedCount>
       <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\TypeExtensions.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
@@ -958,6 +1084,177 @@
     </DevTrackerDataItem>
   </TotalTimeList>
   <HistoryTimeList>
+    <DevTrackerDataItem ViewActiveTime="PT4M2.0455412S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core.Tests\DateTimeExtensionsTests.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core.Tests\SharedCode.Core.Tests.csproj</ProjectName>
+      <CreatedDate>2017-11-16T00:40:15.3197685-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT7M2.985568S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>SharedCode.Core.Tests\SharedCode.Core.Tests.csproj</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>SharedCode.Core.Tests\SharedCode.Core.Tests.csproj</ProjectName>
+      <CreatedDate>2017-11-16T00:37:18.3323853-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M17.7755398S" EditActiveTime="PT3.3657934S">
+      <ModifiedDate>2017-11-16T00:29:26.5160408-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\EnumerableExtensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
+      <CreatedDate>2017-11-16T00:29:11.0934705-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT20.6294474S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\AppData\Local\JetBrains\Shared\v09\DecompilerCache\decompiler\0279B6E2-D194-4600-B7FB-29D814B3491E\6f\f4c025f1\IDataRecord.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2017-11-16T00:23:51.4660904-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT27.359717S" EditActiveTime="PT2M13.2724478S">
+      <ModifiedDate>2017-11-16T00:06:50.3898768-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\DataTableExtensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
+      <CreatedDate>2017-11-16T00:04:15.3195785-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3M23.8111019S" EditActiveTime="PT8M38.2865373S">
+      <ModifiedDate>2017-11-16T00:00:55.9730721-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\StreamExtensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:43:05.6131551-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M19.5361978S" EditActiveTime="PT2M16.9209368S">
+      <ModifiedDate>2017-11-15T23:41:24.2505013-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\ListExtensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:38:22.7841961-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT29.2706032S" EditActiveTime="PT1M11.7911147S">
+      <ModifiedDate>2017-11-15T23:37:55.5538162-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\TypeExtensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:36:37.8017981-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M10.5976581S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>SharedCode.Data\SharedCode.Data.csproj</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>SharedCode.Data\SharedCode.Data.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:25:40.7212978-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M59.3402159S" EditActiveTime="PT52.3967944S">
+      <ModifiedDate>2017-11-15T23:36:10.7686857-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Data\StringExtensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Data\SharedCode.Data.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:24:23.936723-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT47.8573527S" EditActiveTime="PT2M10.9867972S">
+      <ModifiedDate>2017-11-16T00:03:40.9081243-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\DateTimeOffsetExtensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:20:24.8170026-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT39.8790942S" EditActiveTime="PT1M56.2023323S">
+      <ModifiedDate>2017-11-16T00:03:09.5255918-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\DateTimeExtensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:20:22.2949356-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3M3.6744426S" EditActiveTime="PT13M28.8233296S">
+      <ModifiedDate>2017-11-16T00:28:05.0614783-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\DataReaderExtensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:20:20.8773476-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M33.5303634S" EditActiveTime="PT5M43.4987155S">
+      <ModifiedDate>2017-11-15T23:15:02.8031684-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\Extensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:07:25.5276486-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT8.4563554S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\Enum.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:07:21.8194373-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4M33.0082399S" EditActiveTime="PT10M54.2929219S">
+      <ModifiedDate>2017-11-16T00:10:54.5589565-08:00</ModifiedDate>
+      <ModifiedBy>WilliamForney</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\StringExtensions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core\SharedCode.Core.csproj</ProjectName>
+      <CreatedDate>2017-11-15T23:00:27.0776326-08:00</CreatedDate>
+      <ViewedBy>WilliamForney</ViewedBy>
+    </DevTrackerDataItem>
     <DevTrackerDataItem ViewActiveTime="PT2M57.3587254S" EditActiveTime="PT5M28.5497549S">
       <ModifiedDate>2017-11-15T22:51:24.3384668-08:00</ModifiedDate>
       <ModifiedBy>WilliamForney</ModifiedBy>
@@ -1647,7 +1944,7 @@
       <ModifiedBy>WilliamForney</ModifiedBy>
       <EditedCount>1</EditedCount>
       <ViewedCount>1</ViewedCount>
-      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core.Tests\DateTimeStringFormatTests.cs</Item>
+      <Item>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core.Tests\DateTimeExtensionsTests.cs</Item>
       <ItemType>ProjectItem</ItemType>
       <ProjectName>C:\Users\WilliamForney\source\repos\SharedCode\SharedCode.Core.Tests\SharedCode.Core.Tests.csproj</ProjectName>
       <CreatedDate>2017-11-12T00:20:28.4079043-08:00</CreatedDate>

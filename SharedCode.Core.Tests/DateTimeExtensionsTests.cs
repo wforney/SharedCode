@@ -1,4 +1,4 @@
-﻿// <copyright file="DateTimeStringFormatTests.cs" company="improvGroup, LLC">
+﻿// <copyright file="DateTimeExtensionsTests.cs" company="improvGroup, LLC">
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
@@ -9,10 +9,10 @@ namespace SharedCode.Core.Tests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// Class DateTimeStringFormatTests.
+    /// The date time extensions tests class
     /// </summary>
     [TestClass]
-    public class DateTimeStringFormatTests
+    public class DateTimeExtensionsTests
     {
         /// <summary>
         /// The original date time
@@ -20,49 +20,13 @@ namespace SharedCode.Core.Tests
         private DateTime originalDateTime;
 
         /// <summary>
-        /// Initializes the test case.
-        /// </summary>
-        [TestInitialize]
-        public void InitTestCase() => this.originalDateTime = new DateTime(1984, 3, 11, 2, 30, 58);
-
-        /// <summary>
-        /// Determines whether this instance [can get short date string].
+        /// Determines whether this instance [can get full long date time string].
         /// </summary>
         [TestMethod]
-        public void Can_Get_Short_Date_String()
+        public void Can_Get_Full_Long_Date_Time_String()
         {
-            var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.ShortDate);
-            Assert.AreEqual(this.originalDateTime.ToShortDateString(), result);
-        }
-
-        /// <summary>
-        /// Determines whether this instance [can get long date string].
-        /// </summary>
-        [TestMethod]
-        public void Can_Get_Long_Date_String()
-        {
-            var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.LongDate);
-            Assert.AreEqual("11 March 1984", result);
-        }
-
-        /// <summary>
-        /// Determines whether this instance [can get short time string].
-        /// </summary>
-        [TestMethod]
-        public void Can_Get_Short_Time_String()
-        {
-            var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.ShortTime);
-            Assert.AreEqual("02:30", result);
-        }
-
-        /// <summary>
-        /// Determines whether this instance [can get long time string].
-        /// </summary>
-        [TestMethod]
-        public void Can_Get_Long_Time_String()
-        {
-            var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.LongTime);
-            Assert.AreEqual("02:30:58", result);
+            var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.FullLongDateTime);
+            Assert.AreEqual("Sunday, March 11, 1984 2:30:58 AM", result);
         }
 
         /// <summary>
@@ -72,27 +36,7 @@ namespace SharedCode.Core.Tests
         public void Can_Get_Full_Short_Date_Time_String()
         {
             var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.FullShortDateTime);
-            Assert.AreEqual("11 March 1984 02:30", result);
-        }
-
-        /// <summary>
-        /// Determines whether this instance [can get full long date time string].
-        /// </summary>
-        [TestMethod]
-        public void Can_Get_Full_Long_Date_Time_String()
-        {
-            var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.FullLongDateTime);
-            Assert.AreEqual("11 March 1984 02:30:58", result);
-        }
-
-        /// <summary>
-        /// Determines whether this instance [can get general short date time string].
-        /// </summary>
-        [TestMethod]
-        public void Can_Get_General_Short_Date_Time_String()
-        {
-            var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.GeneralShortDateTime);
-            Assert.AreEqual("11/03/1984 02:30", result);
+            Assert.AreEqual("Sunday, March 11, 1984 2:30 AM", result);
         }
 
         /// <summary>
@@ -102,7 +46,37 @@ namespace SharedCode.Core.Tests
         public void Can_Get_General_Long_Date_Time_String()
         {
             var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.GeneralLongDateTime);
-            Assert.AreEqual("11/03/1984 02:30:58", result);
+            Assert.AreEqual("3/11/1984 2:30:58 AM", result);
+        }
+
+        /// <summary>
+        /// Determines whether this instance [can get general short date time string].
+        /// </summary>
+        [TestMethod]
+        public void Can_Get_General_Short_Date_Time_String()
+        {
+            var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.GeneralShortDateTime);
+            Assert.AreEqual("3/11/1984 2:30 AM", result);
+        }
+
+        /// <summary>
+        /// Determines whether this instance [can get long date string].
+        /// </summary>
+        [TestMethod]
+        public void Can_Get_Long_Date_String()
+        {
+            var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.LongDate);
+            Assert.AreEqual("Sunday, March 11, 1984", result);
+        }
+
+        /// <summary>
+        /// Determines whether this instance [can get long time string].
+        /// </summary>
+        [TestMethod]
+        public void Can_Get_Long_Time_String()
+        {
+            var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.LongTime);
+            Assert.AreEqual("2:30:58 AM", result);
         }
 
         /// <summary>
@@ -112,7 +86,7 @@ namespace SharedCode.Core.Tests
         public void Can_Get_Month_Day_Lower_Case_String()
         {
             var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.MonthDayLowerCase);
-            Assert.AreEqual("11 March", result);
+            Assert.AreEqual("March 11", result);
         }
 
         /// <summary>
@@ -122,7 +96,7 @@ namespace SharedCode.Core.Tests
         public void Can_Get_Month_Day_Upper_Case_String()
         {
             var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.MonthDayUpperCase);
-            Assert.AreEqual("11 March", result);
+            Assert.AreEqual("March 11", result);
         }
 
         /// <summary>
@@ -146,6 +120,26 @@ namespace SharedCode.Core.Tests
         }
 
         /// <summary>
+        /// Determines whether this instance [can get short date string].
+        /// </summary>
+        [TestMethod]
+        public void Can_Get_Short_Date_String()
+        {
+            var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.ShortDate);
+            Assert.AreEqual(this.originalDateTime.ToShortDateString(), result);
+        }
+
+        /// <summary>
+        /// Determines whether this instance [can get short time string].
+        /// </summary>
+        [TestMethod]
+        public void Can_Get_Short_Time_String()
+        {
+            var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.ShortTime);
+            Assert.AreEqual("2:30 AM", result);
+        }
+
+        /// <summary>
         /// Determines whether this instance [can get sortable date time iso8601 string].
         /// </summary>
         [TestMethod]
@@ -162,7 +156,7 @@ namespace SharedCode.Core.Tests
         public void Can_Get_Universal_Sortable_DateTime_String()
         {
             var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.UniversalSortableDateTime);
-            Assert.AreEqual("11 March 1984 02:30:58", result);
+            Assert.AreEqual("Sunday, March 11, 1984 10:30:58 AM", result);
         }
 
         /// <summary>
@@ -184,6 +178,12 @@ namespace SharedCode.Core.Tests
             var result = this.originalDateTime.ToStringFormat(() => DateTimeFormat.YearMonthUpperCase);
             Assert.AreEqual("March 1984", result);
         }
+
+        /// <summary>
+        /// Initializes the test case.
+        /// </summary>
+        [TestInitialize]
+        public void InitTestCase() => this.originalDateTime = new DateTime(1984, 3, 11, 2, 30, 58);
 
         /// <summary>
         /// Teardowns the test case.
