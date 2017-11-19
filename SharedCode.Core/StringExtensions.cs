@@ -25,6 +25,12 @@ namespace SharedCode.Core
     public static class StringExtensions
     {
         /// <summary>
+        /// The domain regular expression
+        /// </summary>
+        [NotNull]
+        private static readonly Regex DomainRegex = new Regex(@"(((?<scheme>http(s)?):\/\/)?([\w-]+?\.\w+)+([a-zA-Z0-9\~\!\@\#\$\%\^\&amp;\*\(\)_\-\=\+\\\/\?\.\:\;\,]*)?)", RegexOptions.Compiled | RegexOptions.Multiline);
+
+        /// <summary>
         /// Returns a value indicating whether the specified <see cref="string"/> object occurs within the <paramref name="input"/> string.
         /// A parameter specifies the type of search to use for the specified string.
         /// </summary>
@@ -65,6 +71,31 @@ namespace SharedCode.Core
             Contract.Requires(characters != null);
 
             return characters.Any(character => input?.Contains(character.ToString()) ?? false);
+        }
+
+        /// <summary>
+        /// Converts the input to the specified type.
+        /// </summary>
+        /// <typeparam name="T">The type to convert to.</typeparam>
+        /// <param name="input">The input string.</param>
+        /// <returns>The output.</returns>
+        [CanBeNull]
+        public static T ConvertTo<T>([CanBeNull]this string input)
+        {
+            try
+            {
+                var converter = TypeDescriptor.GetConverter(typeof(T));
+                if (converter != null)
+                {
+                    return (T)converter.ConvertFromString(input);
+                }
+
+                return default;
+            }
+            catch (NotSupportedException)
+            {
+                return default;
+            }
         }
 
         /// <summary>
@@ -159,6 +190,9 @@ namespace SharedCode.Core
         [NotNull]
         public static string Encrypt([NotNull] this string stringToEncrypt, [NotNull] string key)
         {
+            Contract.Requires(stringToEncrypt != null);
+            Contract.Requires(key != null);
+
             if (string.IsNullOrEmpty(stringToEncrypt))
             {
                 throw new ArgumentException("An empty string value cannot be encrypted.");
@@ -306,6 +340,58 @@ namespace SharedCode.Core
             => stringValues.Any(otherValue => string.CompareOrdinal(value, otherValue) == 0);
 
         /// <summary>
+        /// Determines whether the input string can be converted to the target type.
+        /// </summary>
+        /// <typeparam name="T">The target type.</typeparam>
+        /// <param name="input">The input string.</param>
+        /// <returns>A value indicating whether the input string was successfully converted to the target type.</returns>
+        public static bool Is<T>([CanBeNull] this string input)
+        {
+            try
+            {
+                var converter = TypeDescriptor.GetConverter(typeof(T));
+                if (converter == null)
+                {
+                    return false;
+                }
+
+                var output = (T)converter.ConvertFromString(input);
+                return true;
+            }
+            catch (NotSupportedException)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the input string can be converted to the target type.
+        /// </summary>
+        /// <param name="input">The input string.</param>
+        /// <param name="targetType">The target type.</param>
+        /// <returns>A value indicating whether the input string was successfully converted to the target type.</returns>
+        public static bool Is([CanBeNull]this string input, [NotNull] Type targetType)
+        {
+            Contract.Requires(targetType != null);
+
+            try
+            {
+                var converter = TypeDescriptor.GetConverter(targetType);
+                if (converter == null)
+                {
+                    return false;
+                }
+
+                var ouput = converter.ConvertFromString(input);
+                return true;
+            }
+            catch (NotSupportedException)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         ///     Determines whether the specified input string is a date.
         /// </summary>
         /// <param name="input">
@@ -355,18 +441,18 @@ namespace SharedCode.Core
         public static bool IsNotNullOrEmpty([CanBeNull] this string input) => !string.IsNullOrEmpty(input);
 
         /// <summary>
-        /// Determines whether the specified input string is null or empty.
-        /// </summary>
-        /// <param name="input">The input string.</param>
-        /// <returns><c>true</c> if the specified input string is null or empty; otherwise, <c>false</c>.</returns>
-        public static bool IsNullOrEmpty([CanBeNull] this string input) => string.IsNullOrEmpty(input);
-
-        /// <summary>
         /// Determines whether the specified input string is not null or white space.
         /// </summary>
         /// <param name="input">The input string.</param>
         /// <returns><c>true</c> if the specified input string is not null or white space; otherwise, <c>false</c>.</returns>
         public static bool IsNotNullOrWhiteSpace([CanBeNull] this string input) => !string.IsNullOrWhiteSpace(input);
+
+        /// <summary>
+        /// Determines whether the specified input string is null or empty.
+        /// </summary>
+        /// <param name="input">The input string.</param>
+        /// <returns><c>true</c> if the specified input string is null or empty; otherwise, <c>false</c>.</returns>
+        public static bool IsNullOrEmpty([CanBeNull] this string input) => string.IsNullOrEmpty(input);
 
         /// <summary>
         /// Determines whether the specified input string is null or white space.
@@ -415,6 +501,18 @@ namespace SharedCode.Core
         }
 
         /// <summary>
+        /// Determines whether the specified input string is a valid IP address.
+        /// </summary>
+        /// <param name="input">The input string.</param>
+        /// <returns><c>true</c> if the specified input string is a valid IP address; otherwise, <c>false</c>.</returns>
+        public static bool IsValidIPAddress([CanBeNull] this string input)
+        {
+            return Regex.IsMatch(
+                input,
+                @"\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b");
+        }
+
+        /// <summary>
         /// Determines whether the input text is a valid URI.
         /// </summary>
         /// <param name="input">The input text.</param>
@@ -446,6 +544,30 @@ namespace SharedCode.Core
             return value != null && value.Length > Math.Max(length, 0)
                        ? value.Substring(0, Math.Max(length, 0))
                        : value;
+        }
+
+        /// <summary>
+        /// Takes a string of text and replaces text matching a link pattern to a hyperlink.
+        /// </summary>
+        /// <param name="text">The input text.</param>
+        /// <param name="target">The link target.</param>
+        /// <returns>The output.</returns>
+        [CanBeNull]
+        public static string Linkify([CanBeNull] this string text, [NotNull] string target = "_self")
+        {
+            Contract.Requires(target != null);
+            return StringExtensions.DomainRegex.Replace(
+                text,
+                match =>
+                {
+                    var link = match.ToString();
+                    var scheme = match.Groups["scheme"].Value == "https" ? Uri.UriSchemeHttps : Uri.UriSchemeHttp;
+
+                    var url = new UriBuilder(link) { Scheme = scheme }.Uri.ToString();
+
+                    return $@"<a href=""{url}"" target=""{target}"">{link}</a>";
+                }
+            );
         }
 
         /// <summary>
@@ -592,7 +714,8 @@ namespace SharedCode.Core
         /// </summary>
         /// <param name="text">The input string.</param>
         /// <returns>The proper cased string.</returns>
-        public static string ToProperCase(this string text)
+        [CanBeNull]
+        public static string ToProperCase([CanBeNull] this string text)
         {
             var cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
             var textInfo = cultureInfo.TextInfo;
@@ -666,7 +789,7 @@ namespace SharedCode.Core
                 return truncatedString;
             }
 
-            if (text == null || text.Length <= maxLength)
+            if (text.Length <= maxLength)
             {
                 return truncatedString;
             }
@@ -715,7 +838,6 @@ namespace SharedCode.Core
         ///     The result.
         /// </returns>
         [NotNull]
-        public static string ValueOrEmpty([CanBeNull] this string value) =>
-            string.IsNullOrEmpty(value) ? string.Empty : value;
+        public static string ValueOrEmpty([CanBeNull] this string value) => value ?? string.Empty;
     }
 }

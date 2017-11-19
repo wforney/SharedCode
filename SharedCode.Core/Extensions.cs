@@ -7,6 +7,8 @@ namespace SharedCode.Core
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Data.SqlTypes;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.IO;
     using System.Linq;
@@ -290,6 +292,57 @@ namespace SharedCode.Core
         /// <param name="source">The source object.</param>
         /// <returns><c>true</c> if the specified source object is null; otherwise, <c>false</c>.</returns>
         public static bool IsNull([CanBeNull] this object source) => source == null;
+
+        /// <summary>
+        /// Unified advanced generic check for: DbNull.Value, INullable.IsNull, !Nullable&lt;&gt;.HasValue, null reference. Omits boxing for value types.
+        /// </summary>
+        /// <typeparam name="T">The type of the value we are checking.</typeparam>
+        /// <param name="value">The value to check.</param>
+        /// <returns>A value indicating whether or not this value is null.</returns>
+        [DebuggerStepThrough]
+        public static bool IsNull<T>([CanBeNull] this T value)
+        {
+            if (value is INullable nullable && nullable.IsNull)
+            {
+                return true;
+            }
+
+            var type = typeof(T);
+            if (type.IsValueType)
+            {
+                if (!object.ReferenceEquals(Nullable.GetUnderlyingType(type), null) && value?.GetHashCode() == 0)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if (EqualityComparer<T>.Default.Equals(value, default))
+                {
+                    return true;
+                }
+
+                if (Convert.IsDBNull(value))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Determines whether the specified value is null.
+        /// </summary>
+        /// <typeparam name="T">The type of the value.</typeparam>
+        /// <param name="value">The value being checked.</param>
+        /// <returns>A value indicating whether the specified value is null.</returns>
+        [DebuggerStepThrough]
+        public static bool IsNull<T>([CanBeNull] this T? value)
+#pragma warning disable GCop615 // Negative logic is taxing on the brain. Use "{0} == null" instead.
+            where T : struct => !value.HasValue;
+
+#pragma warning restore GCop615 // Negative logic is taxing on the brain. Use "{0} == null" instead.
 
         /// <summary>
         ///     Turns any object into an exception.

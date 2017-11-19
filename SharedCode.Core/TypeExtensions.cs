@@ -82,6 +82,13 @@ namespace SharedCode.Core
         }
 
         /// <summary>
+        /// Determines whether the specified type is string.
+        /// </summary>
+        /// <param name="type">The type to check.</param>
+        /// <returns><c>true</c> if the specified type is string; otherwise, <c>false</c>.</returns>
+        public static bool IsString([NotNull] this Type type) => type == typeof(string);
+
+        /// <summary>
         /// Alternative version of <see cref="Type.IsSubclassOf"/> that supports raw generic types (generic types without
         /// any type parameters).
         /// </summary>

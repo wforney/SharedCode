@@ -19,6 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netstandard2.0\SharedCode.Core.xml</DocumentationFile>
     <LangVersion>latest</LangVersion>
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD2_0;CONTRACTS_FULL</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

@@ -148,6 +148,14 @@ namespace SharedCode.Core
         }
 
         /// <summary>
+        ///     Gets the first day of the month.
+        /// </summary>
+        /// <param name="dateTime">The date time.</param>
+        /// <returns>The first day of the month.</returns>
+        public static DateTimeOffset FirstDayOfMonth(this DateTimeOffset dateTime)
+            => new DateTimeOffset(dateTime.Year, dateTime.Month, 1, 0, 0, 0, dateTime.Offset);
+
+        /// <summary>
         ///     Gets the date range between this date time and the specified date time.
         /// </summary>
         /// <param name="fromDate">The from date.</param>
@@ -161,14 +169,6 @@ namespace SharedCode.Core
             return Enumerable.Range(0, new TimeSpan(toDate.Ticks - fromDate.Ticks).Days)
                              .Select(p => new DateTimeOffset(fromDate.Date.AddDays(p)));
         }
-
-        /// <summary>
-        /// Gets the last day of the month.
-        /// </summary>
-        /// <param name="dateTime">The date time.</param>
-        /// <returns>The last day of the month.</returns>
-        public static DateTimeOffset GetLastDayOfMonth(this DateTimeOffset dateTime)
-            => new DateTimeOffset(dateTime.Year, dateTime.Month, 1, 0, 0, 0, TimeSpan.Zero).AddMonths(1).AddDays(-1);
 
         /// <summary>
         ///     Returns true if two date ranges intersect.
@@ -207,6 +207,14 @@ namespace SharedCode.Core
         /// <returns><c>true</c> if the specified value is weekend; otherwise, <c>false</c>.</returns>
         public static bool IsWeekend(this DateTimeOffset value)
             => value.DayOfWeek == DayOfWeek.Sunday || value.DayOfWeek == DayOfWeek.Saturday;
+
+        /// <summary>
+        /// Gets the last day of the month.
+        /// </summary>
+        /// <param name="dateTime">The date time.</param>
+        /// <returns>The last day of the month.</returns>
+        public static DateTimeOffset LastDayOfMonth(this DateTimeOffset dateTime)
+            => dateTime.FirstDayOfMonth().AddMonths(1).AddDays(-1);
 
         /// <summary>
         ///     Converts the enumeration to the format string.

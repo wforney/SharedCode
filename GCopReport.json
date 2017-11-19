@@ -2,14 +2,14 @@
   "Items": [
     {
       "Analyzer": "LongMethodAnalyzer",
-      "OccurrenceCount": 89,
+      "OccurrenceCount": 100,
       "Exceptions": null,
       "SentToServer": true,
       "InstallationName": "COREDESK"
     },
     {
       "Analyzer": "UseStringCollectionIntersectsAnalyzer",
-      "OccurrenceCount": 5,
+      "OccurrenceCount": 6,
       "Exceptions": null,
       "SentToServer": true,
       "InstallationName": "COREDESK"

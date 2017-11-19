@@ -18,6 +18,28 @@ namespace SharedCode.Core
     public static class DataReaderExtensions
     {
         /// <summary>
+        /// Returns an enumerable from this data reader.
+        /// </summary>
+        /// <param name="dataReader">The data reader.</param>
+        /// <returns>An enumerable of data records.</returns>
+        [NotNull]
+        [ItemCanBeNull]
+        public static IEnumerable<IDataRecord> AsEnumerable([CanBeNull] this IDataReader dataReader)
+        {
+            Contract.Ensures(Contract.Result<IEnumerable<IDataRecord>>() != null);
+
+            if (dataReader == null)
+            {
+                yield break;
+            }
+
+            while (dataReader.Read())
+            {
+                yield return dataReader;
+            }
+        }
+
+        /// <summary>
         /// Determines whether The specified column value is null.
         /// </summary>
         /// <param name="dataReader">The data reader.</param>

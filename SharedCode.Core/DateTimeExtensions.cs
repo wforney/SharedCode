@@ -142,6 +142,14 @@ namespace SharedCode.Core
         }
 
         /// <summary>
+        ///     Gets the first day of the month.
+        /// </summary>
+        /// <param name="dateTime">The date time.</param>
+        /// <returns>The first day of the month.</returns>
+        public static DateTime FirstDayOfMonth(this DateTime dateTime)
+            => new DateTime(dateTime.Year, dateTime.Month, 1);
+
+        /// <summary>
         ///     Gets the date range between this date time and the specified date time.
         /// </summary>
         /// <param name="fromDate">The from date.</param>
@@ -155,14 +163,6 @@ namespace SharedCode.Core
             return Enumerable.Range(0, new TimeSpan(toDate.Ticks - fromDate.Ticks).Days)
                              .Select(p => fromDate.Date.AddDays(p));
         }
-
-        /// <summary>
-        ///     Gets the last day of the month.
-        /// </summary>
-        /// <param name="dateTime">The date time.</param>
-        /// <returns>The last day of the month.</returns>
-        public static DateTime GetLastDayOfMonth(this DateTime dateTime)
-            => new DateTime(dateTime.Year, dateTime.Month, 1).AddMonths(1).AddDays(-1);
 
         /// <summary>
         ///     Returns true if two date ranges intersect.
@@ -201,6 +201,14 @@ namespace SharedCode.Core
         /// <returns><c>true</c> if the specified value is weekend; otherwise, <c>false</c>.</returns>
         public static bool IsWeekend(this DateTime value)
             => value.DayOfWeek == DayOfWeek.Sunday || value.DayOfWeek == DayOfWeek.Saturday;
+
+        /// <summary>
+        ///     Gets the last day of the month.
+        /// </summary>
+        /// <param name="dateTime">The date time.</param>
+        /// <returns>The last day of the month.</returns>
+        public static DateTime LastDayOfMonth(this DateTime dateTime)
+            => dateTime.FirstDayOfMonth().AddMonths(1).AddDays(-1);
 
         /// <summary>
         ///     Converts the enumeration to the format string.
