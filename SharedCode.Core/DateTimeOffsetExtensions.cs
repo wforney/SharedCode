@@ -56,6 +56,98 @@ namespace SharedCode.Core
                 : DateTime.Today.Year - dateOfBirth.Year;
 
         /// <summary>
+        /// DateDiff in SQL style.
+        /// Datepart implemented:
+        /// "year" (abbr. "yy", "yyyy"),
+        /// "quarter" (abbr. "qq", "q"),
+        /// "month" (abbr. "mm", "m"),
+        /// "day" (abbr. "dd", "d"),
+        /// "week" (abbr. "wk", "ww"),
+        /// "hour" (abbr. "hh"),
+        /// "minute" (abbr. "mi", "n"),
+        /// "second" (abbr. "ss", "s"),
+        /// "millisecond" (abbr. "ms").
+        /// </summary>
+        /// <param name="startDate">The start date.</param>
+        /// <param name="datePart">The date part.</param>
+        /// <param name="endDate">The end date.</param>
+        /// <exception cref="Exception">The date part is unknown.</exception>
+        /// <returns>The date difference.</returns>
+        public static long DateDiff(this DateTimeOffset startDate, [NotNull] string datePart, DateTimeOffset endDate)
+        {
+            Contract.Requires(datePart != null);
+
+            long dateDiffVal;
+            var cal = Thread.CurrentThread.CurrentCulture.Calendar;
+            var ts = new TimeSpan(endDate.Ticks - startDate.Ticks);
+            switch (datePart.ToLower().Trim())
+            {
+                case "year":
+                case "yy":
+                case "yyyy":
+                    dateDiffVal = cal.GetYear(endDate.LocalDateTime) - cal.GetYear(startDate.LocalDateTime);
+                    break;
+
+                case "quarter":
+                case "qq":
+                case "q":
+                    dateDiffVal =
+                        (((cal.GetYear(endDate.LocalDateTime) - cal.GetYear(startDate.LocalDateTime)) * 4)
+                         + ((cal.GetMonth(endDate.LocalDateTime) - 1) / 3))
+                        - ((cal.GetMonth(startDate.LocalDateTime) - 1) / 3);
+                    break;
+
+                case "month":
+                case "mm":
+                case "m":
+                    dateDiffVal =
+                        ((cal.GetYear(endDate.LocalDateTime) - cal.GetYear(startDate.LocalDateTime)) * 12
+                         + cal.GetMonth(endDate.LocalDateTime))
+                        - cal.GetMonth(startDate.LocalDateTime);
+                    break;
+
+                case "day":
+                case "d":
+                case "dd":
+                    dateDiffVal = (long)ts.TotalDays;
+                    break;
+
+                case "week":
+                case "wk":
+                case "ww":
+                    dateDiffVal = (long)(ts.TotalDays / 7);
+                    break;
+
+                case "hour":
+                case "hh":
+                    dateDiffVal = (long)ts.TotalHours;
+                    break;
+
+                case "minute":
+                case "mi":
+                case "n":
+                    dateDiffVal = (long)ts.TotalMinutes;
+                    break;
+
+                case "second":
+                case "ss":
+                case "s":
+                    dateDiffVal = (long)ts.TotalSeconds;
+                    break;
+
+                case "millisecond":
+                case "ms":
+                    dateDiffVal = (long)ts.TotalMilliseconds;
+                    break;
+
+                default:
+                    throw new Exception($"DatePart \"{datePart}\" is unknown");
+            }
+
+            return dateDiffVal;
+        }
+
+        /// <summary>
         ///     Gets the date range between this date time and the specified date time.
         /// </summary>
         /// <param name="fromDate">The from date.</param>
@@ -137,6 +229,19 @@ namespace SharedCode.Core
             var currentCulture = Thread.CurrentThread.CurrentCulture;
 
             return source.ToString(dateTimeStringFormat, currentCulture);
+        }
+
+        /// <summary>
+        /// Converts a System.DateTime object to Unix timestamp
+        /// </summary>
+        /// <param name="date">The date time.</param>
+        /// <returns>The Unix timestamp.</returns>
+        public static long ToUnixTimestamp(this DateTimeOffset date)
+        {
+            var unixEpoch = new DateTimeOffset(year: 1970, month: 1, day: 1, hour: 0, minute: 0, second: 0, offset: DateTimeOffset.UtcNow.Offset);
+            var unixTimeSpan = date - unixEpoch;
+
+            return (long)unixTimeSpan.TotalSeconds;
         }
     }
 }

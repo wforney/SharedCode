@@ -5,7 +5,10 @@
 namespace SharedCode.Core
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.Contracts;
+    using System.Linq;
+
     using JetBrains.Annotations;
 
     /// <summary>
@@ -13,6 +16,51 @@ namespace SharedCode.Core
     /// </summary>
     public static class TypeExtensions
     {
+        /// <summary>
+        /// Loads the custom attributes from the type
+        /// </summary>
+        /// <typeparam name="T">The type of the custom attribute to find.</typeparam>
+        /// <param name="typeWithAttributes">The calling assembly to search.</param>
+        /// <returns>The custom attribute of type T, if found.</returns>
+        [NotNull]
+        public static T GetAttribute<T>([NotNull] this Type typeWithAttributes)
+            where T : Attribute => typeWithAttributes.GetAttributes<T>().FirstOrDefault();
+
+        /// <summary>
+        /// Loads the custom attributes from the type
+        /// </summary>
+        /// <typeparam name="T">The type of the custom attribute to find.</typeparam>
+        /// <param name="typeWithAttributes">The calling assembly to search.</param>
+        /// <returns>An enumeration of attributes of type T that were found.</returns>
+        [NotNull]
+        [ItemNotNull]
+        public static IEnumerable<T> GetAttributes<T>([NotNull] this Type typeWithAttributes)
+            where T : Attribute
+        {
+            Contract.Requires(typeWithAttributes != null);
+            Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
+
+            // Try to find the configuration attribute for the default logger if it exists
+            var configAttributes = Attribute.GetCustomAttributes(typeWithAttributes, typeof(T), inherit: false);
+            if (configAttributes == null)
+            {
+                yield break;
+            }
+
+            foreach (var configAttribute in configAttributes)
+            {
+                var attribute = (T)configAttribute;
+                yield return attribute;
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified type is boolean.
+        /// </summary>
+        /// <param name="type">The type in question.</param>
+        /// <returns><c>true</c> if the specified type is boolean; otherwise, <c>false</c>.</returns>
+        public static bool IsBoolean([CanBeNull] this Type type) => type == typeof(bool);
+
         /// <summary>
         ///     Return true if the type is a System.Nullable wrapper of a value type
         /// </summary>

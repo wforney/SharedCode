@@ -2,7 +2,7 @@
   "Items": [
     {
       "Analyzer": "LongMethodAnalyzer",
-      "OccurrenceCount": 73,
+      "OccurrenceCount": 89,
       "Exceptions": null,
       "SentToServer": true,
       "InstallationName": "COREDESK"
@@ -114,7 +114,21 @@
     },
     {
       "Analyzer": "RemoveUnnecessaryBracesAnalyzer",
-      "OccurrenceCount": 4,
+      "OccurrenceCount": 5,
+      "Exceptions": null,
+      "SentToServer": true,
+      "InstallationName": "COREDESK"
+    },
+    {
+      "Analyzer": "RedundantDatabaseGetListAnalyzer",
+      "OccurrenceCount": 1,
+      "Exceptions": null,
+      "SentToServer": true,
+      "InstallationName": "COREDESK"
+    },
+    {
+      "Analyzer": "FloatVariablesComparisonAnalyser",
+      "OccurrenceCount": 1,
       "Exceptions": null,
       "SentToServer": true,
       "InstallationName": "COREDESK"

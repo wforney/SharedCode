@@ -10,6 +10,8 @@ namespace SharedCode.Core
     using System.Diagnostics.Contracts;
     using System.IO;
     using System.Linq;
+    using System.Linq.Expressions;
+    using System.Reflection;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Runtime.Serialization.Json;
@@ -164,6 +166,78 @@ namespace SharedCode.Core
         [CanBeNull]
         public static T FromJson<T>([CanBeNull] this object jsonString)
             => JsonConvert.DeserializeObject<T>(jsonString as string);
+
+        /// <summary>
+        /// Gets the property information.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source.</typeparam>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="source">The source object.</param>
+        /// <param name="propertyLambda">The property lambda.</param>
+        /// <returns>The property information.</returns>
+        // ReSharper disable once UnusedParameter.Global
+#pragma warning disable RECS0154 // Parameter is never used
+#pragma warning disable CC0057 // Unused parameters
+#pragma warning disable RCS1175 // Unused this parameter.
+
+        [CanBeNull]
+        public static PropertyInfo GetPropertyInfo<TSource, TProperty>([CanBeNull] this TSource source, [NotNull] Expression<Func<TSource, TProperty>> propertyLambda)
+#pragma warning restore RCS1175 // Unused this parameter.
+#pragma warning restore CC0057 // Unused parameters
+#pragma warning restore RECS0154 // Parameter is never used
+        {
+            Contract.Requires(propertyLambda != null);
+
+            var type = typeof(TSource);
+
+            if (!(propertyLambda.Body is MemberExpression member))
+            {
+                throw new ArgumentException($"Expression '{propertyLambda}' refers to a method, not a property.");
+            }
+
+            if (!(member.Member is PropertyInfo propInfo))
+            {
+                throw new ArgumentException($"Expression '{propertyLambda}' refers to a field, not a property.");
+            }
+
+            if (type != propInfo.ReflectedType && !type.IsSubclassOf(propInfo.ReflectedType) && !propInfo.ReflectedType.IsAssignableFrom(type))
+            {
+                throw new ArgumentException($"Expresion '{propertyLambda}' refers to a property that is not from type {type}.");
+            }
+
+            return propInfo;
+        }
+
+        /// <summary>
+        /// Gets the property value from the source object using reflection.
+        /// </summary>
+        /// <typeparam name="T">The type of the property value.</typeparam>
+        /// <param name="source">The source object.</param>
+        /// <param name="property">The property name.</param>
+        /// <returns>The property value.</returns>
+        [CanBeNull]
+        public static T GetPropertyValue<T>([NotNull] this object source, [NotNull] string property)
+        {
+            Contract.Requires(source != null);
+            Contract.Requires(property != null);
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (property == null)
+            {
+                throw new ArgumentNullException(nameof(property));
+            }
+
+            var sourceType = source.GetType();
+            var sourceProperties = sourceType.GetProperties();
+
+            return (T)sourceProperties.Where(s => s.Name.Equals(property, StringComparison.OrdinalIgnoreCase))
+                                                .Select(s => s.GetValue(source, null))
+                                                .FirstOrDefault();
+        }
 
         /// <summary>
         ///     If the object this method is called on is not null, runs the given function and returns the value.
