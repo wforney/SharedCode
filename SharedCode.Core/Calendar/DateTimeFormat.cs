@@ -2,9 +2,9 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-namespace SharedCode.Core
+namespace SharedCode.Core.Calendar
 {
-    using SharedCode.Core.Attributes;
+    using Attributes;
 
     /// <summary>
     /// Enum DateTimeFormat

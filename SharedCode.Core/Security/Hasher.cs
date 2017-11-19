@@ -2,7 +2,7 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-namespace SharedCode.Core
+namespace SharedCode.Core.Security
 {
     using System;
     using System.Security.Cryptography;
@@ -150,7 +150,7 @@ namespace SharedCode.Core
         {
             try
             {
-                var hash = GetHash(input, hashType);
+                var hash = Hasher.GetHash(input, hashType);
                 var stringBuilder = new StringBuilder();
 
                 for (var i = 0; i < hash.Length; i++)

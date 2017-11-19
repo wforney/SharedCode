@@ -2,7 +2,7 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-namespace SharedCode.Core
+namespace SharedCode.Core.Data
 {
     using System;
     using System.Collections.Generic;

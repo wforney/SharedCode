@@ -2,7 +2,7 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-namespace SharedCode.Core
+namespace SharedCode.Core.Text
 {
     using System;
     using System.Collections.Generic;
@@ -192,6 +192,7 @@ namespace SharedCode.Core
         {
             Contract.Requires(stringToEncrypt != null);
             Contract.Requires(key != null);
+            Contract.Ensures(Contract.Result<string>() != null);
 
             if (string.IsNullOrEmpty(stringToEncrypt))
             {
@@ -470,11 +471,14 @@ namespace SharedCode.Core
         /// <returns>
         ///     Returns <c>true</c> if the specified string is numeric; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsNumeric([CanBeNull] this string input) => long.TryParse(
-            input,
-            NumberStyles.Integer,
-            NumberFormatInfo.InvariantInfo,
-            out _);
+        public static bool IsNumeric([CanBeNull] this string input)
+        {
+            return long.TryParse(
+                input,
+                NumberStyles.Integer,
+                NumberFormatInfo.InvariantInfo,
+                out _);
+        }
 
         /// <summary>
         ///     Determines whether the input string is a valid email address.
@@ -663,6 +667,24 @@ namespace SharedCode.Core
         }
 
         /// <summary>
+        /// Converts the specified input string to a date time.
+        /// </summary>
+        /// <param name="input">The input string.</param>
+        /// <returns>The date time or null if conversion failed.</returns>
+        [CanBeNull]
+        public static DateTime? ToDateTime([CanBeNull] this string input)
+                    => DateTime.TryParse(input, out var result) ? result : new DateTime?();
+
+        /// <summary>
+        /// Converts the specified input string to a date time offset.
+        /// </summary>
+        /// <param name="input">The input string.</param>
+        /// <returns>The date time offset or null if conversion failed.</returns>
+        [CanBeNull]
+        public static DateTimeOffset? ToDateTimeOffset([CanBeNull] this string input)
+            => DateTimeOffset.TryParse(input, out var result) ? result : new DateTimeOffset?();
+
+        /// <summary>
         ///     Converts string to enum object
         /// </summary>
         /// <typeparam name="T">
@@ -734,7 +756,9 @@ namespace SharedCode.Core
         [NotNull]
         public static SecureString ToSecureString([CanBeNull] this string input)
         {
+#pragma warning disable DF0001 // Marks undisposed anonymous objects from method invocations.
             Contract.Ensures(Contract.Result<SecureString>() != null);
+#pragma warning restore DF0001 // Marks undisposed anonymous objects from method invocations.
 
             var secureString = new SecureString();
 

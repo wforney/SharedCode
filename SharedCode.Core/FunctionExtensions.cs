@@ -2,22 +2,21 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-using System.Diagnostics.Contracts;
-
-using JetBrains.Annotations;
-
 namespace SharedCode.Core
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+
+    using JetBrains.Annotations;
 
     /// <summary>
-    /// The function extensions class
+    ///     The function extensions class
     /// </summary>
     public static class FunctionExtensions
     {
         /// <summary>
-        /// Memoizes the function.
+        ///     Memoizes the function.
         /// </summary>
         /// <typeparam name="T">The input type.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>

@@ -2,11 +2,12 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-namespace SharedCode.Core
+namespace SharedCode.Core.Collections
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
+
     using JetBrains.Annotations;
 
     /// <summary>

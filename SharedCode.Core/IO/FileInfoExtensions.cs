@@ -2,12 +2,13 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-namespace SharedCode.Core
+namespace SharedCode.Core.IO
 {
     using System;
     using System.Diagnostics.Contracts;
     using System.IO;
     using System.Security;
+
     using JetBrains.Annotations;
 
     /// <summary>
@@ -62,6 +63,7 @@ namespace SharedCode.Core
 
                 var fileNameOnly = Path.GetFileNameWithoutExtension(fileInfo.FullName);
                 var extension = Path.GetExtension(fileInfo.FullName);
+#pragma warning disable SecurityIntelliSenseCS // MS Security rules violation
                 newFullPath = Path.Combine(destFileName, fileInfo.Name);
 
                 while (File.Exists(newFullPath))
@@ -69,6 +71,7 @@ namespace SharedCode.Core
                     var tempFileName = $"{fileNameOnly}({count++})";
                     newFullPath = Path.Combine(destFileName, tempFileName + extension);
                 }
+#pragma warning restore SecurityIntelliSenseCS // MS Security rules violation
             }
 
             fileInfo.MoveTo(renameWhenExists ? newFullPath : destFileName);

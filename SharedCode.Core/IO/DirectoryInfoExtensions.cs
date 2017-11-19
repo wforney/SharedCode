@@ -2,7 +2,7 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-namespace SharedCode.Core
+namespace SharedCode.Core.IO
 {
     using System.Diagnostics.Contracts;
     using System.IO;
@@ -22,10 +22,7 @@ namespace SharedCode.Core
         {
             Contract.Requires(dirInfo != null);
 
-            if (dirInfo.Parent != null)
-            {
-                DirectoryInfoExtensions.CreateDirectory(dirInfo.Parent);
-            }
+            dirInfo.Parent?.CreateDirectory();
 
             if (!dirInfo.Exists)
             {

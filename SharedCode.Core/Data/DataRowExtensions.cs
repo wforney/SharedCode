@@ -2,7 +2,7 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-namespace SharedCode.Core
+namespace SharedCode.Core.Data
 {
     using System.Data;
     using System.Diagnostics.Contracts;

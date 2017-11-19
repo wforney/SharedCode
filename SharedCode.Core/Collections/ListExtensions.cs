@@ -2,11 +2,11 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-using JetBrains.Annotations;
-
-namespace SharedCode.Core
+namespace SharedCode.Core.Collections
 {
     using System.Collections.Generic;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// The list extensions class

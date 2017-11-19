@@ -2,7 +2,7 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-namespace SharedCode.Core
+namespace SharedCode.Core.Calendar
 {
     using System;
     using System.Collections.Generic;
@@ -50,10 +50,12 @@ namespace SharedCode.Core
         /// <param name="dateOfBirth">The date of birth.</param>
         /// <returns>The age.</returns>
         public static int Age(this DateTimeOffset dateOfBirth)
-            => (DateTime.Today.Month < dateOfBirth.Month || DateTime.Today.Month == dateOfBirth.Month)
-               && DateTime.Today.Day < dateOfBirth.Day
+        {
+            return (DateTime.Today.Month < dateOfBirth.Month || DateTime.Today.Month == dateOfBirth.Month)
+                   && DateTime.Today.Day < dateOfBirth.Day
                 ? DateTime.Today.Year - dateOfBirth.Year - 1
                 : DateTime.Today.Year - dateOfBirth.Year;
+        }
 
         /// <summary>
         /// DateDiff in SQL style.
@@ -77,27 +79,33 @@ namespace SharedCode.Core
         {
             Contract.Requires(datePart != null);
 
+            const int MonthsInYear = 12;
+            const int QuartersInYear = 4;
+            const int MonthsInQuarter = 3;
+            const int DaysInWeek = 7;
+
             long dateDiffVal;
             var cal = Thread.CurrentThread.CurrentCulture.Calendar;
+            var yearDiff = cal.GetYear(endDate) - cal.GetYear(startDate);
             var ts = new TimeSpan(endDate.Ticks - startDate.Ticks);
             switch (datePart.ToLower().Trim())
             {
                 case "year":
                 case "yy":
                 case "yyyy":
-                    dateDiffVal = cal.GetYear(endDate) - cal.GetYear(startDate);
+                    dateDiffVal = yearDiff;
                     break;
 
                 case "quarter":
                 case "qq":
                 case "q":
-                    dateDiffVal = (((cal.GetYear(endDate) - cal.GetYear(startDate)) * 4) + ((cal.GetMonth(endDate) - 1) / 3)) - ((cal.GetMonth(startDate) - 1) / 3);
+                    dateDiffVal = ((yearDiff * QuartersInYear) + ((cal.GetMonth(endDate) - 1) / MonthsInQuarter)) - ((cal.GetMonth(startDate) - 1) / MonthsInQuarter);
                     break;
 
                 case "month":
                 case "mm":
                 case "m":
-                    dateDiffVal = ((cal.GetYear(endDate) - cal.GetYear(startDate)) * 12 + cal.GetMonth(endDate)) - cal.GetMonth(startDate);
+                    dateDiffVal = ((yearDiff * MonthsInYear) + cal.GetMonth(endDate)) - cal.GetMonth(startDate);
                     break;
 
                 case "day":
@@ -109,7 +117,7 @@ namespace SharedCode.Core
                 case "week":
                 case "wk":
                 case "ww":
-                    dateDiffVal = (long)(ts.TotalDays / 7);
+                    dateDiffVal = (long)(ts.TotalDays / DaysInWeek);
                     break;
 
                 case "hour":
@@ -240,7 +248,8 @@ namespace SharedCode.Core
         /// <returns>The Unix timestamp.</returns>
         public static long ToUnixTimestamp(this DateTime date)
         {
-            var unixEpoch = new DateTime(year: 1970, month: 1, day: 1, hour: 0, minute: 0, second: 0);
+            const int UnixEpochYear = 1970;
+            var unixEpoch = new DateTime(year: UnixEpochYear, month: 1, day: 1, hour: 0, minute: 0, second: 0);
             var unixTimeSpan = date - unixEpoch;
 
             return (long)unixTimeSpan.TotalSeconds;

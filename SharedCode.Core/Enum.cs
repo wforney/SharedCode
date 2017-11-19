@@ -2,16 +2,15 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-using System.Diagnostics.Contracts;
-using JetBrains.Annotations;
-
 namespace SharedCode.Core
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Reflection;
+    using JetBrains.Annotations;
     using SharedCode.Core.Attributes;
 
     /// <summary>

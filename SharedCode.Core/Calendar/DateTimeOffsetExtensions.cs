@@ -2,7 +2,7 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-namespace SharedCode.Core
+namespace SharedCode.Core.Calendar
 {
     using System;
     using System.Collections.Generic;
@@ -54,6 +54,17 @@ namespace SharedCode.Core
                && DateTime.Today.Day < dateOfBirth.Day
                 ? DateTime.Today.Year - dateOfBirth.Year - 1
                 : DateTime.Today.Year - dateOfBirth.Year;
+
+        /// <summary>
+        /// Computes the time zone variance in minutes between the specified date time offset and UTC.
+        /// </summary>
+        /// <param name="dateTimeOffset">The date time offset.</param>
+        /// <returns>The time zone variance in minutes.</returns>
+        public static int ComputeTimeZoneVariance(this DateTimeOffset dateTimeOffset)
+        {
+            var difference = dateTimeOffset - dateTimeOffset.ToUniversalTime();
+            return Convert.ToInt32(difference.TotalMinutes);
+        }
 
         /// <summary>
         /// DateDiff in SQL style.

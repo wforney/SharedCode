@@ -2,7 +2,7 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-namespace SharedCode.Core
+namespace SharedCode.Core.Linq
 {
     using System;
     using System.Collections;
@@ -13,6 +13,8 @@ namespace SharedCode.Core
     using System.Linq;
     using System.Reflection;
     using System.Text;
+
+    using Collections;
 
     using JetBrains.Annotations;
 
@@ -130,6 +132,7 @@ namespace SharedCode.Core
             [CanBeNull] [ItemCanBeNull] this IEnumerable<T> source,
             [NotNull] Action<T> action)
         {
+            Contract.Requires(action != null);
             return source?.Select(
                 item =>
                 {
@@ -308,7 +311,7 @@ namespace SharedCode.Core
         /// <param name="keySelectors">The remaining key selectors.</param>
         /// <returns>The sorted enumerable.</returns>
         /// <exception cref="ArgumentNullException">
-        ///     <paramref name="source">source</paramref> or
+        ///     The <paramref name="source">source</paramref> or
         ///     <paramref name="keySelectors">keySelector</paramref> is null.
         /// </exception>
         /// <exception cref="OverflowException">
@@ -596,7 +599,9 @@ namespace SharedCode.Core
         [NotNull]
         public static DataTable ToDataTable<T>([CanBeNull] [ItemCanBeNull] this IEnumerable<T> source)
         {
+#pragma warning disable DF0001 // Marks undisposed anonymous objects from method invocations.
             Contract.Ensures(Contract.Result<DataTable>() != null);
+#pragma warning restore DF0001 // Marks undisposed anonymous objects from method invocations.
 
             var dtReturn = new DataTable();
 

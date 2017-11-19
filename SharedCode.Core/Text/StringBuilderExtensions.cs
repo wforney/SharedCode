@@ -2,12 +2,13 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-using System.Diagnostics.Contracts;
-using System.Text;
-using JetBrains.Annotations;
-
-namespace SharedCode.Core
+namespace SharedCode.Core.Text
 {
+    using System.Diagnostics.Contracts;
+    using System.Text;
+
+    using JetBrains.Annotations;
+
     /// <summary>
     /// The string builder extensions class
     /// </summary>

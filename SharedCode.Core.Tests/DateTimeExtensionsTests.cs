@@ -6,6 +6,8 @@ namespace SharedCode.Core.Tests
 {
     using System;
 
+    using Calendar;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>

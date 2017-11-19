@@ -2,7 +2,7 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
-namespace SharedCode.Core
+namespace SharedCode.Core.IO
 {
     using System.Diagnostics.Contracts;
     using System.IO;
@@ -15,6 +15,50 @@ namespace SharedCode.Core
     /// </summary>
     public static class StreamExtensions
     {
+        /// <summary>
+        /// Reads the content of the stream.
+        /// </summary>
+        /// <param name="stream">The input stream.</param>
+        /// <returns>Returns a string with the content of the input stream.</returns>
+        [CanBeNull]
+        public static string ReadToEnd([NotNull] this Stream stream)
+        {
+            Contract.Requires(stream != null);
+
+            if (stream.CanSeek)
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+            }
+
+            using (var sr = new StreamReader(stream))
+            {
+                return sr.ReadToEnd();
+            }
+        }
+
+        /// <summary>
+        /// Reads the content of the stream.
+        /// </summary>
+        /// <param name="stream">The input stream.</param>
+        /// <returns>Returns a string with the content of the input stream.</returns>
+        [NotNull]
+        [ItemCanBeNull]
+        public static async Task<string> ReadToEndAsync([NotNull] this Stream stream)
+        {
+            Contract.Requires(stream != null);
+            Contract.Ensures(Contract.Result<Task<string>>() != null);
+
+            if (stream.CanSeek)
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+            }
+
+            using (var sr = new StreamReader(stream))
+            {
+                return await sr.ReadToEndAsync().ConfigureAwait(continueOnCapturedContext: false);
+            }
+        }
+
         /// <summary>
         ///     Converts the input stream to a byte array.
         /// </summary>
@@ -67,7 +111,7 @@ namespace SharedCode.Core
                     input.Seek(0, SeekOrigin.Begin);
                 }
 
-                await input.CopyToAsync(ms).ConfigureAwait(false);
+                await input.CopyToAsync(ms).ConfigureAwait(continueOnCapturedContext: false);
                 return ms.ToArray();
             }
         }

@@ -8,6 +8,8 @@ namespace SharedCode.Core
     using System.Diagnostics.Contracts;
     using System.Reflection;
 
+    using Collections;
+
     using JetBrains.Annotations;
 
     /// <summary>
@@ -30,7 +32,7 @@ namespace SharedCode.Core
             T result = null;
 
             // Try to find the configuration attribute for the default logger if it exists
-            object[] configAttributes = Attribute.GetCustomAttributes(callingAssembly, typeof(T), inherit: false);
+            var configAttributes = Attribute.GetCustomAttributes(callingAssembly, typeof(T), inherit: false);
 
             // get just the first one
             if (!configAttributes.IsNullOrEmpty())
