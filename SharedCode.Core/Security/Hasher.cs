@@ -2,6 +2,9 @@
 //     Copyright © improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
+// ReSharper disable InconsistentNaming
+using JetBrains.Annotations;
+
 namespace SharedCode.Core.Security
 {
     using System;
@@ -90,7 +93,8 @@ namespace SharedCode.Core.Security
         /// <param name="input">The input string.</param>
         /// <param name="hash">The hash type.</param>
         /// <returns>The hash byte array.</returns>
-        private static byte[] GetHash(string input, EHashType hash)
+        [CanBeNull]
+        private static byte[] GetHash([CanBeNull] string input, EHashType hash)
         {
             var inputBytes = Encoding.ASCII.GetBytes(input);
 
@@ -146,14 +150,15 @@ namespace SharedCode.Core.Security
         /// <param name="input">The string to hash</param>
         /// <param name="hashType">The hash algorithm to use</param>
         /// <returns>The resulting hash or an empty string on error</returns>
-        public static string ComputeHash(this string input, EHashType hashType)
+        [CanBeNull]
+        public static string ComputeHash([CanBeNull] this string input, EHashType hashType)
         {
             try
             {
                 var hash = Hasher.GetHash(input, hashType);
                 var stringBuilder = new StringBuilder();
 
-                for (var i = 0; i < hash.Length; i++)
+                for (var i = 0; i < hash?.Length; i++)
                 {
                     stringBuilder.Append(hash[i].ToString("x2"));
                 }
