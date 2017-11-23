@@ -55,6 +55,30 @@ namespace SharedCode.Core
         }
 
         /// <summary>
+        /// Gets the display name of the specified type.
+        /// </summary>
+        /// <param name="input">The input type.</param>
+        /// <returns>The display name.</returns>
+        [NotNull]
+        public static string GetDisplayName([NotNull] this Type input)
+        {
+            Contract.Requires(input != null);
+            Contract.Ensures(Contract.Result<string>() != null);
+
+            var displayName = input.Name;
+
+            for (var i = displayName.Length - 1; i >= 0; i--)
+            {
+                if (displayName[i] == char.ToUpper(displayName[i]) && i > 0)
+                {
+                    displayName = displayName.Insert(i, " ");
+                }
+            }
+
+            return displayName;
+        }
+
+        /// <summary>
         /// Determines whether the specified type is boolean.
         /// </summary>
         /// <param name="type">The type in question.</param>

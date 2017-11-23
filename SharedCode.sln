@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedCode.Office", "Shared
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedCode.Core.Tests", "SharedCode.Core.Tests\SharedCode.Core.Tests.csproj", "{E7A94348-A068-4408-BA40-2B605D131C89}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedCode.Data.EntityFramework", "SharedCode.Data.EntityFramework\SharedCode.Data.EntityFramework.csproj", "{85A277B6-D2EB-4830-A26A-3E18715C26FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{E7A94348-A068-4408-BA40-2B605D131C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7A94348-A068-4408-BA40-2B605D131C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7A94348-A068-4408-BA40-2B605D131C89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85A277B6-D2EB-4830-A26A-3E18715C26FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85A277B6-D2EB-4830-A26A-3E18715C26FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85A277B6-D2EB-4830-A26A-3E18715C26FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85A277B6-D2EB-4830-A26A-3E18715C26FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

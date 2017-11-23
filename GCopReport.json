@@ -37,7 +37,7 @@
     },
     {
       "Analyzer": "UseCalculateForMethodNameAnalyzer",
-      "OccurrenceCount": 5,
+      "OccurrenceCount": 7,
       "Exceptions": null,
       "SentToServer": true,
       "InstallationName": "COREDESK"

@@ -30,6 +30,36 @@ namespace SharedCode.Core.Linq
         [NotNull] private static readonly Random Random = new Random();
 
         /// <summary>
+        /// Starts execution of IQueryable on a ThreadPool thread and returns immediately with a "end" method to call once the result is needed.
+        /// </summary>
+        /// <typeparam name="T">The type of the items in the enumerable.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="source">The source enumerable.</param>
+        /// <param name="asyncSelector">The asynchronous selector.</param>
+        /// <returns>Func&lt;TResult&gt;.</returns>
+        [NotNull]
+#pragma warning disable CC0072 // Remove Async termination when method is not asynchronous.
+#pragma warning disable RCS1047 // Non-asynchronous method name should not end with 'Async'.
+        public static Func<TResult> Async<T, TResult>([NotNull][ItemCanBeNull] this IEnumerable<T> source, [NotNull] Func<IEnumerable<T>, TResult> asyncSelector)
+#pragma warning restore RCS1047 // Non-asynchronous method name should not end with 'Async'.
+#pragma warning restore CC0072 // Remove Async termination when method is not asynchronous.
+        {
+            Contract.Requires(source != null);
+            Contract.Requires(asyncSelector != null);
+            Contract.Ensures(Contract.Result<Func<TResult>>() != null);
+            System.Diagnostics.Debug.Assert(!(source is ICollection), "Async does not work on arrays/lists/collections, only on true enumerables/queryables.");
+
+            // Create delegate to exec async
+            var work = asyncSelector;
+
+            // Launch it
+            var result = work.BeginInvoke(source, null, null);
+
+            // Return method that will block until completed and rethrow exceptions if any
+            return () => work.EndInvoke(result);
+        }
+
+        /// <summary>
         ///     Aggregates the source.
         /// </summary>
         /// <typeparam name="T">The type of the items in the source.</typeparam>
@@ -445,6 +475,45 @@ namespace SharedCode.Core.Linq
         [ItemCanBeNull]
         public static IOrderedEnumerable<T> Randomize<T>([CanBeNull] [ItemCanBeNull] this IEnumerable<T> source)
             => source?.OrderBy(x => EnumerableExtensions.Random.Next());
+
+        /// <summary>
+        /// This method selects a random element from an Enumerable with only one pass (O(N) complexity). It contains optimizations for argumens that implement ICollection&lt;T&gt; by using the Count property and the ElementAt LINQ method. The ElementAt LINQ method itself contains optimizations for IList&lt;T&gt;
+        /// </summary>
+        /// <typeparam name="T">The type of the items in the enumerable.</typeparam>
+        /// <param name="source">The source enumerable.</param>
+        /// <returns>A randomly selected item from the enumerable.</returns>
+        [CanBeNull]
+        public static T SelectRandom<T>([CanBeNull][ItemCanBeNull] this IEnumerable<T> source)
+        {
+            if (source == null)
+            {
+                return default;
+            }
+
+            if (!source.Any())
+            {
+                return default;
+            }
+
+            if (source is ICollection<T> collection)
+            {
+                return collection.ElementAt(EnumerableExtensions.Random.Next(collection.Count));
+            }
+
+            var count = 1;
+            var selected = default(T);
+
+            foreach (var element in source)
+            {
+                if (EnumerableExtensions.Random.Next(count++) == 0)
+                {
+                    // Select the current element with 1/count probability
+                    selected = element;
+                }
+            }
+
+            return selected;
+        }
 
 #pragma warning restore SG0005 // Weak random generator
 

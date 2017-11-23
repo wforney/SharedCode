@@ -25,6 +25,11 @@ namespace SharedCode.Core.Text
     public static class StringExtensions
     {
         /// <summary>
+        /// Default masking character used in a mask.
+        /// </summary>
+        public const char DefaultMaskCharacter = '*';
+
+        /// <summary>
         /// The domain regular expression
         /// </summary>
         [NotNull]
@@ -140,9 +145,7 @@ namespace SharedCode.Core.Text
 
                 var bytes = rsa.Decrypt(decryptByteArray, fOAEP: true);
 
-                var result = Encoding.UTF8.GetString(bytes);
-
-                return result;
+                return Encoding.UTF8.GetString(bytes);
             }
         }
 
@@ -165,12 +168,9 @@ namespace SharedCode.Core.Text
         public static string DefaultIfEmpty(
             [CanBeNull] this string str,
             [CanBeNull] string defaultValue,
-            bool considerWhiteSpaceIsEmpty = false)
-        {
-            return (considerWhiteSpaceIsEmpty ? string.IsNullOrWhiteSpace(str) : string.IsNullOrEmpty(str))
+            bool considerWhiteSpaceIsEmpty = false) => (considerWhiteSpaceIsEmpty ? string.IsNullOrWhiteSpace(str) : string.IsNullOrEmpty(str))
                        ? defaultValue
                        : str;
-        }
 
         /// <summary>
         ///     Encryptes a string using the supplied key. Encoding is done using RSA encryption.
@@ -289,9 +289,7 @@ namespace SharedCode.Core.Text
                 }
             }
 
-            output = builder.ToString();
-
-            return output;
+            return builder.ToString();
         }
 
         /// <summary>
@@ -321,7 +319,7 @@ namespace SharedCode.Core.Text
             }
 
             var field = type.GetField(name);
-            var customAttribute = field.GetCustomAttributes<DescriptionAttribute>(inherit: false);
+            var customAttribute = field.GetCustomAttributes<DescriptionAttribute>(inherit: false).ToList();
             return customAttribute.Any() ? customAttribute.First().Description : name;
         }
 
@@ -435,6 +433,24 @@ namespace SharedCode.Core.Text
         }
 
         /// <summary>
+        /// Returns true if the string is non-null and at least the specified number of characters.
+        /// </summary>
+        /// <param name="value">The string to check.</param>
+        /// <param name="length">The minimum length.</param>
+        /// <returns>True if string is non-null and at least the length specified.</returns>
+        /// <exception>throws ArgumentOutOfRangeException if length is not a non-negative number.</exception>
+        public static bool IsLengthAtLeast([CanBeNull] this string value, int length)
+        {
+            if (length < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(length), length,
+                                                        "The length must be a non-negative number.");
+            }
+
+            return value != null && value.Length >= length;
+        }
+
+        /// <summary>
         /// Determines whether the specified input string is not null or empty.
         /// </summary>
         /// <param name="input">The input string.</param>
@@ -471,14 +487,11 @@ namespace SharedCode.Core.Text
         /// <returns>
         ///     Returns <c>true</c> if the specified string is numeric; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsNumeric([CanBeNull] this string input)
-        {
-            return long.TryParse(
+        public static bool IsNumeric([CanBeNull] this string input) => long.TryParse(
                 input,
                 NumberStyles.Integer,
                 NumberFormatInfo.InvariantInfo,
                 out _);
-        }
 
         /// <summary>
         ///     Determines whether the input string is a valid email address.
@@ -509,12 +522,9 @@ namespace SharedCode.Core.Text
         /// </summary>
         /// <param name="input">The input string.</param>
         /// <returns><c>true</c> if the specified input string is a valid IP address; otherwise, <c>false</c>.</returns>
-        public static bool IsValidIPAddress([CanBeNull] this string input)
-        {
-            return Regex.IsMatch(
+        public static bool IsValidIPAddress([CanBeNull] this string input) => Regex.IsMatch(
                 input,
                 @"\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b");
-        }
 
         /// <summary>
         /// Determines whether the input text is a valid URI.
@@ -543,12 +553,9 @@ namespace SharedCode.Core.Text
         ///     Returns string from left
         /// </returns>
         [CanBeNull]
-        public static string Left([CanBeNull] this string value, int length)
-        {
-            return value != null && value.Length > Math.Max(length, 0)
+        public static string Left([CanBeNull] this string value, int length) => value != null && value.Length > Math.Max(length, 0)
                        ? value.Substring(0, Math.Max(length, 0))
                        : value;
-        }
 
         /// <summary>
         /// Takes a string of text and replaces text matching a link pattern to a hyperlink.
@@ -573,6 +580,85 @@ namespace SharedCode.Core.Text
                 }
             );
         }
+
+        /// <summary>
+        /// Mask the source string with the mask char except for the last exposed digits.
+        /// </summary>
+        /// <param name="sourceValue">Original string to mask.</param>
+        /// <param name="maskChar">The character to use to mask the source.</param>
+        /// <param name="numExposed">Number of characters exposed in masked value.</param>
+        /// <param name="style">The masking style to use (all characters or just alpha-nums).</param>
+        /// <returns>The masked account number.</returns>
+        [CanBeNull]
+        public static string Mask([CanBeNull] this string sourceValue, char maskChar, int numExposed = 0, MaskStyle style = MaskStyle.All)
+        {
+            if (sourceValue == null)
+            {
+                return sourceValue;
+            }
+
+            if (!sourceValue.IsLengthAtLeast(numExposed))
+            {
+                return sourceValue;
+            }
+
+            var builder = new StringBuilder(sourceValue.Length);
+            var index = sourceValue.Length - numExposed;
+
+            if (style == MaskStyle.AlphaNumericOnly)
+            {
+                StringExtensions.CreateAlphaNumMask(builder, sourceValue, maskChar, index);
+            }
+            else
+            {
+                builder.Append(maskChar, index);
+            }
+
+            builder.Append(sourceValue.Substring(index));
+
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Mask the source string with the default mask char.
+        /// </summary>
+        /// <param name="sourceValue">Original string to mask.</param>
+        /// <returns>The masked account number.</returns>
+        [CanBeNull]
+        public static string Mask([CanBeNull] this string sourceValue)
+            => sourceValue.Mask(StringExtensions.DefaultMaskCharacter);
+
+        /// <summary>
+        /// Mask the source string with the mask char.
+        /// </summary>
+        /// <param name="sourceValue">Original string to mask.</param>
+        /// <param name="maskChar">The character to use to mask the source.</param>
+        /// <param name="style">The masking style to use (all characters or just alpha-nums).</param>
+        /// <returns>The masked account number.</returns>
+        [CanBeNull]
+        public static string Mask([CanBeNull] this string sourceValue, char maskChar, MaskStyle style)
+            => sourceValue.Mask(maskChar, 0, style);
+
+        /// <summary>
+        /// Mask the source string with the default mask char except for the last exposed digits.
+        /// </summary>
+        /// <param name="sourceValue">Original string to mask.</param>
+        /// <param name="numExposed">Number of characters exposed in masked value.</param>
+        /// <param name="style">The masking style to use (all characters or just alpha-nums).</param>
+        /// <returns>The masked account number.</returns>
+        [CanBeNull]
+        public static string Mask([CanBeNull] this string sourceValue, int numExposed, MaskStyle style)
+            => sourceValue.Mask(StringExtensions.DefaultMaskCharacter, numExposed, style);
+
+        /// <summary>
+        /// Mask the source string with the default mask char.
+        /// </summary>
+        /// <param name="sourceValue">Original string to mask.</param>
+        /// <param name="style">The masking style to use (all characters or just alpha-nums).</param>
+        /// <returns>The masked account number.</returns>
+        [CanBeNull]
+        public static string Mask([CanBeNull] this string sourceValue, MaskStyle style)
+            => sourceValue.Mask(StringExtensions.DefaultMaskCharacter, 0, style);
 
         /// <summary>
         ///     Returns the string with the specified value or null if the value is empty.
@@ -774,6 +860,24 @@ namespace SharedCode.Core.Text
         }
 
         /// <summary>
+        /// Converts the specified text to a slug for friendly URLs.
+        /// </summary>
+        /// <param name="text">The text input.</param>
+        /// <returns>The slug.</returns>
+        [NotNull]
+        public static string ToSlug([NotNull] this string text)
+        {
+            Contract.Requires(text != null);
+            Contract.Ensures(Contract.Result<string>() != null);
+
+            var bytes = Encoding.GetEncoding("Cyrillic").GetBytes(text);
+
+            var value = Regex.Replace(Regex.Replace(Encoding.ASCII.GetString(bytes), @"\s{2,}|[^\w]", " ", RegexOptions.ECMAScript).Trim(), @"\s+", "_");
+
+            return value.ToLowerInvariant();
+        }
+
+        /// <summary>
         ///     Truncates the string to a specified length and replace the truncated to a ...
         /// </summary>
         /// <param name="text">
@@ -863,5 +967,29 @@ namespace SharedCode.Core.Text
         /// </returns>
         [NotNull]
         public static string ValueOrEmpty([CanBeNull] this string value) => value ?? string.Empty;
+
+        /// <summary>
+        /// Masks all characters for the specified length.
+        /// </summary>
+        /// <param name="buffer">String builder to store result in.</param>
+        /// <param name="source">The source string to pull non-alpha numeric characters.</param>
+        /// <param name="mask">Masking character to use.</param>
+        /// <param name="length">Length of the mask.</param>
+        private static void CreateAlphaNumMask([NotNull] StringBuilder buffer, [CanBeNull] string source, char mask, int length)
+        {
+            Contract.Requires(buffer != null);
+
+            if (source == null)
+            {
+                return;
+            }
+
+            for (var i = 0; i < length; i++)
+            {
+                buffer.Append(char.IsLetterOrDigit(source[i])
+                                ? mask
+                                : source[i]);
+            }
+        }
     }
 }
